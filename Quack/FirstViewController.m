@@ -17,6 +17,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    NSLog(@"hello log");
+    FBLoginView *loginView = [[FBLoginView alloc] init];
+    NSLog(@"after loginview init");
+    loginView.center = self.view.center;
+    NSLog(@"After center");
+    [self.view addSubview:loginView];
+    NSLog(@"after add subview");
 }
 
 - (void)didReceiveMemoryWarning {
