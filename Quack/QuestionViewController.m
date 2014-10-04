@@ -11,12 +11,16 @@
 
 @interface QuestionViewController ()
 
+
 @end
 
-@implementation QuestionViewController
+@implementation QuestionViewController {
+    NSString *_emptyString;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _emptyString = [NSString stringWithFormat:@""];
     // Do any additional setup after loading the view.
 }
 
@@ -33,6 +37,17 @@
     
     [question saveInBackground];
     
-    // Reload page
+    // Reload fields
+    [self clearFields];
 }
+
+- (void) clearFields {
+    for (UIView *view in self.view.subviews) {
+        if ([view isKindOfClass:[UITextField class]] || [view isKindOfClass:[UITextView class]]) {
+            UITextField *textField = (UITextField *)view;
+            textField.text = _emptyString;
+        }
+    }
+}
+
 @end

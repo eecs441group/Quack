@@ -19,8 +19,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     Secrets *secrets = [[Secrets alloc] init];
-    [Parse setApplicationId:secrets.ParseID
-                  clientKey:secrets.ParseKey];
+    [Parse setApplicationId:secrets.parseId
+                  clientKey:secrets.parseKey];
     // Override point for customization after application launch.
     return YES;
 }
