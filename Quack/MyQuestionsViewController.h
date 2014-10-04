@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyQuestionsViewController : UIViewController
+@interface MyQuestionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
 
 @end
