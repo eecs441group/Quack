@@ -17,6 +17,7 @@
 		5E2CCB9219E0780600BFC609 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E2CCB9019E0780600BFC609 /* LaunchScreen.xib */; };
 		5E2CCB9E19E0780600BFC609 /* QuackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2CCB9D19E0780600BFC609 /* QuackTests.m */; };
 		5E6385C919E07AEA00D00F80 /* InboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6385C819E07AEA00D00F80 /* InboxViewController.m */; };
+		5E6385CC19E07EF000D00F80 /* QuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6385CB19E07EF000D00F80 /* QuestionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,8 @@
 		5E2CCB9D19E0780600BFC609 /* QuackTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuackTests.m; sourceTree = "<group>"; };
 		5E6385C719E07AEA00D00F80 /* InboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InboxViewController.h; sourceTree = "<group>"; };
 		5E6385C819E07AEA00D00F80 /* InboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InboxViewController.m; sourceTree = "<group>"; };
+		5E6385CA19E07EF000D00F80 /* QuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionViewController.h; sourceTree = "<group>"; };
+		5E6385CB19E07EF000D00F80 /* QuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionViewController.m; sourceTree = "<group>"; };
 		657F35ED5A75533C4FBF2C46 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6F86B3A92149818E9D6D1579 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -99,6 +102,8 @@
 				5E2CCB8519E0780600BFC609 /* FirstViewController.h */,
 				5E2CCB8619E0780600BFC609 /* FirstViewController.m */,
 				5E2CCB8819E0780600BFC609 /* SecondViewController.h */,
+				5E6385CA19E07EF000D00F80 /* QuestionViewController.h */,
+				5E6385CB19E07EF000D00F80 /* QuestionViewController.m */,
 				5E2CCB8919E0780600BFC609 /* SecondViewController.m */,
 				5E2CCB8B19E0780600BFC609 /* Main.storyboard */,
 				5E2CCB8E19E0780600BFC609 /* Images.xcassets */,
@@ -290,6 +295,7 @@
 			files = (
 				5E2CCB8A19E0780600BFC609 /* SecondViewController.m in Sources */,
 				5E2CCB8419E0780600BFC609 /* AppDelegate.m in Sources */,
+				5E6385CC19E07EF000D00F80 /* QuestionViewController.m in Sources */,
 				5E6385C919E07AEA00D00F80 /* InboxViewController.m in Sources */,
 				5E2CCB8719E0780600BFC609 /* FirstViewController.m in Sources */,
 				5E2CCB8119E0780600BFC609 /* main.m in Sources */,
