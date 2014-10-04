@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
+#import "Secrets.h"
 
 @interface AppDelegate ()
 
@@ -16,6 +18,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    Secrets *secrets = [[Secrets alloc] init];
+    [Parse setApplicationId:secrets.ParseID
+                  clientKey:secrets.ParseKey];
     // Override point for customization after application launch.
     return YES;
 }

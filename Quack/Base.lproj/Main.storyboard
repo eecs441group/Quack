@@ -57,45 +57,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Question" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWa-f0-TXD">
-                                <rect key="frame" x="16" y="101" width="568" height="29"/>
+                                <rect key="frame" x="16" y="36" width="568" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Possible Answers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1o-Eu-xnB">
-                                <rect key="frame" x="16" y="236" width="568" height="29"/>
+                                <rect key="frame" x="16" y="132" width="568" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="What's your favorite color out of these options?" translatesAutoresizingMaskIntoConstraints="NO" id="NP1-jt-pHj">
-                                <rect key="frame" x="16" y="138" width="306" height="80"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NP1-jt-pHj">
+                                <rect key="frame" x="16" y="73" width="306" height="51"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Blue" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="unO-Z4-04o">
-                                <rect key="frame" x="16" y="280" width="306" height="30"/>
+                                <rect key="frame" x="16" y="176" width="306" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Orange" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D3u-GH-oW8">
-                                <rect key="frame" x="16" y="328" width="306" height="30"/>
+                                <rect key="frame" x="16" y="224" width="306" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Red" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UKH-aC-SEF">
-                                <rect key="frame" x="16" y="376" width="306" height="30"/>
+                                <rect key="frame" x="16" y="272" width="306" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Yellow" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ebs-qM-nSa">
-                                <rect key="frame" x="16" y="426" width="306" height="30"/>
+                                <rect key="frame" x="16" y="322" width="306" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfa-hU-ZJN">
-                                <rect key="frame" x="16" y="470" width="306" height="50"/>
+                                <rect key="frame" x="16" y="366" width="306" height="50"/>
                                 <state key="normal" title="Quack">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>

@@ -7,6 +7,7 @@
 //
 
 #import "QuestionViewController.h"
+#import <Parse/Parse.h>
 
 @interface QuestionViewController ()
 
@@ -24,16 +25,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (IBAction)quackPressed:(id)sender {
+    // Push to parse
+    PFObject *question = [PFObject objectWithClassName:@"Question"];
+    question[@"question"] = self.questionTextView.text;
+    question[@"answers"] = @[self.answer1.text, self.answer2.text, self.answer3.text, self.answer4.text];
+    
+    [question saveInBackground];
+    
+    // Reload page
 }
 @end
