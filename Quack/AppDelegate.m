@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import <Parse/Parse.h>
+#import "Secrets.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    Secrets *secrets = [[Secrets alloc] init];
+    [Parse setApplicationId:secrets.parseId
+                  clientKey:secrets.parseKey];
     // Override point for customization after application launch.
     return YES;
 }
