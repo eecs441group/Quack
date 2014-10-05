@@ -19,10 +19,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Override point for customization after application launch.
+    
     Secrets *secrets = [[Secrets alloc] init];
     [Parse setApplicationId:secrets.parseId
                   clientKey:secrets.parseKey];
-    // Override point for customization after application launch.
+    [FBLoginView class];
+    
     return YES;
 }
 
@@ -48,13 +51,15 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-// for facebook
+// Facebook login handler
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     // attempt to extract a token from the url
-    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+    BOOL loginHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+    
+    return loginHandled;
 }
 
 @end

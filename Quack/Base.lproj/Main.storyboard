@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Log in/out-->
         <scene sceneID="WcG-Du-7ZQ">
             <objects>
-                <viewController id="XbX-6k-FRa" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController title="Log in/out" id="XbX-6k-FRa" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Nme-bD-n08"/>
                         <viewControllerLayoutGuide type="bottom" id="VsW-9t-R7W"/>
