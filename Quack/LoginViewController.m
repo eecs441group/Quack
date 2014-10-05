@@ -65,7 +65,7 @@
                 userInfo[@"userId"] = user.objectID;
                 userInfo[@"name"] = user.name;
                 
-                NSLog(@"saving");
+                NSLog(@"saving new user");
                 [userInfo saveInBackground];
             }
         } else {
