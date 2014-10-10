@@ -24,15 +24,11 @@
     _myQuestions = [[NSMutableArray alloc] init];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Question"];
-//    [query whereKey:@"houseID" equalTo:@"houseID"];
+    // TODO: Refine query here
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            // The find succeeded.
-            NSLog(@"Successfully retrieved %lu questions.", (unsigned long)[objects count]);
-            
             for (PFObject *object in objects) {
                 Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)object];
-                NSLog(@"%@", q);
                 [_myQuestions addObject:q];
             }
             [self.tableView reloadData];

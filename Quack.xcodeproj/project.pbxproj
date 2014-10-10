@@ -19,6 +19,7 @@
 		5E6385CC19E07EF000D00F80 /* QuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6385CB19E07EF000D00F80 /* QuestionViewController.m */; };
 		5E6385D219E088F300D00F80 /* MyQuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6385D119E088F300D00F80 /* MyQuestionsViewController.m */; };
 		5E6385D519E089AE00D00F80 /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6385D419E089AE00D00F80 /* Secrets.m */; };
+		F9D78AEB19E0990200500B71 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D78AEA19E0990200500B71 /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		5E6385D419E089AE00D00F80 /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
 		657F35ED5A75533C4FBF2C46 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6F86B3A92149818E9D6D1579 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9D78AE919E0990200500B71 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		F9D78AEA19E0990200500B71 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +107,8 @@
 				5E6385D419E089AE00D00F80 /* Secrets.m */,
 				5E6385D019E088F300D00F80 /* MyQuestionsViewController.h */,
 				5E6385D119E088F300D00F80 /* MyQuestionsViewController.m */,
+				F9D78AE919E0990200500B71 /* LoginViewController.h */,
+				F9D78AEA19E0990200500B71 /* LoginViewController.m */,
 				5E2CCB8219E0780600BFC609 /* AppDelegate.h */,
 				5E2CCB8319E0780600BFC609 /* AppDelegate.m */,
 				5E6385CA19E07EF000D00F80 /* QuestionViewController.h */,
@@ -303,6 +308,7 @@
 				5E6385CC19E07EF000D00F80 /* QuestionViewController.m in Sources */,
 				5E6385C919E07AEA00D00F80 /* InboxViewController.m in Sources */,
 				5E2AA85E19E75DE20084D717 /* Question.m in Sources */,
+				F9D78AEB19E0990200500B71 /* LoginViewController.m in Sources */,
 				5E2CCB8119E0780600BFC609 /* main.m in Sources */,
 				5E6385D519E089AE00D00F80 /* Secrets.m in Sources */,
 			);

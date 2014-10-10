@@ -51,6 +51,7 @@
                             user:(id<FBGraphUser>)user {
     self.profilePictureView.profileID = user.objectID;
     self.nameLabel.text = user.name;
+//    [self.profilePictureView reloadData];
     
     // Check if logged in user exists in parse User table and add them if needed
     PFQuery *query = [PFQuery queryWithClassName:@"User"];
