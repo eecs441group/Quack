@@ -93,8 +93,12 @@
                               
                               NSLog(@"Total friends %@", result[@"summary"][@"total_count"]);
                               NSLog(@"Quacking friends %lu", (unsigned long)[result[@"data"] count]);
-                              for (id key in result[@"data"]) {
-                                  NSLog(@"key=%@ value=%@", key, [result[@"data"] objectForKey:key]);
+//                              NSLog(@"result %@", result);
+                              // Result is an array of dictionaries. Each dict has id and name fields.
+                              
+                              for (NSDictionary *friend in result[@"data"]) {
+                                  for (id key in friend)
+                                  NSLog(@"key=%@ value=%@", key, [friend objectForKey:key]);
                               }
                           }];
 }
