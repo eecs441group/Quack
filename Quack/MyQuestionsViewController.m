@@ -16,12 +16,14 @@
 
 @implementation MyQuestionsViewController {
     NSMutableArray *_myQuestions;
+    NSMutableArray *_expandedCells;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"wtf");
     _myQuestions = [[NSMutableArray alloc] init];
+    _expandedCells = [[NSMutableArray alloc] init];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Question"];
     // TODO: Refine query here
@@ -67,6 +69,35 @@
     cell.textLabel.text = q.question;
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //expandedCells is a mutable set declared in your interface section or private class extensiont
+    if ([_expandedCells containsObject:indexPath])
+    {
+        [_expandedCells removeObject:indexPath];
+    }
+    else
+    {
+        [_expandedCells addObject:indexPath];
+    }
+    [self.tableView reloadData];
+//    [self.tableView beginEditing];
+//    [self.tableView endEditing]; //Yeah, that old trick to animate cell expand/collapse
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([_expandedCells containsObject:indexPath])
+    {
+        return 300.0; //It's not necessary a constant, though
+    }
+    else
+    {
+        return 180.0; //Again not necessary a constant
+    }
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
