@@ -7,6 +7,8 @@
 //
 
 #import "MyQuestionsViewController.h"
+#import <Parse/Parse.h>
+#import "Question.h"
 
 @interface MyQuestionsViewController ()
 
@@ -20,6 +22,21 @@
     [super viewDidLoad];
     NSLog(@"wtf");
     _myQuestions = [[NSMutableArray alloc] init];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Question"];
+    // TODO: Refine query here
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            for (PFObject *object in objects) {
+                Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)object];
+                [_myQuestions addObject:q];
+            }
+            [self.tableView reloadData];
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
         
 }
 
@@ -45,7 +62,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     
-    cell.textLabel.text = [_myQuestions objectAtIndex:indexPath.row];
+    Question *q = [_myQuestions objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = q.question;
     return cell;
 }
 

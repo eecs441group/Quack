@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MyQuestionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
