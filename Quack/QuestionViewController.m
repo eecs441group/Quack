@@ -33,7 +33,9 @@
     // Push to parse
     PFObject *question = [PFObject objectWithClassName:@"Question"];
     question[@"question"] = self.questionTextView.text;
+    
     question[@"answers"] = @[self.answer1.text, self.answer2.text, self.answer3.text, self.answer4.text];
+    question[@"counts"] = @[[NSNumber numberWithInt:0],[NSNumber numberWithInt:0],[NSNumber numberWithInt:0], [NSNumber numberWithInt:0]];
     
     [question saveInBackground];
     
