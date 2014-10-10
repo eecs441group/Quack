@@ -14,12 +14,15 @@
 @end
 
 @implementation InboxViewController
-
+{
+    NSMutableArray *inbox;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     PFQuery *query = [PFQuery queryWithClassName:@"Question"];
-    
+    inbox = [NSMutableArray new];
+
     // Retrieve the most recent ones
     [query orderByDescending:@"createdAt"];
     
@@ -32,7 +35,10 @@
         for (PFObject *question in questions) {
             // This does not require a network access.
             NSLog(@"retrieved question: %@", question);
+            [inbox addObject:[NSString stringWithString:question[@"question"]]];
         }
+    [self.tableView reloadData];
+    NSLog(@"retrieved question: %@", inbox);
     }];
     // The InBackground methods are asynchronous, so any code after this will run
     // immediately.  Any code that depends on the query result should be moved
@@ -43,6 +49,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [inbox count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *simpleTableIdentifier = @"SimpleTableCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    }
+    
+    cell.textLabel.text = [inbox objectAtIndex:indexPath.row];
+    return cell;
+}
+
+
 
 /*
 #pragma mark - Navigation

@@ -18,6 +18,7 @@
 		5E6385CC19E07EF000D00F80 /* QuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6385CB19E07EF000D00F80 /* QuestionViewController.m */; };
 		5E6385D219E088F300D00F80 /* MyQuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6385D119E088F300D00F80 /* MyQuestionsViewController.m */; };
 		5E6385D519E089AE00D00F80 /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6385D419E089AE00D00F80 /* Secrets.m */; };
+		639B43F219E10EB8005FD305 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 639B43F119E10EB8005FD305 /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		5E6385D119E088F300D00F80 /* MyQuestionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyQuestionsViewController.m; sourceTree = "<group>"; };
 		5E6385D319E089AE00D00F80 /* Secrets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Secrets.h; sourceTree = "<group>"; };
 		5E6385D419E089AE00D00F80 /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
+		639B43F019E10EB8005FD305 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		639B43F119E10EB8005FD305 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		657F35ED5A75533C4FBF2C46 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6F86B3A92149818E9D6D1579 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -97,6 +100,8 @@
 		5E2CCB7D19E0780600BFC609 /* Quack */ = {
 			isa = PBXGroup;
 			children = (
+				639B43F019E10EB8005FD305 /* LoginViewController.h */,
+				639B43F119E10EB8005FD305 /* LoginViewController.m */,
 				5E6385D319E089AE00D00F80 /* Secrets.h */,
 				5E6385D419E089AE00D00F80 /* Secrets.m */,
 				5E6385D019E088F300D00F80 /* MyQuestionsViewController.h */,
@@ -297,6 +302,7 @@
 				5E6385D219E088F300D00F80 /* MyQuestionsViewController.m in Sources */,
 				5E6385CC19E07EF000D00F80 /* QuestionViewController.m in Sources */,
 				5E6385C919E07AEA00D00F80 /* InboxViewController.m in Sources */,
+				639B43F219E10EB8005FD305 /* LoginViewController.m in Sources */,
 				5E2CCB8119E0780600BFC609 /* main.m in Sources */,
 				5E6385D519E089AE00D00F80 /* Secrets.m in Sources */,
 			);
