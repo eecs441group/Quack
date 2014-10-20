@@ -57,8 +57,9 @@
     FacebookInfo * fbInfo = [[FacebookInfo alloc] initWithAccountID:user.objectID];
     [fbInfo getFriends:^(NSArray *friends){
         for (NSDictionary *friend in friends) {
-            for (id key in friend)
-                NSLog(@"key=%@ value=%@", key, [friend objectForKey:key]);
+            //for (id key in friend)
+                //NSLog(@"key=%@ value=%@", key, [friend objectForKey:key]);
+            continue;
         }
     }];
 
@@ -76,7 +77,6 @@
                 userInfo[@"userId"] = user.objectID;
                 userInfo[@"name"] = user.name;
                 userInfo[@"userInbox"] = [NSMutableArray array];
-                userInfo[@"userQuestions"] = [NSMutableArray array];
                 
                 NSLog(@"saving new user");
                 [userInfo saveInBackground];

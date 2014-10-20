@@ -39,12 +39,21 @@
     question[@"answers"] = @[self.answer1.text, self.answer2.text, self.answer3.text, self.answer4.text];
     question[@"counts"] = @[[NSNumber numberWithInt:0],[NSNumber numberWithInt:0],[NSNumber numberWithInt:0], [NSNumber numberWithInt:0]];
     
-    [question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-    {
-        NSLog(@"%@", question.objectId);
-        [self saveAuthor:question.objectId];
-        [self sendToAllFriends:question.objectId];
-    }];
+    // Get fb id and save the question
+    if (FBSession.activeSession.isOpen) {
+        [FBRequestConnection
+         startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+             if (!error) {
+                 NSString *userId = [result objectForKey:@"id"];
+                 question[@"authorId"] = userId;
+                 
+                 [question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+                 {
+                      [self sendToAllFriends:question.objectId];
+                 }];
+             }
+         }];
+    }
     
     // Reload fields
     [self clearFields];
