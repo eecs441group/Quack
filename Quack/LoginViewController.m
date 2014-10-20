@@ -53,6 +53,7 @@
     self.profilePictureView.profileID = user.objectID;
     self.nameLabel.text = user.name;
 
+    //example for getting friends. can remove this anytime
     FacebookInfo * fbInfo = [[FacebookInfo alloc] initWithAccountID:user.objectID];
     [fbInfo getFriends:^(NSArray *friends){
         for (NSDictionary *friend in friends) {
