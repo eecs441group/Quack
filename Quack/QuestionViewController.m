@@ -49,7 +49,7 @@
                  
                  [question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
                  {
-                      [self sendToAllFriends:question.objectId];
+                      [self sendToAllFriends:question];
                  }];
              }
          }];
@@ -100,7 +100,7 @@
     }
 }
 
-- (void) sendToAllFriends:(NSString*) questionId {
+- (void) sendToAllFriends:(PFObject*) question {
     if (FBSession.activeSession.isOpen) {
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -120,7 +120,7 @@
                                  if (objects.count) {
                                      PFObject *user = objects[0];
                                      NSMutableArray *questions = user[@"userInbox"];
-                                     [questions addObject: questionId];
+                                     [questions addObject: question];
                                      user[@"userInbox"] = questions;
                                      
                                      NSLog(@"updating friend's inbox");

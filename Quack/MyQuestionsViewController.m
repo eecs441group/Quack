@@ -28,6 +28,8 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated {
+    //putting this in here for now, should probably move this code out of this function into viewDidLoad once
+    //fb login happens on load
     if (FBSession.activeSession.isOpen) {
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -36,6 +38,7 @@
                  
                  PFQuery *query = [PFQuery queryWithClassName:@"Question"];
                  [query whereKey:@"authorId" equalTo:userId];
+                 [query orderByDescending:@"createdAt"];
                  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                      if (!error) {
                          for (PFObject *object in objects) {
