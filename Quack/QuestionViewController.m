@@ -68,37 +68,37 @@
     }
 }
 
-- (void) saveAuthor:(NSString*) questionId {
-    if (FBSession.activeSession.isOpen) {
-        [FBRequestConnection
-         startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-             if (!error) {
-                 NSString *userId = [result objectForKey:@"id"];
-                 
-                 PFQuery * query = [PFQuery queryWithClassName:@"User"];
-                 [query whereKey:@"userId" equalTo:userId];
-                 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                     if (!error) {
-                         if (objects.count) {
-                             PFObject *user = objects[0];
-                             NSMutableArray *questions = user[@"userQuestions"];
-                             [questions addObject: questionId];
-                             user[@"userQuestions"] = questions;
-                             
-                             NSLog(@"updating user's questions");
-                             [user saveInBackground];
-                         } else {
-                             NSLog(@"userId not found when adding to UserQuestions");
-                         }
-                     } else {
-                         // Log details of the failure
-                         NSLog(@"Error: %@ %@", error, [error userInfo]);
-                     }
-                 }];
-             }
-         }];
-    }
-}
+//- (void) saveAuthor:(NSString*) questionId {
+//    if (FBSession.activeSession.isOpen) {
+//        [FBRequestConnection
+//         startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+//             if (!error) {
+//                 NSString *userId = [result objectForKey:@"id"];
+//                 
+//                 PFQuery * query = [PFQuery queryWithClassName:@"User"];
+//                 [query whereKey:@"userId" equalTo:userId];
+//                 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//                     if (!error) {
+//                         if (objects.count) {
+//                             PFObject *user = objects[0];
+//                             NSMutableArray *questions = user[@"userQuestions"];
+//                             [questions addObject: questionId];
+//                             user[@"userQuestions"] = questions;
+//                             
+//                             NSLog(@"updating user's questions");
+//                             [user saveInBackground];
+//                         } else {
+//                             NSLog(@"userId not found when adding to UserQuestions");
+//                         }
+//                     } else {
+//                         // Log details of the failure
+//                         NSLog(@"Error: %@ %@", error, [error userInfo]);
+//                     }
+//                 }];
+//             }
+//         }];
+//    }
+//}
 
 - (void) sendToAllFriends:(PFObject*) question {
     if (FBSession.activeSession.isOpen) {
@@ -107,23 +107,24 @@
              if (!error) {
                  NSString *userId = [result objectForKey:@"id"];
                  
+                 // Get fb friends who use Quack
                  FacebookInfo * fbInfo = [[FacebookInfo alloc] initWithAccountID:userId];
                  [fbInfo getFriends:^(NSArray *friends){
                      for (NSDictionary *friend in friends) {
-//                         for (id key in friend)
-//                             NSLog(@"key=%@ value=%@", key, [friend objectForKey:key]);
                          
                          PFQuery * query = [PFQuery queryWithClassName:@"User"];
+                         // Get the User object for this friend based on fb userId
                          [query whereKey:@"userId" equalTo:[friend objectForKey:@"id"]];
+                         
                          [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                              if (!error) {
                                  if (objects.count) {
                                      PFObject *user = objects[0];
                                      NSMutableArray *questions = user[@"userInbox"];
+                                     // Add the new question to friend's inbox
                                      [questions addObject: question];
-                                     user[@"userInbox"] = questions;
                                      
-                                     NSLog(@"updating friend's inbox");
+                                     user[@"userInbox"] = questions;
                                      [user saveInBackground];
                                  } else {
                                      NSLog(@"userId not found when adding to userInbox");

@@ -39,6 +39,7 @@
                  PFQuery *query = [PFQuery queryWithClassName:@"Question"];
                  [query whereKey:@"authorId" equalTo:userId];
                  [query orderByDescending:@"createdAt"];
+                 
                  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                      if (!error) {
                          for (PFObject *object in objects) {
