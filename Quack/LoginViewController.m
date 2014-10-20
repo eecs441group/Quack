@@ -75,6 +75,8 @@
                 PFObject *userInfo = [PFObject objectWithClassName:@"User"];
                 userInfo[@"userId"] = user.objectID;
                 userInfo[@"name"] = user.name;
+                userInfo[@"userInbox"] = [NSMutableArray array];
+                userInfo[@"userQuestions"] = [NSMutableArray array];
                 
                 NSLog(@"saving new user");
                 [userInfo saveInBackground];
