@@ -20,6 +20,7 @@
 		5E6385D219E088F300D00F80 /* MyQuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6385D119E088F300D00F80 /* MyQuestionsViewController.m */; };
 		5E6385D519E089AE00D00F80 /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6385D419E089AE00D00F80 /* Secrets.m */; };
 		F9D78AEB19E0990200500B71 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D78AEA19E0990200500B71 /* LoginViewController.m */; };
+		F9D78AEE19E76A8700500B71 /* FacebookInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D78AED19E76A8700500B71 /* FacebookInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		6F86B3A92149818E9D6D1579 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9D78AE919E0990200500B71 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		F9D78AEA19E0990200500B71 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		F9D78AEC19E76A8700500B71 /* FacebookInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookInfo.h; sourceTree = "<group>"; };
+		F9D78AED19E76A8700500B71 /* FacebookInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,24 +106,26 @@
 		5E2CCB7D19E0780600BFC609 /* Quack */ = {
 			isa = PBXGroup;
 			children = (
-				5E6385D319E089AE00D00F80 /* Secrets.h */,
-				5E6385D419E089AE00D00F80 /* Secrets.m */,
-				5E6385D019E088F300D00F80 /* MyQuestionsViewController.h */,
-				5E6385D119E088F300D00F80 /* MyQuestionsViewController.m */,
-				F9D78AE919E0990200500B71 /* LoginViewController.h */,
-				F9D78AEA19E0990200500B71 /* LoginViewController.m */,
 				5E2CCB8219E0780600BFC609 /* AppDelegate.h */,
 				5E2CCB8319E0780600BFC609 /* AppDelegate.m */,
-				5E6385CA19E07EF000D00F80 /* QuestionViewController.h */,
-				5E6385CB19E07EF000D00F80 /* QuestionViewController.m */,
-				5E2CCB8B19E0780600BFC609 /* Main.storyboard */,
+				F9D78AEC19E76A8700500B71 /* FacebookInfo.h */,
+				F9D78AED19E76A8700500B71 /* FacebookInfo.m */,
 				5E2CCB8E19E0780600BFC609 /* Images.xcassets */,
-				5E2CCB9019E0780600BFC609 /* LaunchScreen.xib */,
-				5E2CCB7E19E0780600BFC609 /* Supporting Files */,
 				5E6385C719E07AEA00D00F80 /* InboxViewController.h */,
 				5E6385C819E07AEA00D00F80 /* InboxViewController.m */,
+				5E2CCB9019E0780600BFC609 /* LaunchScreen.xib */,
+				F9D78AE919E0990200500B71 /* LoginViewController.h */,
+				F9D78AEA19E0990200500B71 /* LoginViewController.m */,
+				5E2CCB8B19E0780600BFC609 /* Main.storyboard */,
+				5E6385D019E088F300D00F80 /* MyQuestionsViewController.h */,
+				5E6385D119E088F300D00F80 /* MyQuestionsViewController.m */,
 				5E2AA85C19E75DE20084D717 /* Question.h */,
 				5E2AA85D19E75DE20084D717 /* Question.m */,
+				5E6385CA19E07EF000D00F80 /* QuestionViewController.h */,
+				5E6385CB19E07EF000D00F80 /* QuestionViewController.m */,
+				5E6385D319E089AE00D00F80 /* Secrets.h */,
+				5E6385D419E089AE00D00F80 /* Secrets.m */,
+				5E2CCB7E19E0780600BFC609 /* Supporting Files */,
 			);
 			path = Quack;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E2CCB8419E0780600BFC609 /* AppDelegate.m in Sources */,
+				F9D78AEE19E76A8700500B71 /* FacebookInfo.m in Sources */,
 				5E6385D219E088F300D00F80 /* MyQuestionsViewController.m in Sources */,
 				5E6385CC19E07EF000D00F80 /* QuestionViewController.m in Sources */,
 				5E6385C919E07AEA00D00F80 /* InboxViewController.m in Sources */,

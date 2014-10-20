@@ -26,6 +26,11 @@
                   clientKey:secrets.parseKey];
     [FBLoginView class];
     
+    // Show login view on app launch. Will be dismissed on successful login.
+    if (!FBSession.activeSession.isOpen) {
+        [self showLoginViewController:NO];
+    }
+    
     return YES;
 }
 
@@ -60,6 +65,17 @@
     BOOL loginHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
     
     return loginHandled;
+}
+
+- (void)showLoginViewController:(BOOL)animated {
+    // Get login screen from storyboard and present it
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    // "loginScreen" is the Storyboard Id for the Login ViewController
+    UIViewController *viewController = (UIViewController *)[storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
+    [self.window makeKeyAndVisible];
+    [self.window.rootViewController presentViewController:viewController
+                                                 animated:animated
+                                               completion:nil];
 }
 
 @end

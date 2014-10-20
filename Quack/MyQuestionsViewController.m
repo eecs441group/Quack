@@ -28,8 +28,7 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-    //putting this in here for now, should probably move this code out of this function into viewDidLoad once
-    //fb login happens on load
+    //putting this code viewDidAppear for now, does it belong in viewDidLoad though?
     if (FBSession.activeSession.isOpen) {
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -42,6 +41,10 @@
                  
                  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                      if (!error) {
+                         // There's probably a more efficient way to do this other than removing all objects every time?
+                         // Putting this here for now so we don't see duplicates
+                         [_myQuestions removeAllObjects];
+                         
                          for (PFObject *object in objects) {
                              Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)object];
                              [_myQuestions addObject:q];

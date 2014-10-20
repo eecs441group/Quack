@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     if (FBSession.activeSession.isOpen) {
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {

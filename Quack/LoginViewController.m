@@ -53,17 +53,6 @@
     self.profilePictureView.profileID = user.objectID;
     self.nameLabel.text = user.name;
 
-    //example for getting friends. can remove this anytime
-    FacebookInfo * fbInfo = [[FacebookInfo alloc] initWithAccountID:user.objectID];
-    [fbInfo getFriends:^(NSArray *friends){
-        for (NSDictionary *friend in friends) {
-            //for (id key in friend)
-                //NSLog(@"key=%@ value=%@", key, [friend objectForKey:key]);
-            continue;
-        }
-    }];
-
-
     // Check if logged in user exists in parse User table and add them if needed
     PFQuery *query = [PFQuery queryWithClassName:@"User"];
     [query whereKey:@"userId" equalTo:user.objectID];
@@ -86,6 +75,11 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+    
+    // Dismiss this view if login was successful. On app launch,
+    // this redirects to the first tab in the root tab bar controller.
+    // TODO: could change the animating/flashing
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 // Implement the loginViewShowingLoggedInUser: delegate method to modify your app's UI for a logged-in user experience
