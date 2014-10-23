@@ -22,7 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"wtf");
     _myQuestions = [[NSMutableArray alloc] init];
     _expandedCells = [[NSMutableArray alloc] init];
 }

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InboxViewController : UITableViewController
+@interface InboxViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
