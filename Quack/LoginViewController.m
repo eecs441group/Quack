@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "FacebookInfo.h"
 #import <Parse/Parse.h>
 
 @interface LoginViewController ()
@@ -51,8 +52,7 @@
                             user:(id<FBGraphUser>)user {
     self.profilePictureView.profileID = user.objectID;
     self.nameLabel.text = user.name;
-//    [self.profilePictureView reloadData];
-    
+
     // Check if logged in user exists in parse User table and add them if needed
     PFQuery *query = [PFQuery queryWithClassName:@"User"];
     [query whereKey:@"userId" equalTo:user.objectID];
@@ -65,6 +65,7 @@
                 PFObject *userInfo = [PFObject objectWithClassName:@"User"];
                 userInfo[@"userId"] = user.objectID;
                 userInfo[@"name"] = user.name;
+                userInfo[@"userInbox"] = [NSMutableArray array];
                 
                 NSLog(@"saving new user");
                 [userInfo saveInBackground];
@@ -74,33 +75,16 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+    
+    // Dismiss this view if login was successful. On app launch,
+    // this redirects to the first tab in the root tab bar controller.
+    // TODO: could change the animating/flashing
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 // Implement the loginViewShowingLoggedInUser: delegate method to modify your app's UI for a logged-in user experience
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
     self.statusLabel.text = @"You're logged in as";
-    
-    /* get user's friends who use quack */
-    [FBRequestConnection startWithGraphPath:@"/me/friends"
-                                 parameters:nil
-                                 HTTPMethod:@"GET"
-                          completionHandler:^(
-                                              FBRequestConnection *connection,
-                                              id result,
-                                              NSError *error
-                                              ) {
-                              /* handle the result */
-                              
-                              NSLog(@"Total friends %@", result[@"summary"][@"total_count"]);
-                              NSLog(@"Quacking friends %lu", (unsigned long)[result[@"data"] count]);
-//                              NSLog(@"result %@", result);
-                              // Result is an array of dictionaries. Each dict has id and name fields.
-                              
-                              for (NSDictionary *friend in result[@"data"]) {
-                                  for (id key in friend)
-                                  NSLog(@"key=%@ value=%@", key, [friend objectForKey:key]);
-                              }
-                          }];
 }
 
 // Implement the loginViewShowingLoggedOutUser: delegate method to modify your app's UI for a logged-out user experience

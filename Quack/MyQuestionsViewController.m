@@ -7,8 +7,9 @@
 //
 
 #import "MyQuestionsViewController.h"
-#import <Parse/Parse.h>
 #import "Question.h"
+#import <Parse/Parse.h>
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface MyQuestionsViewController ()
 
@@ -21,25 +22,43 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"wtf");
     _myQuestions = [[NSMutableArray alloc] init];
     _expandedCells = [[NSMutableArray alloc] init];
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"Question"];
-    // TODO: Refine query here
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            for (PFObject *object in objects) {
-                Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)object];
-                [_myQuestions addObject:q];
-            }
-            [self.tableView reloadData];
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
-        
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    //putting this code viewDidAppear for now, does it belong in viewDidLoad though?
+    if (FBSession.activeSession.isOpen) {
+        [FBRequestConnection
+         startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+             if (!error) {
+                 NSString *userId = [result objectForKey:@"id"];
+                 
+                 PFQuery *query = [PFQuery queryWithClassName:@"Question"];
+                 [query whereKey:@"authorId" equalTo:userId];
+                 [query orderByDescending:@"createdAt"];
+                 
+                 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                     if (!error) {
+                         // There's probably a more efficient way to do this other than removing all objects every time?
+                         // Putting this here for now so we don't see duplicates
+                         [_myQuestions removeAllObjects];
+                         
+                         for (PFObject *object in objects) {
+                             Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)object];
+                             [_myQuestions addObject:q];
+                         }
+                         [self.tableView reloadData];
+                     } else {
+                         // Log details of the failure
+                         NSLog(@"Error: %@ %@", error, [error userInfo]);
+                     }
+                 }];
+             }
+         }];
+    } else {
+        NSLog(@"fb session not active");
+    }
 }
 
 #pragma TableView
