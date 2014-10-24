@@ -38,7 +38,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="dJk-yg-Y3H"/>
+                    <tabBarItem key="tabBarItem" title="Account" id="dJk-yg-Y3H"/>
                     <connections>
                         <outlet property="nameLabel" destination="TCZ-qH-SDO" id="Wbb-Yu-H6G"/>
                         <outlet property="profilePictureView" destination="3FA-hK-uk3" id="wdn-32-Yi9"/>

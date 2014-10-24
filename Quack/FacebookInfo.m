@@ -35,11 +35,6 @@
                                               id result,
                                               NSError *error
                                               ) {
-                              /* handle the result */
-
-//                              NSLog(@"Total friends %@", result[@"summary"][@"total_count"]);
-//                              NSLog(@"Quacking friends %lu", (unsigned long)[result[@"data"] count]);
-//                              NSLog(@"result %@", result);
                               // Result is an array of dictionaries. Each dict has id and name fields.
 
                               handler(result[@"data"]);

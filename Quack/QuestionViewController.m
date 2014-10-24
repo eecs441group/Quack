@@ -111,9 +111,8 @@
                  FacebookInfo * fbInfo = [[FacebookInfo alloc] initWithAccountID:userId];
                  [fbInfo getFriends:^(NSArray *friends){
                      for (NSDictionary *friend in friends) {
-                         
-                         PFQuery * query = [PFQuery queryWithClassName:@"User"];
                          // Get the User object for this friend based on fb userId
+                         PFQuery * query = [PFQuery queryWithClassName:@"User"];
                          [query whereKey:@"userId" equalTo:[friend objectForKey:@"id"]];
                          
                          [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -121,6 +120,7 @@
                                  if (objects.count) {
                                      PFObject *user = objects[0];
                                      NSMutableArray *questions = user[@"userInbox"];
+                                     
                                      // Add the new question to friend's inbox
                                      [questions addObject: question];
                                      
