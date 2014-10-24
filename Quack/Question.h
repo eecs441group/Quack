@@ -12,6 +12,9 @@
 
 @property (strong, nonatomic) NSString *question;
 @property (strong, nonatomic) NSArray *answers;
+@property (strong, nonatomic) NSString *questionId;
+@property (assign, nonatomic) bool answerSet;
+@property (assign, nonatomic) long curSelected;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 

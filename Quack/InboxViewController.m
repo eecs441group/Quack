@@ -19,6 +19,7 @@
 @implementation InboxViewController {
     NSMutableArray *_userInbox;
     NSMutableArray *_expandedCells;
+    PFObject *_user;
 }
 
 - (void)viewDidLoad {
@@ -49,8 +50,8 @@
                  query.limit = 100;
                  
                  [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
-                     PFObject *user = users[0];
-                     for (PFObject *question in user[@"userInbox"]) {
+                     _user = users[0];
+                     for (PFObject *question in _user[@"userInbox"]) {
                          [_userInbox addObject:[[Question alloc] initWithDictionary:(NSDictionary *)question]];
                          // This does not require a network access.
                          NSLog(@"retrieved question: %@", question);
@@ -114,21 +115,56 @@
 
 - (void)addAnswersToCell:(UITableViewCell *)cell question:(Question *)question{
     for(int i = 0; i < 4; i++) {
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(5, 30 + i*55, 40, 40)];
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(5, 55 + i*55, 40, 40)];
+        button.tag = i;
         [button setTitle:@"+" forState:UIControlStateNormal];
         [button addTarget:self
-                   action:@selector(selectAnswer)
+                   action:@selector(selectAnswer:)
          forControlEvents:UIControlEventTouchUpInside];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 30 + i*55, 200, 40)];
+        UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 55 + i*55, 200, 40)];
         answerLabel.text = question.answers[i];
         [cell addSubview:answerLabel];
         [cell addSubview:button];
     }
 }
 
-- (void)selectAnswer {
-    NSLog(@"Pressed!");
+- (void)selectAnswer:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    InboxQuestionTableViewCell *cell = (InboxQuestionTableViewCell *)button.superview;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    Question *q = (Question *)[_userInbox objectAtIndex:indexPath.row];
+    
+    if(!q.answerSet && [button.titleLabel.text isEqual:@"+"]) {
+        [button setTitle:@">" forState:UIControlStateNormal];
+        q.answerSet = true;
+        q.curSelected = button.tag;
+    } else if ([button.titleLabel.text isEqualToString:@">"]) {
+        // get question from Parse
+        PFQuery *query = [PFQuery queryWithClassName:@"Question"];
+        [query getObjectInBackgroundWithId:q.questionId block:^(PFObject *question, NSError *error) {
+            // update count
+            NSMutableArray *counts = question[@"counts"];
+            counts[button.tag] = [NSNumber numberWithInt:[counts[button.tag] intValue] + 1];
+    
+            // submit changes
+            [question saveInBackground];
+            [_user[@"userInbox"] removeObject:question];
+            [_user saveInBackground];
+        }];
+        
+        // remove cell & question
+        [_userInbox removeObject:q];
+        [self.tableView reloadData];
+        
+    } else if([button.titleLabel.text isEqualToString:@"+"] && q.answerSet) {
+        // swap selected
+        UIButton *oldSelection = (UIButton *)[cell viewWithTag:q.curSelected];
+        [oldSelection setTitle:@"+" forState:UIControlStateNormal];
+        [button setTitle:@">" forState:UIControlStateNormal];
+        q.curSelected = button.tag;
+
+    }
 }
 
 - (void)removeAnswersFromCell:(UITableViewCell *)cell {
