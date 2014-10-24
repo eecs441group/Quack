@@ -14,6 +14,9 @@
     if(self == [super init]) {
         self.question = [dictionary objectForKey:@"question"];
         self.answers = [dictionary objectForKey:@"answers"];
+        self.questionId = [dictionary valueForKey:@"objectId"];
+        self.curSelected = 0;
+        self.answerSet = false;
     }
     return self;
 }

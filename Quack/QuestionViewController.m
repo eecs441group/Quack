@@ -50,6 +50,8 @@
                  [question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
                  {
                       [self sendToAllFriends:question];
+                     //send push notifications to all friends
+                     
                  }];
              }
          }];
@@ -111,8 +113,27 @@
                  FacebookInfo * fbInfo = [[FacebookInfo alloc] initWithAccountID:userId];
                  [fbInfo getFriends:^(NSArray *friends){
                      for (NSDictionary *friend in friends) {
-                         // Get the User object for this friend based on fb userId
+                         
+                         PFQuery *friendQuery = [PFUser query];
+                         [friendQuery whereKey:@"FBUserID" equalTo:[friend objectForKey:@"id"]]; // find all the women
+                         [friendQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                             if (!error) {
+                                 if (objects.count) {
+                                     PFUser *user = objects[0];
+                                     NSMutableArray *questions = user[@"userInbox"];
+                                     // Add the new question to friend's inbox
+                                     [questions addObject: question];
+                                     
+                                     user[@"userInbox"] = questions;
+                                     [user saveInBackground];
+                                 }
+                             } else {
+                                 NSLog(@"userId not found when adding to userInbox");
+                             }
+                         }];
+                         
                          PFQuery * query = [PFQuery queryWithClassName:@"User"];
+                         // Get the User object for this friend based on fb userId
                          [query whereKey:@"userId" equalTo:[friend objectForKey:@"id"]];
                          
                          [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -120,12 +141,19 @@
                                  if (objects.count) {
                                      PFObject *user = objects[0];
                                      NSMutableArray *questions = user[@"userInbox"];
-                                     
                                      // Add the new question to friend's inbox
                                      [questions addObject: question];
                                      
                                      user[@"userInbox"] = questions;
                                      [user saveInBackground];
+                                     
+//                                     [PFCloud callFunctionInBackground:@"sendPushToUser"
+//                                            withParameters:@{@"recipientId": user[@"userId"],}
+//                                                block:^(NSString *success, NSError *error) {
+//                                                    if (!error) {
+//                                                        // Push sent successfully
+//                                                    }
+//                                                }];
                                  } else {
                                      NSLog(@"userId not found when adding to userInbox");
                                  }
