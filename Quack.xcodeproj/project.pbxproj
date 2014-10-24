@@ -111,6 +111,9 @@
 		5E2CCB7D19E0780600BFC609 /* Quack */ = {
 			isa = PBXGroup;
 			children = (
+				63A4BD4119F9EE56009DE2EE /* InboxQuestionTableViewCell.h */,
+				63A4BD4219F9EE56009DE2EE /* InboxQuestionTableViewCell.m */,
+				63A4BD4319F9EE56009DE2EE /* InboxQuestionTableViewCell.xib */,
 				5E2CCB8219E0780600BFC609 /* AppDelegate.h */,
 				5E2CCB8319E0780600BFC609 /* AppDelegate.m */,
 				F9D78AEC19E76A8700500B71 /* FacebookInfo.h */,

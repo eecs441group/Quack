@@ -52,7 +52,28 @@
                             user:(id<FBGraphUser>)user {
     self.profilePictureView.profileID = user.objectID;
     self.nameLabel.text = user.name;
-
+    
+    //Check if logged in used exists in PFUser
+    PFQuery *userQuery = [PFUser query];
+    [userQuery whereKey:@"FBUserID" equalTo:user.objectID];
+    [userQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            if (!objects.count) {
+                // User not found, sign them up
+                PFUser *newUser = [PFUser user];
+                newUser.username = user.name;
+                newUser.password = @"password";
+                newUser[@"FBUserID"] = user.objectID;
+                newUser[@"userInbox"] = [NSMutableArray array];
+                
+                [newUser signUpInBackground];
+            }
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+    
     // Check if logged in user exists in parse User table and add them if needed
     PFQuery *query = [PFQuery queryWithClassName:@"User"];
     [query whereKey:@"userId" equalTo:user.objectID];
