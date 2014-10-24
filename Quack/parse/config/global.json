@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "Quack": {
+            "applicationId": "2NGA49afRaad8YaIz5AuqpLCZV0XokuFcThMiLJF", 
+            "masterKey": "2VY4d1Wdl1PJHlyx00XfVbz0uw9oeBuyVhxAmFKM"
+        }, 
+        "_default": {
+            "link": "Quack"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.3.1"
+    }
+}
