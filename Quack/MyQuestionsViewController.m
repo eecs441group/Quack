@@ -118,7 +118,8 @@
             total += [question[@"counts"][i] intValue];
         }
         for(int i = 0; i < 4; i++) {
-            UIView *v = [self getRectWithColor:[UIColor greenColor] width:(250 * [question[@"counts"][i] intValue] / total) ycoord:(95 + i*55)];
+            float proportion = total > 0 ? [question[@"counts"][i] intValue] / total : 0.0;
+            UIView *v = [self getRectWithColor:[UIColor greenColor] width:(250 * proportion) ycoord:(95 + i*55)];
             UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 55 + i*55, 200, 40)];
             answerLabel.text = [NSString stringWithFormat:@"%@ (%d)", question[@"answers"][i], [question[@"counts"][i] intValue]];
             [answerLabel setTag:i + 1];
