@@ -24,6 +24,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidLoad];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
     _userInbox = [[NSMutableArray alloc] init];
     _expandedCells = [[NSMutableArray alloc] init];
     
@@ -52,9 +54,10 @@
                  [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
                      _user = users[0];
                      for (PFObject *question in _user[@"userInbox"]) {
-                         [_userInbox addObject:[[Question alloc] initWithDictionary:(NSDictionary *)question]];
-                         // This does not require a network access.
-                         NSLog(@"retrieved question: %@", question);
+                         if(![question isKindOfClass:[NSNull class]]) {
+                             [_userInbox addObject:[[Question alloc] initWithDictionary:(NSDictionary *)question]];
+                             // This does not require a network access.
+                         }
                      }
                      [self.tableView reloadData];
                  }];
@@ -114,8 +117,8 @@
 - (void)addAnswersToCell:(UITableViewCell *)cell question:(Question *)question{
     for(int i = 0; i < 4; i++) {
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(5, 55 + i*55, 40, 40)];
-        button.tag = i;
-        [button setTitle:@"+" forState:UIControlStateNormal];
+        button.tag = i + 1;
+        [button setBackgroundImage:[UIImage imageNamed:@"checkmark.png"] forState:UIControlStateNormal];
         [button addTarget:self
                    action:@selector(selectAnswer:)
          forControlEvents:UIControlEventTouchUpInside];
@@ -133,46 +136,50 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     Question *q = (Question *)[_userInbox objectAtIndex:indexPath.row];
     
-    if(!q.answerSet && [button.titleLabel.text isEqual:@"+"]) {
-        [button setTitle:@">" forState:UIControlStateNormal];
+    if(!q.answerSet) {
+        [button setBackgroundImage:[UIImage imageNamed:@"checkmark_green.png"] forState:UIControlStateNormal];
         q.answerSet = true;
         q.curSelected = button.tag;
-    } else if ([button.titleLabel.text isEqualToString:@">"]) {
+    } else if (q.curSelected == button.tag) {
+        for(PFObject *question in _user[@"userInbox"]) {
+            if(![question isKindOfClass:[NSNull class]] && [[question objectId] isEqualToString:q.questionId]) {
+                [_user[@"userInbox"] removeObject:question];
+                [_user saveInBackground];
+                break;
+            }
+        }
+        
         // get question from Parse
+
         PFQuery *query = [PFQuery queryWithClassName:@"Question"];
         [query getObjectInBackgroundWithId:q.questionId block:^(PFObject *question, NSError *error) {
             // update count
-            [_user[@"userInbox"] removeObject:question];
-            for(PFObject *question in _user[@"userInbox"]) {
-                NSLog(@"question: %@", question);
-                if([[question objectId] isEqualToString:q.questionId]) {
-                    [_user[@"userInbox"] removeObject:question];
-                    [_user saveInBackground];
-                    break;
-                }
-            }
-            
             [_expandedCells removeObject:indexPath];
             [self removeAnswersFromCell:[self.tableView cellForRowAtIndexPath:indexPath]];
             
             NSMutableArray *counts = question[@"counts"];
-            counts[button.tag] = [NSNumber numberWithInt:[counts[button.tag] intValue] + 1];
+            counts[button.tag - 1] = [NSNumber numberWithInt:[counts[button.tag - 1] intValue] + 1];
     
             // save changes
             [question saveInBackground];
-            [_user saveInBackground];
             
             // remove cell & question
-            [_userInbox removeObject:q];
+            for(int i = 0; i < [_userInbox count]; ++i) {
+                Question *curQ = _userInbox[i];
+                if([curQ.questionId isEqualToString:q.questionId]) {
+                    NSLog(@"Removing obj with id: %@", curQ.questionId);
+                    [_userInbox removeObjectAtIndex:i];
+                }
+            }
             [self.tableView reloadData];
         }];
         
         
-    } else if([button.titleLabel.text isEqualToString:@"+"] && q.answerSet) {
+    } else if(q.answerSet) {
         // swap selected
         UIButton *oldSelection = (UIButton *)[cell viewWithTag:q.curSelected];
-        [oldSelection setTitle:@"+" forState:UIControlStateNormal];
-        [button setTitle:@">" forState:UIControlStateNormal];
+        [oldSelection setBackgroundImage:[UIImage imageNamed:@"checkmark.png"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"checkmark_green.png"] forState:UIControlStateNormal];
         q.curSelected = button.tag;
 
     }
