@@ -143,6 +143,11 @@
                                  NSLog(@"Error: %@ %@", error, [error userInfo]);
                              }
                          }];
+                         
+                         PFQuery *pushQuery = [PFInstallation query];
+                         [pushQuery whereKey:@"FBUserID" equalTo: [friend objectForKey:@"id"]];
+                         [PFPush sendPushMessageToQueryInBackground:pushQuery
+                                                        withMessage:@"Someone Quacked you a question!!"];
                      }
                  }];
              }

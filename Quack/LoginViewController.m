@@ -69,6 +69,7 @@
                     if (!error) {
                         PFInstallation *installation = [PFInstallation currentInstallation];
                         installation[@"user"] = [PFUser currentUser];
+                        installation[@"FBUserID"] = user.objectID;
                         [installation saveInBackground];
                         NSLog(@"pfinstallation initialized");
                     } else {
