@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InboxQuestionTableViewCell : UITableViewCell
+@interface QuestionTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *questionLabel;
 

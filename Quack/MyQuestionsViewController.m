@@ -10,6 +10,7 @@
 #import "Question.h"
 #import <Parse/Parse.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import "QuestionTableViewCell.h"
 
 @interface MyQuestionsViewController ()
 
@@ -24,6 +25,10 @@
     [super viewDidLoad];
     _myQuestions = [[NSMutableArray alloc] init];
     _expandedCells = [[NSMutableArray alloc] init];
+    
+    UINib *nib = [UINib nibWithNibName:@"QuestionTableViewCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"QuestionTableViewCell"];
+
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -75,17 +80,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *simpleTableIdentifier = @"UITableViewCell";
+    static NSString *simpleTableIdentifier = @"QuestionTableViewCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    QuestionTableViewCell *cell = (QuestionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        cell = [[QuestionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     
     Question *q = [_myQuestions objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = q.question;
+    cell.questionLabel.text = q.question;
     return cell;
 }
 
@@ -94,14 +99,50 @@
     if ([_expandedCells containsObject:indexPath])
     {
         [_expandedCells removeObject:indexPath];
+        [self removeDataFromCell:[self.tableView cellForRowAtIndexPath:indexPath]];
     }
     else
     {
         [_expandedCells addObject:indexPath];
+        [self addDataToCell:[self.tableView cellForRowAtIndexPath:indexPath] question:[_myQuestions objectAtIndex:indexPath.row]];
     }
     [self.tableView reloadData];
-//    [self.tableView beginEditing];
-//    [self.tableView endEditing]; //Yeah, that old trick to animate cell expand/collapse
+}
+
+- (void)addDataToCell:(UITableViewCell *)cell question:(Question *)question{
+    PFQuery *query = [PFQuery queryWithClassName:@"Question"];
+    
+    [query getObjectInBackgroundWithId:question.questionId block:^(PFObject *question, NSError *error) {
+        float total = 0;
+        for(int i = 0; i < 4; i++) {
+            total += [question[@"counts"][i] intValue];
+        }
+        for(int i = 0; i < 4; i++) {
+            float proportion = total > 0 ? [question[@"counts"][i] intValue] / total : 0.0;
+            UIView *v = [self getRectWithColor:[UIColor greenColor] width:(250 * proportion) ycoord:(95 + i*55)];
+            UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 55 + i*55, 200, 40)];
+            answerLabel.text = [NSString stringWithFormat:@"%@ (%d)", question[@"answers"][i], [question[@"counts"][i] intValue]];
+            [answerLabel setTag:i + 1];
+            [v setTag:i + 1];
+            [cell addSubview:answerLabel];
+            [cell addSubview:v];
+        }
+    }];
+}
+
+- (void)removeDataFromCell:(UITableViewCell *)cell {
+    for (UIView *view in cell.subviews) {
+        if (view.tag >= 1 && view.tag <= 4) {
+            [view removeFromSuperview];
+        }
+    }
+}
+
+- (UIView *)getRectWithColor:(UIColor *)color width:(int)width ycoord:(int)ycoord {
+    CGRect rectangle = CGRectMake(50, ycoord, width, 10);
+    UIView *bar = [[UIView alloc] initWithFrame:rectangle];
+    bar.backgroundColor = color;
+    return bar;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -112,7 +153,7 @@
     }
     else
     {
-        return 180.0; //Again not necessary a constant
+        return 80.0; //Again not necessary a constant
     }
 }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
@@ -38,7 +38,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="dJk-yg-Y3H"/>
+                    <tabBarItem key="tabBarItem" title="Account" image="user_male3" id="dJk-yg-Y3H"/>
                     <connections>
                         <outlet property="nameLabel" destination="TCZ-qH-SDO" id="Wbb-Yu-H6G"/>
                         <outlet property="profilePictureView" destination="3FA-hK-uk3" id="wdn-32-Yi9"/>
@@ -72,7 +72,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="My Questions" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="My Questions" image="bar_chart" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="tableView" destination="0Lg-6p-aYb" id="AQk-tQ-Onh"/>
                     </connections>
@@ -144,7 +144,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Quack" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Quack" image="quack_black" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="answer1" destination="unO-Z4-04o" id="P2h-zT-3dy"/>
                         <outlet property="answer2" destination="D3u-GH-oW8" id="JlJ-0e-vyb"/>
@@ -199,7 +199,7 @@
                             <outlet property="delegate" destination="dF5-fx-pC3" id="InG-eP-g5A"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Inbox" image="first" id="p7w-1e-S1h"/>
+                    <tabBarItem key="tabBarItem" title="Inbox" image="inbox" id="p7w-1e-S1h"/>
                     <connections>
                         <outlet property="tableView" destination="Ulh-fW-Ec5" id="Y3J-XK-FGU"/>
                     </connections>
@@ -210,7 +210,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="bar_chart" width="25" height="25"/>
+        <image name="inbox" width="25" height="25"/>
+        <image name="quack_black" width="25" height="25"/>
+        <image name="user_male3" width="25" height="25"/>
     </resources>
 </document>

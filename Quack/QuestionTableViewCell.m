@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 eecs441group. All rights reserved.
 //
 
-#import "InboxQuestionTableViewCell.h"
+#import "QuestionTableViewCell.h"
 
-@implementation InboxQuestionTableViewCell
+@implementation QuestionTableViewCell
 
 - (void)awakeFromNib {
     
