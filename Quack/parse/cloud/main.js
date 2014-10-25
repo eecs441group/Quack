@@ -39,3 +39,35 @@ Parse.Cloud.define("sendPushToUser", function(request, response) {
 		response.error("Push failed to send with error: " + error.message);
 	});
 });
+
+Parse.Cloud.define("sendQuestionToAllUsers", function(request, response) {
+	var sender = request.user;
+	var question = request.params.question;
+	var recipients = request.params.friends; 
+
+	for (i = 0; i < 1; i++) {
+		var query = new Parse.Query(Parse.User);
+		query.equalTo("FBUserID", recipients[i].id).first()
+			.then(function(results){
+				results.add("userInbox",question);
+				//response.success(results);
+			});
+	}
+
+	//response.success("succeded");
+});
+
+Parse.Cloud.define("sendQuestionToUser", function(request, response) {
+	var sender = request.user;
+	var question = request.params.question;
+	var recipient = request.params.friend; 
+	var query = new Parse.Query(Parse.User);
+	query.equalTo("FBUserID", recipient.id).first().then(function(result){
+		if (result){
+			result.add("userInbox",question);
+			result.save(null, { useMasterKey: true });
+			response.success(result);
+		}
+	});
+	response.success("succeded");
+});

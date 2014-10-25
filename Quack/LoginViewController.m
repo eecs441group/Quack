@@ -53,7 +53,7 @@
     self.profilePictureView.profileID = user.objectID;
     self.nameLabel.text = user.name;
     
-    //Check if logged in used exists in PFUser
+    //Check if logged in user exists in PFUser
     PFQuery *userQuery = [PFUser query];
     [userQuery whereKey:@"FBUserID" equalTo:user.objectID];
     [userQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -65,8 +65,27 @@
                 newUser.password = @"password";
                 newUser[@"FBUserID"] = user.objectID;
                 newUser[@"userInbox"] = [NSMutableArray array];
-                
-                [newUser signUpInBackground];
+                [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (!error) {
+                        PFInstallation *installation = [PFInstallation currentInstallation];
+                        installation[@"user"] = [PFUser currentUser];
+                        [installation saveInBackground];
+                        NSLog(@"pfinstallation initialized");
+                    } else {
+                        NSString *errorString = [error userInfo][@"error"];
+                        NSLog(@" %@", errorString);
+                    }
+                }];
+            } else {
+                //the find succeeded; auto login
+                [PFUser logInWithUsernameInBackground:user.name password:@"password"
+                        block:^(PFUser *user, NSError *error) {
+                            if (user) {
+                                NSLog(@"login successful!");
+                            } else {
+                                // The login failed. Check error to see why.
+                            }
+                            }];
             }
         } else {
             // Log details of the failure
