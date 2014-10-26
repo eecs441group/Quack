@@ -17,6 +17,7 @@
 @end
 
 @implementation InboxViewController {
+    UILabel *_noQuestions;
     NSMutableArray *_userInbox;
     NSMutableArray *_expandedCells;
     PFObject *_user;
@@ -25,7 +26,9 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-
+    
+    _noQuestions = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 300, 30)];
+    
     _userInbox = [[NSMutableArray alloc] init];
     _expandedCells = [[NSMutableArray alloc] init];
     
@@ -54,16 +57,12 @@
                  [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
                      _user = users[0];
                      for (PFObject *question in _user[@"userInbox"]) {
-                         if(![question isKindOfClass:[NSNull class]]) {
+                         if(question && ![question isKindOfClass:[NSNull class]]) {
                              [_userInbox addObject:[[Question alloc] initWithDictionary:(NSDictionary *)question]];
-                             // This does not require a network access.
                          }
                      }
                      [self.tableView reloadData];
                  }];
-                 // The InBackground methods are asynchronous, so any code after this will run
-                 // immediately.  Any code that depends on the query result should be moved
-                 // inside the completion block above.
              }
          }];
     } else {
@@ -141,39 +140,26 @@
         q.answerSet = true;
         q.curSelected = button.tag;
     } else if (q.curSelected == button.tag) {
-        for(PFObject *question in _user[@"userInbox"]) {
-            if(![question isKindOfClass:[NSNull class]] && [[question objectId] isEqualToString:q.questionId]) {
-                [_user[@"userInbox"] removeObject:question];
-                [_user saveInBackground];
-                break;
-            }
-        }
+        [_userInbox removeObject:q];
+        [_expandedCells removeObject:indexPath];
+        [self removeAnswersFromCell:[self.tableView cellForRowAtIndexPath:indexPath]];
+        [self.tableView reloadData];
+        
+        NSUInteger idx = [_user[@"userInbox"] indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+            return obj != [NSNull null] && [[obj objectId] isEqualToString:q.questionId];
+        }];
+        [_user[@"userInbox"] removeObjectAtIndex:idx];
+        [_user saveInBackground];
         
         // get question from Parse
 
         PFQuery *query = [PFQuery queryWithClassName:@"Question"];
         [query getObjectInBackgroundWithId:q.questionId block:^(PFObject *question, NSError *error) {
-            // update count
-            [_expandedCells removeObject:indexPath];
-            [self removeAnswersFromCell:[self.tableView cellForRowAtIndexPath:indexPath]];
-            
             NSMutableArray *counts = question[@"counts"];
             counts[button.tag - 1] = [NSNumber numberWithInt:[counts[button.tag - 1] intValue] + 1];
-    
-            // save changes
             [question saveInBackground];
             
-            // remove cell & question
-            for(int i = 0; i < [_userInbox count]; ++i) {
-                Question *curQ = _userInbox[i];
-                if([curQ.questionId isEqualToString:q.questionId]) {
-                    NSLog(@"Removing obj with id: %@", curQ.questionId);
-                    [_userInbox removeObjectAtIndex:i];
-                }
-            }
-            [self.tableView reloadData];
         }];
-        
         
     } else if(q.answerSet) {
         // swap selected
