@@ -11,6 +11,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "Question.h"
 #import "QuestionTableViewCell.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface InboxViewController ()
 
@@ -37,6 +38,7 @@
     // Do any additional setup after loading the view.
     
     if (FBSession.activeSession.isOpen) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
              if (!error) {
@@ -64,6 +66,7 @@
                      [self.tableView reloadData];
                  }];
              }
+             [hud hide:YES];
          }];
     } else {
         NSLog(@"fb session not active");
