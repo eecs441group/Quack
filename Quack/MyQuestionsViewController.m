@@ -32,7 +32,7 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-    //putting this code viewDidAppear for now, does it belong in viewDidLoad though?
+    // Get all questions that this user authored and show them in the view
     if (FBSession.activeSession.isOpen) {
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -45,6 +45,7 @@
                  
                  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                      if (!error) {
+                         // Remove all old objects and append them to the MyQuestions array
                          // There's probably a more efficient way to do this other than removing all objects every time?
                          // Putting this here for now so we don't see duplicates
                          [_myQuestions removeAllObjects];

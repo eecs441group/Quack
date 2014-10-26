@@ -26,6 +26,11 @@
                   clientKey:secrets.parseKey];
     [FBLoginView class];
     
+    //Make a FBLoginView so we can check if the session is active
+    FBLoginView *firstLoginView =
+        [[FBLoginView alloc] initWithReadPermissions:
+         @[@"public_profile", @"email", @"user_friends"]];
+    
     // Show login view on app launch. Will be dismissed on successful login.
     if (!FBSession.activeSession.isOpen) {
         [self showLoginViewController:NO];
