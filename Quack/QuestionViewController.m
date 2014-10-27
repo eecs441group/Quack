@@ -23,8 +23,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+    
     _emptyString = [NSString stringWithFormat:@""];
     // Do any additional setup after loading the view.
+}
+
+-(void)dismissKeyboard {
+    [self.questionTextView resignFirstResponder];
+    [self.answer1 resignFirstResponder];
+    [self.answer2 resignFirstResponder];
+    [self.answer3 resignFirstResponder];
+    [self.answer4 resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
