@@ -38,7 +38,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Account" image="user_male3" id="dJk-yg-Y3H"/>
+                    <tabBarItem key="tabBarItem" title="Me" image="user_male3" id="dJk-yg-Y3H"/>
                     <connections>
                         <outlet property="nameLabel" destination="TCZ-qH-SDO" id="Wbb-Yu-H6G"/>
                         <outlet property="profilePictureView" destination="3FA-hK-uk3" id="wdn-32-Yi9"/>
@@ -168,9 +168,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="dF5-fx-pC3" kind="relationship" relationship="viewControllers" id="eYc-99-rIw"/>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="XbX-6k-FRa" kind="relationship" relationship="viewControllers" id="QwB-rD-u8l"/>
                     </connections>
                 </tabBarController>
