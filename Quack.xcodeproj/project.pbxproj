@@ -111,9 +111,6 @@
 		5E2CCB7D19E0780600BFC609 /* Quack */ = {
 			isa = PBXGroup;
 			children = (
-				63A4BD4119F9EE56009DE2EE /* InboxQuestionTableViewCell.h */,
-				63A4BD4219F9EE56009DE2EE /* InboxQuestionTableViewCell.m */,
-				63A4BD4319F9EE56009DE2EE /* InboxQuestionTableViewCell.xib */,
 				5E2CCB8219E0780600BFC609 /* AppDelegate.h */,
 				5E2CCB8319E0780600BFC609 /* AppDelegate.m */,
 				F9D78AEC19E76A8700500B71 /* FacebookInfo.h */,
@@ -388,7 +385,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Ze Han (2YQYRHR6AH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Feng Ze Han (2YQYRHR6AH)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -408,6 +406,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "051119da-bf0e-45d1-a5aa-2f6f694e3256";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -429,7 +428,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Ze Han (2YQYRHR6AH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Feng Ze Han (2YQYRHR6AH)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -442,6 +442,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "051119da-bf0e-45d1-a5aa-2f6f694e3256";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -452,6 +453,8 @@
 			baseConfigurationReference = 07453993A8348CD2BCA7DA9A /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Ze Han (2YQYRHR6AH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Feng Ze Han (2YQYRHR6AH)";
 				INFOPLIST_FILE = Quack/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -464,6 +467,8 @@
 			baseConfigurationReference = 657F35ED5A75533C4FBF2C46 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Ze Han (2YQYRHR6AH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Feng Ze Han (2YQYRHR6AH)";
 				INFOPLIST_FILE = Quack/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
