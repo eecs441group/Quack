@@ -49,7 +49,7 @@
             </objects>
             <point key="canvasLocation" x="750" y="-990"/>
         </scene>
-        <!--My Questions-->
+        <!--Results-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="MyQuestionsViewController" sceneMemberID="viewController">
@@ -72,7 +72,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="My Questions" image="bar_chart" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Results" image="bar_chart" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="tableView" destination="0Lg-6p-aYb" id="AQk-tQ-Onh"/>
                     </connections>
@@ -178,7 +178,7 @@
             </objects>
             <point key="canvasLocation" x="-184" y="-12"/>
         </scene>
-        <!--Inbox-->
+        <!--Feed-->
         <scene sceneID="273-nC-hSR">
             <objects>
                 <tableViewController id="dF5-fx-pC3" customClass="InboxViewController" sceneMemberID="viewController">
@@ -199,7 +199,7 @@
                             <outlet property="delegate" destination="dF5-fx-pC3" id="InG-eP-g5A"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Inbox" image="inbox" id="p7w-1e-S1h"/>
+                    <tabBarItem key="tabBarItem" title="Feed" image="inbox" id="p7w-1e-S1h"/>
                     <connections>
                         <outlet property="tableView" destination="Ulh-fW-Ec5" id="Y3J-XK-FGU"/>
                     </connections>
