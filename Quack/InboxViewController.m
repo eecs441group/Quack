@@ -24,8 +24,12 @@
     PFObject *_user;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidLoad {
     [super viewDidLoad];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     _noQuestions = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 300, 30)];
@@ -139,7 +143,7 @@
     Question *q = (Question *)[_userInbox objectAtIndex:indexPath.row];
     
     if(!q.answerSet) {
-        [button setBackgroundImage:[UIImage imageNamed:@"checkmark_green.png"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"sent_green.png"] forState:UIControlStateNormal];
         q.answerSet = true;
         q.curSelected = button.tag;
     } else if (q.curSelected == button.tag) {
@@ -168,7 +172,7 @@
         // swap selected
         UIButton *oldSelection = (UIButton *)[cell viewWithTag:q.curSelected];
         [oldSelection setBackgroundImage:[UIImage imageNamed:@"checkmark.png"] forState:UIControlStateNormal];
-        [button setBackgroundImage:[UIImage imageNamed:@"checkmark_green.png"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"sent_green.png"] forState:UIControlStateNormal];
         q.curSelected = button.tag;
 
     }
