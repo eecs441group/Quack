@@ -100,12 +100,13 @@
                  [fbInfo getFriends:^(NSArray *friends){
                      for (NSDictionary *friend in friends) {
                          
-                         [PFCloud callFunctionInBackground:@"sendQuestionToUser"
+                         [PFCloud callFunctionInBackground:@"sendQuestionToUser2"
                                 withParameters:@{@"friend": friend, @"question": question.objectId}
                                     block:^(id object, NSError *error) {
                                         NSLog(@"success!! %@", object);
                                     }];
                          
+                         //TODO: delete this block of code later
                          PFQuery * query = [PFQuery queryWithClassName:@"User"];
                          // Get the User object for this friend based on fb userId
                          [query whereKey:@"userId" equalTo:[friend objectForKey:@"id"]];

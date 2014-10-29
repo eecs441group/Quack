@@ -58,16 +58,57 @@ Parse.Cloud.define("sendQuestionToAllUsers", function(request, response) {
 });
 
 Parse.Cloud.define("sendQuestionToUser", function(request, response) {
+    var sender = request.user;
+    var question = request.params.question;
+    var recipient = request.params.friend; 
+    var query = new Parse.Query(Parse.User);
+    query.equalTo("FBUserID", recipient.id).first().then(function(result){
+        if (result){
+            result.add("userInbox",question);
+            result.save(null, { useMasterKey: true });
+            response.success(result);
+        }
+    });
+    response.success("succeded");
+});
+
+Parse.Cloud.define("sendQuestionToUser2", function(request, response) {
 	var sender = request.user;
-	var question = request.params.question;
+	var questionId = request.params.question;
 	var recipient = request.params.friend; 
-	var query = new Parse.Query(Parse.User);
-	query.equalTo("FBUserID", recipient.id).first().then(function(result){
-		if (result){
-			result.add("userInbox",question);
-			result.save(null, { useMasterKey: true });
-			response.success(result);
-		}
-	});
-	response.success("succeded");
+
+    var questionQuery = new Parse.Query("Question");
+    questionQuery.get(questionId, {
+        success: function(question) {
+            if (question) {
+                var friendQuery = new Parse.Query(Parse.User);
+                friendQuery.equalTo("FBUserID", recipient.id).first().then(function(friend) {
+                    if (friend) {
+                        var relation = friend.relation("inbox");
+                        relation.add(question);
+                        friend.save(null, {
+                            useMasterKey: true,
+                            success: function(result) {
+                                response.success(true);
+                            },
+                            error: function(result, error) {
+                                response.error(error);
+                            }
+                        });
+                    } else {
+                        response.error("Friend not found when trying to send question");
+                    }
+                });
+            } else {
+                response.error("Question not found when trying to send question");
+            }
+        },
+        error: function(error) {
+            response.error(error);
+        }
+    });
+});
+
+Parse.Cloud.afterDelete("Question", function(request) {
+    
 });
