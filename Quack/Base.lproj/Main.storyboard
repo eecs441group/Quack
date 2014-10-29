@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
         <!--Log in/out-->
@@ -125,22 +125,22 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfa-hU-ZJN">
-                                <rect key="frame" x="139" y="281" width="42" height="37"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" image="quack_black">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="quackPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="zbx-Jf-hLG"/>
-                                </connections>
-                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NP1-jt-pHj">
                                 <rect key="frame" x="7" y="57" width="306" height="51"/>
                                 <color key="backgroundColor" red="0.74335006380000002" green="0.95686274510000002" blue="0.89344893780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfa-hU-ZJN">
+                                <rect key="frame" x="97" y="293" width="125" height="47"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" image="quack_word">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="quackPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="zbx-Jf-hLG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -149,6 +149,7 @@
                             <constraint firstAttribute="centerX" secondItem="unO-Z4-04o" secondAttribute="centerX" id="Bia-WK-SAp"/>
                             <constraint firstAttribute="centerX" secondItem="u1o-Eu-xnB" secondAttribute="centerX" id="ELT-xC-pGp"/>
                             <constraint firstAttribute="centerX" secondItem="NP1-jt-pHj" secondAttribute="centerX" id="Tjf-fS-f9R"/>
+                            <constraint firstAttribute="centerX" secondItem="bfa-hU-ZJN" secondAttribute="centerX" id="fe9-Ov-6HT"/>
                             <constraint firstAttribute="centerX" secondItem="bfa-hU-ZJN" secondAttribute="centerX" id="jLN-Pb-LPM"/>
                             <constraint firstAttribute="centerX" secondItem="ebs-qM-nSa" secondAttribute="centerX" id="kjH-l7-wkO"/>
                             <constraint firstAttribute="centerX" secondItem="EWa-f0-TXD" secondAttribute="centerX" id="wax-Nv-HzO"/>
@@ -223,6 +224,7 @@
         <image name="bar_chart" width="25" height="25"/>
         <image name="inbox" width="25" height="25"/>
         <image name="quack_black" width="25" height="25"/>
+        <image name="quack_word" width="125" height="47"/>
         <image name="user_male3" width="25" height="25"/>
     </resources>
 </document>
