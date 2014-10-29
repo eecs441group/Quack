@@ -15,7 +15,7 @@
 @property (strong, nonatomic) NSString *questionId;
 @property (assign, nonatomic) bool answerSet;
 @property (assign, nonatomic) long curSelected;
-
+@property (strong, nonatomic) NSMutableArray *counts;
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

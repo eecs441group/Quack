@@ -10,7 +10,6 @@
 #import "Question.h"
 #import <Parse/Parse.h>
 #import <FacebookSDK/FacebookSDK.h>
-#import "QuestionTableViewCell.h"
 #import "MBProgressHud.h"
 
 @interface MyQuestionsViewController ()
@@ -58,24 +57,22 @@
 }
 
 - (void)addDataToCell:(UITableViewCell *)cell question:(Question *)question{
-    PFQuery *query = [PFQuery queryWithClassName:@"Question"];
     
-    [query getObjectInBackgroundWithId:question.questionId block:^(PFObject *question, NSError *error) {
-        float total = 0;
-        for(int i = 0; i < 4; i++) {
-            total += [question[@"counts"][i] intValue];
-        }
-        for(int i = 0; i < 4; i++) {
-            float proportion = total > 0 ? [question[@"counts"][i] intValue] / total : 0.0;
-            UIView *v = [self getRectWithColor:[UIColor greenColor] width:(250 * proportion) ycoord:(95 + i*55)];
-            UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 55 + i*55, 200, 40)];
-            answerLabel.text = [NSString stringWithFormat:@"%@ (%d)", question[@"answers"][i], [question[@"counts"][i] intValue]];
-            [answerLabel setTag:i + 1];
-            [v setTag:i + 1];
-            [cell addSubview:answerLabel];
-            [cell addSubview:v];
-        }
-    }];
+    float total = 0;
+    for(int i = 0; i < 4; i++) {
+        total += [question.counts[i] intValue];
+    }
+    for(int i = 0; i < 4; i++) {
+        float proportion = total > 0 ? [question.counts[i] intValue] / total : 0.0;
+
+        UIView *v = [self getRectWithColor:[UIColor greenColor] width:(250 * proportion) ycoord:(95 + i*55)];
+        UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 55 + i*55, 200, 40)];
+        answerLabel.text = [NSString stringWithFormat:@"%@ (%d)", question.answers[i], [question.counts[i] intValue]];
+        [answerLabel setTag:i + 1];
+        [v setTag:i + 1];
+        [cell addSubview:answerLabel];
+        [cell addSubview:v];
+    }
 }
 
 - (void)removeDataFromCell:(UITableViewCell *)cell {

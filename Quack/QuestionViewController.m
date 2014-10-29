@@ -48,10 +48,9 @@
 }
 
 - (IBAction)quackPressed:(id)sender {
-    // Push to parse
+    // Create PFObject for Question
     PFObject *question = [PFObject objectWithClassName:@"Question"];
     question[@"question"] = self.questionTextView.text;
-    
     question[@"answers"] = @[self.answer1.text, self.answer2.text, self.answer3.text, self.answer4.text];
     question[@"counts"] = @[[NSNumber numberWithInt:0],[NSNumber numberWithInt:0],[NSNumber numberWithInt:0], [NSNumber numberWithInt:0]];
     
@@ -67,7 +66,7 @@
                  
                  [question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
                  {
-                      [self sendToAllFriends:question];
+                     [self sendToAllFriends:question];
                      //send push notifications to all friends
                      [hud hide:YES];
                      
