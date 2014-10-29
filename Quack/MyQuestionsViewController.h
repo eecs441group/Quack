@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ExpandingTableViewController.h"
 
-@interface MyQuestionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MyQuestionsViewController : ExpandingTableViewController
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end

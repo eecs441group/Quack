@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ExpandingTableViewController.h"
 
-@interface InboxViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+@interface InboxViewController : ExpandingTableViewController
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
