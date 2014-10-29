@@ -29,13 +29,14 @@
     
 }
 
+- (void)awakeFromNib {
+    _expandedCells = [[NSMutableArray alloc] init];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
-    _noQuestions = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 300, 30)];
-    
     _userInbox = [[NSMutableArray alloc] init];
-    _expandedCells = [[NSMutableArray alloc] init];
+    _noQuestions = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 300, 30)];
     
     UINib *nib = [UINib nibWithNibName:@"QuestionTableViewCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"QuestionTableViewCell"];

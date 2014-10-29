@@ -22,10 +22,13 @@
     NSMutableArray *_expandedCells;
 }
 
+- (void)awakeFromNib {
+    _expandedCells = [[NSMutableArray alloc] init];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     _myQuestions = [[NSMutableArray alloc] init];
-    _expandedCells = [[NSMutableArray alloc] init];
     
     UINib *nib = [UINib nibWithNibName:@"QuestionTableViewCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"QuestionTableViewCell"];
