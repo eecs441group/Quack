@@ -67,22 +67,28 @@
                 newUser[@"userInbox"] = [NSMutableArray array];
                 [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if (!error) {
+                        NSLog(@"signup successful!");
                         PFInstallation *installation = [PFInstallation currentInstallation];
                         installation[@"user"] = [PFUser currentUser];
                         installation[@"FBUserID"] = user.objectID;
                         [installation saveInBackground];
                         NSLog(@"pfinstallation initialized");
+                        
                     } else {
                         NSString *errorString = [error userInfo][@"error"];
                         NSLog(@" %@", errorString);
                     }
                 }];
             } else {
-                //the find succeeded; auto login
                 [PFUser logInWithUsernameInBackground:user.name password:@"password"
                         block:^(PFUser *user, NSError *error) {
                             if (user) {
                                 NSLog(@"login successful!");
+                                PFInstallation *installation = [PFInstallation currentInstallation];
+                                installation[@"user"] = [PFUser currentUser];
+                                installation[@"FBUserID"] = user[@"FBUserID"];
+                                [installation saveInBackground];
+                                NSLog(@"pfinstallation initialized");
                             } else {
                                 // The login failed. Check error to see why.
                             }
