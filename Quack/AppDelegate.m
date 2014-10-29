@@ -27,6 +27,7 @@
     [FBLoginView class];
     
     // Register for Push Notitications, if running iOS 8
+    // Register for Push Notitications, if running iOS 8
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
                                                         UIUserNotificationTypeBadge |
@@ -56,7 +57,8 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    // Store the deviceToken in the current Installation and save it to Parse.
+    // Store the deviceToken in the current Installation and save it to Parse
+    NSLog(@"didRegisterforRemoteNotifications called with deviceToken: %@", deviceToken);
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation saveInBackground];
