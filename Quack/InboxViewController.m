@@ -151,20 +151,21 @@
         [self removeAnswersFromCell:[self.tableView cellForRowAtIndexPath:indexPath]];
         [self.tableView reloadData];
         
-        NSUInteger idx = [_user[@"userInbox"] indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-            return obj != [NSNull null] && [[obj objectId] isEqualToString:q.questionId];
-        }];
-        [_user[@"userInbox"] removeObjectAtIndex:idx];
-        [_user saveInBackground];
-        
         // get question from Parse
-
         PFQuery *query = [PFQuery queryWithClassName:@"Question"];
         [query getObjectInBackgroundWithId:q.questionId block:^(PFObject *question, NSError *error) {
-            NSMutableArray *counts = question[@"counts"];
-            counts[button.tag - 1] = [NSNumber numberWithInt:[counts[button.tag - 1] intValue] + 1];
-            [question saveInBackground];
-            
+            if (!error) {
+                // Remove question from user's inbox
+                PFUser *user = [PFUser currentUser];
+                PFRelation *relation = [user relationForKey:@"inbox"];
+                [relation removeObject:question];
+                [user saveInBackground];
+                
+                // Update question's counts
+                NSMutableArray *counts = question[@"counts"];
+                counts[button.tag - 1] = [NSNumber numberWithInt:[counts[button.tag - 1] intValue] + 1];
+                [question saveInBackground];
+            }
         }];
         
     } else if(q.answerSet) {
