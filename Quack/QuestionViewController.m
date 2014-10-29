@@ -95,8 +95,7 @@
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
              if (!error) {
                  NSString *userId = [result objectForKey:@"id"];
-
-                 // Get fb friends who use Quack
+                 
                  FacebookInfo * fbInfo = [[FacebookInfo alloc] initWithAccountID:userId];
                  [fbInfo getFriends:^(NSArray *friends){
                      for (NSDictionary *friend in friends) {
@@ -109,9 +108,10 @@
                                     }];
                          
                          PFQuery *pushQuery = [PFInstallation query];
+                         NSString* pushMessage = [result[@"first_name"] stringByAppendingString:@" quacked you a question!!"];
                          [pushQuery whereKey:@"FBUserID" equalTo: [friend objectForKey:@"id"]];
                          [PFPush sendPushMessageToQueryInBackground:pushQuery
-                                                        withMessage:@"Someone Quacked you a question!!"];
+                                                        withMessage:pushMessage];
                      }
                  }];
              }
