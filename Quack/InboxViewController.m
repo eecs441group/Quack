@@ -18,9 +18,6 @@
 @end
 
 @implementation InboxViewController {
-    UILabel *_noQuestions;
-    NSMutableArray *_userInbox;
-    NSMutableArray *_expandedCells;
     PFObject *_user;
 }
 
@@ -29,21 +26,9 @@
     
 }
 
-- (void)awakeFromNib {
-    _expandedCells = [[NSMutableArray alloc] init];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    _userInbox = [[NSMutableArray alloc] init];
-    _noQuestions = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 300, 30)];
+    [super viewDidAppear:YES];
     
-    UINib *nib = [UINib nibWithNibName:@"QuestionTableViewCell" bundle:nil];
-    [self.tableView registerNib:nib forCellReuseIdentifier:@"QuestionTableViewCell"];
-    // Do any additional setup after loading the view.
-    
-    //TODO: now that we're using pfuser and don't need to grab the fbUserId from facebook,
-    //can we unwrap this code from the facebook session checking?
     if (FBSession.activeSession.isOpen) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [FBRequestConnection
@@ -63,7 +48,7 @@
                      } else {
                          for (PFObject *question in objects) {
                              if(question && ![question isKindOfClass:[NSNull class]]) {
-                                 [_userInbox addObject:[[Question alloc] initWithDictionary:(NSDictionary *)question]];
+                                 [self.questions addObject:[[Question alloc] initWithDictionary:(NSDictionary *)question]];
                              }
                          }
                          [self.tableView reloadData];
@@ -77,50 +62,7 @@
     }
 }
 
-#pragma TableView
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [_userInbox count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *simpleTableIdentifier = @"QuestionTableViewCell";
-    
-    QuestionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
-    if (cell == nil) {
-        cell = (QuestionTableViewCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-    }
-    
-    Question *q = [_userInbox objectAtIndex:indexPath.row];
-    
-    cell.questionLabel.text = q.question;
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //expandedCells is a mutable set declared in your interface section or private class extensiont
-    if ([_expandedCells containsObject:indexPath]) {
-        [_expandedCells removeObject:indexPath];
-        [self removeAnswersFromCell:[self.tableView cellForRowAtIndexPath:indexPath]];
-    }
-    else {
-        // Expand the view and show answers
-        [_expandedCells addObject:indexPath];
-        [self addAnswersToCell:[self.tableView cellForRowAtIndexPath:indexPath] question:[_userInbox objectAtIndex:indexPath.row]];
-        
-    }
-    [self.tableView reloadData];
-}
-
-- (void)addAnswersToCell:(UITableViewCell *)cell question:(Question *)question{
+- (void)addDataToCell:(UITableViewCell *)cell question:(Question *)question{
     for(int i = 0; i < 4; i++) {
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(5, 55 + i*55, 40, 40)];
         button.tag = i + 1;
@@ -140,16 +82,16 @@
     UIButton *button = (UIButton *)sender;
     QuestionTableViewCell *cell = (QuestionTableViewCell *)button.superview;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    Question *q = (Question *)[_userInbox objectAtIndex:indexPath.row];
+    Question *q = (Question *)[self.questions objectAtIndex:indexPath.row];
     
     if(!q.answerSet) {
         [button setBackgroundImage:[UIImage imageNamed:@"sent_green.png"] forState:UIControlStateNormal];
         q.answerSet = true;
         q.curSelected = button.tag;
     } else if (q.curSelected == button.tag) {
-        [_userInbox removeObject:q];
-        [_expandedCells removeObject:indexPath];
-        [self removeAnswersFromCell:[self.tableView cellForRowAtIndexPath:indexPath]];
+        [self.questions removeObject:q];
+        [self.expandedCells removeObject:indexPath];
+        [self removeDataFromCell:[self.tableView cellForRowAtIndexPath:indexPath]];
         [self.tableView reloadData];
         
         // get question from Parse
@@ -179,7 +121,7 @@
     }
 }
 
-- (void)removeAnswersFromCell:(UITableViewCell *)cell {
+- (void)removeDataFromCell:(UITableViewCell *)cell {
     for (UIView *view in cell.subviews) {
         if ([view isKindOfClass:[UILabel class]] || [view isKindOfClass:[UIButton class]]) {
             [view removeFromSuperview];
@@ -187,17 +129,6 @@
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([_expandedCells containsObject:indexPath])
-    {
-        return 300.0;
-    }
-    else
-    {
-        return 80.0;
-    }
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
