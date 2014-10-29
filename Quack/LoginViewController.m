@@ -64,6 +64,7 @@
                 newUser.username = user.name;
                 newUser.password = @"password";
                 newUser[@"FBUserID"] = user.objectID;
+                //TODO: delete this userInbox
                 newUser[@"userInbox"] = [NSMutableArray array];
                 [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if (!error) {
@@ -100,32 +101,8 @@
         }
     }];
     
-    // Check if logged in user exists in parse User table and add them if needed
-    PFQuery *query = [PFQuery queryWithClassName:@"User"];
-    [query whereKey:@"userId" equalTo:user.objectID];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            // The find succeeded.
-            
-            if (!objects.count){
-                // User not found, add them to our db
-                PFObject *userInfo = [PFObject objectWithClassName:@"User"];
-                userInfo[@"userId"] = user.objectID;
-                userInfo[@"name"] = user.name;
-                userInfo[@"userInbox"] = [NSMutableArray array];
-                
-                NSLog(@"saving new user");
-                [userInfo saveInBackground];
-            }
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
-    
     // Dismiss this view if login was successful. On app launch,
     // this redirects to the first tab in the root tab bar controller.
-    // TODO: could change the animating/flashing
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
