@@ -41,33 +41,32 @@
     [self.tableView registerNib:nib forCellReuseIdentifier:@"QuestionTableViewCell"];
     // Do any additional setup after loading the view.
     
+    //TODO: now that we're using pfuser and don't need to grab the fbUserId from facebook,
+    //can we unwrap this code from the facebook session checking?
     if (FBSession.activeSession.isOpen) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
              if (!error) {
-                 NSString *userId = [result objectForKey:@"id"];
+                 PFUser *user = [PFUser currentUser];
+                 PFRelation *relation = [user relationForKey:@"inbox"];
                  
-                 PFQuery *query = [PFQuery queryWithClassName:@"User"];
-                 [query whereKey:@"userId" equalTo:userId];
+                 // Find user's inbox questions, add them to the _userInbox array and reload the tableView
+                 PFQuery *questionQuery = [relation query];
+                 [questionQuery orderByDescending:@"createdAt"];
+                 questionQuery.limit = 100;
                  
-                 // Get the Question objects that the Question pointers in userInbox point to
-                 [query includeKey:@"userInbox"];
-                 
-                 // Retrieve the most recent ones
-                 [query orderByDescending:@"createdAt"];
-                 
-                 // Only retrieve the 100 most recent questions
-                 query.limit = 100;
-                 
-                 [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
-                     _user = users[0];
-                     for (PFObject *question in _user[@"userInbox"]) {
-                         if(question && ![question isKindOfClass:[NSNull class]]) {
-                             [_userInbox addObject:[[Question alloc] initWithDictionary:(NSDictionary *)question]];
+                 [questionQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                     if (error) {
+                         // There was an error
+                     } else {
+                         for (PFObject *question in objects) {
+                             if(question && ![question isKindOfClass:[NSNull class]]) {
+                                 [_userInbox addObject:[[Question alloc] initWithDictionary:(NSDictionary *)question]];
+                             }
                          }
+                         [self.tableView reloadData];
                      }
-                     [self.tableView reloadData];
                  }];
              }
              [hud hide:YES];

@@ -72,7 +72,8 @@ Parse.Cloud.define("sendQuestionToUser", function(request, response) {
     response.success("succeded");
 });
 
-Parse.Cloud.define("sendQuestionToUser2", function(request, response) {
+// Send a question to a user's inbox via PFRelations
+Parse.Cloud.define("sendQuestionToUserInbox", function(request, response) {
 	var sender = request.user;
 	var questionId = request.params.question;
 	var recipient = request.params.friend; 

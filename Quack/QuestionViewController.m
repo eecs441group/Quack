@@ -95,41 +95,18 @@
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
              if (!error) {
                  NSString *userId = [result objectForKey:@"id"];
+
                  // Get fb friends who use Quack
                  FacebookInfo * fbInfo = [[FacebookInfo alloc] initWithAccountID:userId];
                  [fbInfo getFriends:^(NSArray *friends){
                      for (NSDictionary *friend in friends) {
                          
-                         [PFCloud callFunctionInBackground:@"sendQuestionToUser2"
+                         // Call Parse Cloud Code function to add question to friend's inbox relations
+                         [PFCloud callFunctionInBackground:@"sendQuestionToUserInbox"
                                 withParameters:@{@"friend": friend, @"question": question.objectId}
                                     block:^(id object, NSError *error) {
-                                        NSLog(@"success!! %@", object);
+                                        NSLog(@"success: %@", object);
                                     }];
-                         
-                         //TODO: delete this block of code later
-                         PFQuery * query = [PFQuery queryWithClassName:@"User"];
-                         // Get the User object for this friend based on fb userId
-                         [query whereKey:@"userId" equalTo:[friend objectForKey:@"id"]];
-                         
-                         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                             if (!error) {
-                                 if (objects.count) {
-                                     PFObject *user = objects[0];
-                                     NSMutableArray *questions = user[@"userInbox"];
-                                     // Add the new question to friend's inbox
-                                     [questions addObject: question];
-                                     
-                                     user[@"userInbox"] = questions;
-                                     [user saveInBackground];
-                                     
-                                 } else {
-                                     NSLog(@"userId not found when adding to userInbox");
-                                 }
-                             } else {
-                                 // Log details of the failure
-                                 NSLog(@"Error: %@ %@", error, [error userInfo]);
-                             }
-                         }];
                          
                          PFQuery *pushQuery = [PFInstallation query];
                          [pushQuery whereKey:@"FBUserID" equalTo: [friend objectForKey:@"id"]];
