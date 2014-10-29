@@ -49,7 +49,7 @@
             </objects>
             <point key="canvasLocation" x="750" y="-990"/>
         </scene>
-        <!--My Questions-->
+        <!--Results-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="MyQuestionsViewController" sceneMemberID="viewController">
@@ -72,7 +72,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="My Questions" image="bar_chart" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Results" image="bar_chart" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="tableView" destination="0Lg-6p-aYb" id="AQk-tQ-Onh"/>
                     </connections>
@@ -93,45 +93,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Question" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWa-f0-TXD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Question" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWa-f0-TXD">
                                 <rect key="frame" x="7" y="30" width="306" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Possible Answers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1o-Eu-xnB">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Possible Answers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1o-Eu-xnB">
                                 <rect key="frame" x="7" y="107" width="306" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NP1-jt-pHj">
-                                <rect key="frame" x="7" y="57" width="306" height="51"/>
-                                <color key="backgroundColor" red="0.64012652640000001" green="0.69927966590000001" blue="0.85087478159999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Blue" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="unO-Z4-04o">
-                                <rect key="frame" x="7" y="136" width="306" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Blue" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="unO-Z4-04o">
+                                <rect key="frame" x="7" y="135" width="306" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Orange" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D3u-GH-oW8">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Orange" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D3u-GH-oW8">
                                 <rect key="frame" x="7" y="173" width="306" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Red" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UKH-aC-SEF">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Red" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UKH-aC-SEF">
                                 <rect key="frame" x="7" y="210" width="306" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Yellow" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ebs-qM-nSa">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Yellow" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ebs-qM-nSa">
                                 <rect key="frame" x="7" y="247" width="306" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfa-hU-ZJN">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfa-hU-ZJN">
                                 <rect key="frame" x="139" y="281" width="42" height="37"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" image="quack_black">
@@ -141,8 +135,24 @@
                                     <action selector="quackPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="zbx-Jf-hLG"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NP1-jt-pHj">
+                                <rect key="frame" x="7" y="57" width="306" height="51"/>
+                                <color key="backgroundColor" red="0.64012652640000001" green="0.69927966590000001" blue="0.85087478159999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="D3u-GH-oW8" secondAttribute="centerX" id="2St-D9-QED"/>
+                            <constraint firstAttribute="centerX" secondItem="UKH-aC-SEF" secondAttribute="centerX" id="5zp-WP-EdH"/>
+                            <constraint firstAttribute="centerX" secondItem="unO-Z4-04o" secondAttribute="centerX" id="Bia-WK-SAp"/>
+                            <constraint firstAttribute="centerX" secondItem="u1o-Eu-xnB" secondAttribute="centerX" id="ELT-xC-pGp"/>
+                            <constraint firstAttribute="centerX" secondItem="NP1-jt-pHj" secondAttribute="centerX" id="Tjf-fS-f9R"/>
+                            <constraint firstAttribute="centerX" secondItem="bfa-hU-ZJN" secondAttribute="centerX" id="jLN-Pb-LPM"/>
+                            <constraint firstAttribute="centerX" secondItem="ebs-qM-nSa" secondAttribute="centerX" id="kjH-l7-wkO"/>
+                            <constraint firstAttribute="centerX" secondItem="EWa-f0-TXD" secondAttribute="centerX" id="wax-Nv-HzO"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Quack" image="quack_black" id="cPa-gy-q4n"/>
                     <connections>
@@ -178,7 +188,7 @@
             </objects>
             <point key="canvasLocation" x="-184" y="-12"/>
         </scene>
-        <!--Inbox-->
+        <!--Feed-->
         <scene sceneID="273-nC-hSR">
             <objects>
                 <tableViewController id="dF5-fx-pC3" customClass="InboxViewController" sceneMemberID="viewController">
@@ -199,7 +209,7 @@
                             <outlet property="delegate" destination="dF5-fx-pC3" id="InG-eP-g5A"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Inbox" image="inbox" id="p7w-1e-S1h"/>
+                    <tabBarItem key="tabBarItem" title="Feed" image="inbox" id="p7w-1e-S1h"/>
                     <connections>
                         <outlet property="tableView" destination="Ulh-fW-Ec5" id="Y3J-XK-FGU"/>
                     </connections>

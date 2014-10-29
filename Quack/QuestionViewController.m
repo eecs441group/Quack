@@ -10,7 +10,7 @@
 #import "FacebookInfo.h"
 #import <Parse/Parse.h>
 #import <FacebookSDK/FacebookSDK.h>
-
+#import <MBProgressHUD/MBProgressHUD.h>
 @interface QuestionViewController ()
 
 
@@ -56,6 +56,8 @@
     question[@"counts"] = @[[NSNumber numberWithInt:0],[NSNumber numberWithInt:0],[NSNumber numberWithInt:0], [NSNumber numberWithInt:0]];
     
     // Get fb id and save the question
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
     if (FBSession.activeSession.isOpen) {
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -67,6 +69,7 @@
                  {
                       [self sendToAllFriends:question];
                      //send push notifications to all friends
+                     [hud hide:YES];
                      
                  }];
              }
