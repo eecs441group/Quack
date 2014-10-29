@@ -110,6 +110,3 @@ Parse.Cloud.define("sendQuestionToUserInbox", function(request, response) {
     });
 });
 
-Parse.Cloud.afterDelete("Question", function(request) {
-    
-});
