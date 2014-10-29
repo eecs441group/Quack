@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "QuestionTableViewCell.h"
+#import "MBProgressHud.h"
 
 @interface MyQuestionsViewController ()
 
@@ -34,6 +35,8 @@
 - (void) viewDidAppear:(BOOL)animated {
     // Get all questions that this user authored and show them in the view
     if (FBSession.activeSession.isOpen) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
              if (!error) {
@@ -59,6 +62,7 @@
                          // Log details of the failure
                          NSLog(@"Error: %@ %@", error, [error userInfo]);
                      }
+                     [hud hide:YES];
                  }];
              }
          }];
