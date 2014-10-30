@@ -35,8 +35,21 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jb-DX-1u9">
+                                <rect key="frame" x="226" y="372" width="148" height="65"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Invite Friends!">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="inviteFriends:" destination="XbX-6k-FRa" eventType="touchUpInside" id="niq-wY-ecU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="4jb-DX-1u9" secondAttribute="centerX" id="vZZ-86-kEB"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Me" image="user_male3" id="dJk-yg-Y3H"/>
                     <connections>
@@ -212,9 +225,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="FsD-3j-cVB" kind="relationship" relationship="viewControllers" id="LNZ-yX-Yhy"/>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="XbX-6k-FRa" kind="relationship" relationship="viewControllers" id="QwB-rD-u8l"/>
-                        <segue destination="FsD-3j-cVB" kind="relationship" relationship="viewControllers" id="LNZ-yX-Yhy"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>

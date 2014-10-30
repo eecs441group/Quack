@@ -153,6 +153,12 @@
             [data saveInBackground];
         }
     }];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry"
+                                                    message:@"This feature has not been implemented yet"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 - (void)didReceiveMemoryWarning {

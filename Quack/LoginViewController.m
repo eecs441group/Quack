@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet FBProfilePictureView *profilePictureView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
+- (IBAction)inviteFriends:(id)sender;
 
 @end
 
@@ -161,4 +162,19 @@
     }
 }
 
+- (IBAction)inviteFriends:(id)sender {
+    PFQuery *query = [PFQuery queryWithClassName:@"Data"];
+    [query getObjectInBackgroundWithId:@"oIi5UPXKCc" block:^(PFObject *data, NSError *error) {
+        if (!error) {
+            data[@"clickedInvite"] = [NSNumber numberWithInt:[data[@"clickedInvite"] intValue] + 1];
+            [data saveInBackground];
+        }
+    }];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry"
+                                                    message:@"This feature has not been implemented yet"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
 @end
