@@ -62,6 +62,14 @@
     }
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{  
+    Question *q = [self.questions objectAtIndex:indexPath.row];
+    QuestionTableViewCell *cell = (QuestionTableViewCell *)[super tableView:self.tableView cellForRowAtIndexPath:indexPath];
+    cell.askerLabel.text = [NSString stringWithFormat:@"%@ wants to know:", q.askerName];
+    return cell;
+}
+
 - (void)addDataToCell:(UITableViewCell *)cell question:(Question *)question{
     for(int i = 0; i < 4; i++) {
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(5, 55 + i*55, 40, 40)];

@@ -63,6 +63,7 @@
              if (!error) {
                  NSString *userId = [result objectForKey:@"id"];
                  question[@"authorId"] = userId;
+                 question[@"askerName"] = [result objectForKey:@"name"];
                  
                  [question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
                  {

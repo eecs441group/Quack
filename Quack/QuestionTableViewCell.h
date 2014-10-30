@@ -11,5 +11,6 @@
 @interface QuestionTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *questionLabel;
+@property (strong, nonatomic) IBOutlet UILabel *askerLabel;
 
 @end
