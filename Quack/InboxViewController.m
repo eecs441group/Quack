@@ -84,6 +84,12 @@
         [cell addSubview:answerLabel];
         [cell addSubview:button];
     }
+    
+    // Add uitextfield to see if people want to comment
+    UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(50, 55 + 4 * 55, 306, 30)];
+    tf.placeholder = @"Comment";
+    tf.delegate = self;
+    [cell addSubview:tf];
 }
 
 - (void)selectAnswer:(id)sender {
@@ -131,12 +137,23 @@
 
 - (void)removeDataFromCell:(UITableViewCell *)cell {
     for (UIView *view in cell.subviews) {
-        if ([view isKindOfClass:[UILabel class]] || [view isKindOfClass:[UIButton class]]) {
+        if ([view isKindOfClass:[UILabel class]] || [view isKindOfClass:[UIButton class]] || [view isKindOfClass:[UITextField class]]) {
             [view removeFromSuperview];
         }
     }
 }
 
+#pragma text field
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    PFQuery *query = [PFQuery queryWithClassName:@"Data"];
+    [query getObjectInBackgroundWithId:@"oIi5UPXKCc" block:^(PFObject *data, NSError *error) {
+        if (!error) {
+            data[@"clickedComment"] = [NSNumber numberWithInt:[data[@"clickedComment"] intValue] + 1];
+            [data saveInBackground];
+        }
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ExpandingTableViewController.h"
 
-@interface InboxViewController : ExpandingTableViewController
+@interface InboxViewController : ExpandingTableViewController <UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
