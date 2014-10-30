@@ -22,6 +22,7 @@
 		5E8564F71A00ABC400B44BFE /* ExpandingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8564F61A00ABC400B44BFE /* ExpandingTableViewController.m */; };
 		5E9323AF19F9A15300022931 /* QuestionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E9323AD19F9A15300022931 /* QuestionTableViewCell.m */; };
 		5E9323B019F9A15300022931 /* QuestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E9323AE19F9A15300022931 /* QuestionTableViewCell.xib */; };
+		5EB4BEEE1A02E9D70009763A /* twitter-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB4BEED1A02E9D70009763A /* twitter-gray.png */; };
 		F9D78AEB19E0990200500B71 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D78AEA19E0990200500B71 /* LoginViewController.m */; };
 		F9D78AEE19E76A8700500B71 /* FacebookInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D78AED19E76A8700500B71 /* FacebookInfo.m */; };
 /* End PBXBuildFile section */
@@ -64,6 +65,7 @@
 		5E9323AC19F9A15300022931 /* QuestionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionTableViewCell.h; sourceTree = "<group>"; };
 		5E9323AD19F9A15300022931 /* QuestionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionTableViewCell.m; sourceTree = "<group>"; };
 		5E9323AE19F9A15300022931 /* QuestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTableViewCell.xib; sourceTree = "<group>"; };
+		5EB4BEED1A02E9D70009763A /* twitter-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-gray.png"; sourceTree = "<group>"; };
 		657F35ED5A75533C4FBF2C46 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6F86B3A92149818E9D6D1579 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9D78AE919E0990200500B71 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				F9D78AE919E0990200500B71 /* LoginViewController.h */,
 				F9D78AEA19E0990200500B71 /* LoginViewController.m */,
 				5E2CCB8B19E0780600BFC609 /* Main.storyboard */,
+				5EB4BEEC1A02E9D70009763A /* social.imageset */,
 				5E6385D019E088F300D00F80 /* MyQuestionsViewController.h */,
 				5E6385D119E088F300D00F80 /* MyQuestionsViewController.m */,
 				5E8564F51A00ABC400B44BFE /* ExpandingTableViewController.h */,
@@ -167,6 +170,15 @@
 				5E2CCB9C19E0780600BFC609 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5EB4BEEC1A02E9D70009763A /* social.imageset */ = {
+			isa = PBXGroup;
+			children = (
+				5EB4BEED1A02E9D70009763A /* twitter-gray.png */,
+			);
+			name = social.imageset;
+			path = Images.xcassets/social.imageset;
 			sourceTree = "<group>";
 		};
 		79A4032D83341C575E1D43E7 /* Frameworks */ = {
@@ -271,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E2CCB8D19E0780600BFC609 /* Main.storyboard in Resources */,
+				5EB4BEEE1A02E9D70009763A /* twitter-gray.png in Resources */,
 				5E2CCB9219E0780600BFC609 /* LaunchScreen.xib in Resources */,
 				5E9323B019F9A15300022931 /* QuestionTableViewCell.xib in Resources */,
 				5E2CCB8F19E0780600BFC609 /* Images.xcassets in Resources */,

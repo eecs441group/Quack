@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jb-DX-1u9">
-                                <rect key="frame" x="226" y="372" width="148" height="65"/>
+                                <rect key="frame" x="226" y="447" width="148" height="65"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Invite Friends!">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -45,9 +45,19 @@
                                     <action selector="inviteFriends:" destination="XbX-6k-FRa" eventType="touchUpInside" id="niq-wY-ecU"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUu-GY-bfN">
+                                <rect key="frame" x="221" y="405" width="158" height="28"/>
+                                <state key="normal" image="twitter-gray">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="twitterSignIn:" destination="XbX-6k-FRa" eventType="touchUpInside" id="V6Y-Z7-cnf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="TUu-GY-bfN" secondAttribute="centerX" id="UKh-xB-Skg"/>
                             <constraint firstAttribute="centerX" secondItem="4jb-DX-1u9" secondAttribute="centerX" id="vZZ-86-kEB"/>
                         </constraints>
                     </view>
@@ -240,6 +250,7 @@
         <image name="inbox" width="25" height="25"/>
         <image name="quack_black" width="25" height="25"/>
         <image name="quack_word" width="125" height="47"/>
+        <image name="twitter-gray" width="158" height="28"/>
         <image name="user_male3" width="25" height="25"/>
     </resources>
 </document>
