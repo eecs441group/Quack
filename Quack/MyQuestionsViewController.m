@@ -72,7 +72,23 @@
         [v setTag:i + 1];
         [cell addSubview:answerLabel];
         [cell addSubview:v];
+        
     }
+    
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 55 + 4 * 55, 200, 40)];
+    [shareButton setTitle:@"Share Results" forState:UIControlStateNormal];
+    [shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [shareButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [cell addSubview:shareButton];
+}
+
+- (IBAction)shareButtonPressed:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry"
+                                                    message:@"This feature has not been implemented yet."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 - (void)removeDataFromCell:(UITableViewCell *)cell {
