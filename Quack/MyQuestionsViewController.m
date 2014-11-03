@@ -93,7 +93,7 @@
 
 - (void)removeDataFromCell:(UITableViewCell *)cell {
     for (UIView *view in cell.subviews) {
-        if (view.tag >= 1 && view.tag <= 4) {
+        if ((view.tag >= 1 && view.tag <= 4) || [view isKindOfClass:[UIButton class]]) {
             [view removeFromSuperview];
         }
     }

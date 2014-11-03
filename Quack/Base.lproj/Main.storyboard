@@ -63,9 +63,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Me" image="user_male3" id="dJk-yg-Y3H"/>
                     <connections>
+                        <outlet property="inviteFriendsButton" destination="4jb-DX-1u9" id="7SV-pJ-6Ve"/>
                         <outlet property="nameLabel" destination="TCZ-qH-SDO" id="Wbb-Yu-H6G"/>
                         <outlet property="profilePictureView" destination="3FA-hK-uk3" id="wdn-32-Yi9"/>
                         <outlet property="statusLabel" destination="9oF-C5-gXE" id="1WM-rC-cjO"/>
+                        <outlet property="twitterButton" destination="TUu-GY-bfN" id="Tqh-pU-p0V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eIi-1P-vvi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -160,22 +162,22 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Blue" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="unO-Z4-04o">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 1" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="unO-Z4-04o">
                                 <rect key="frame" x="7" y="135" width="306" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Orange" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D3u-GH-oW8">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 2" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D3u-GH-oW8">
                                 <rect key="frame" x="7" y="173" width="306" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Red" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UKH-aC-SEF">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 3" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UKH-aC-SEF">
                                 <rect key="frame" x="7" y="210" width="306" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Yellow" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ebs-qM-nSa">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 4" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ebs-qM-nSa">
                                 <rect key="frame" x="7" y="247" width="306" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>

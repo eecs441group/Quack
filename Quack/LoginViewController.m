@@ -17,6 +17,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 - (IBAction)inviteFriends:(id)sender;
 - (IBAction)twitterSignIn:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *twitterButton;
+@property (strong, nonatomic) IBOutlet UIButton *inviteFriendsButton;
 
 @end
 
@@ -111,10 +113,15 @@
 // Implement the loginViewShowingLoggedInUser: delegate method to modify your app's UI for a logged-in user experience
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
     self.statusLabel.text = @"You're logged in as";
+    
+    [self.twitterButton setHidden:YES];
+    [self.inviteFriendsButton setHidden:NO];
 }
 
 // Implement the loginViewShowingLoggedOutUser: delegate method to modify your app's UI for a logged-out user experience
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
+    [self.inviteFriendsButton setHidden:YES];
+    [self.twitterButton setHidden:NO];
     self.profilePictureView.profileID = nil;
     self.nameLabel.text = @"";
     self.statusLabel.text= @"You're not logged in!";

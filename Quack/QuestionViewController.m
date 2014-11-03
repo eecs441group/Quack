@@ -50,6 +50,15 @@
 - (IBAction)quackPressed:(id)sender {
     // Create PFObject for Question
     PFObject *question = [PFObject objectWithClassName:@"Question"];
+    if ([self.questionTextView.text isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No question!"
+                                                        message:@"Please add text to your question"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     question[@"question"] = self.questionTextView.text;
     question[@"answers"] = @[self.answer1.text, self.answer2.text, self.answer3.text, self.answer4.text];
     question[@"counts"] = @[[NSNumber numberWithInt:0],[NSNumber numberWithInt:0],[NSNumber numberWithInt:0], [NSNumber numberWithInt:0]];

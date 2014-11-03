@@ -74,7 +74,7 @@
     for(int i = 0; i < 4; i++) {
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(5, 55 + i*55, 40, 40)];
         button.tag = i + 1;
-        [button setBackgroundImage:[UIImage imageNamed:@"checkmark.png"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"first.png"] forState:UIControlStateNormal];
         [button addTarget:self
                    action:@selector(selectAnswer:)
          forControlEvents:UIControlEventTouchUpInside];
@@ -128,7 +128,7 @@
     } else if(q.answerSet) {
         // swap selected
         UIButton *oldSelection = (UIButton *)[cell viewWithTag:q.curSelected];
-        [oldSelection setBackgroundImage:[UIImage imageNamed:@"checkmark.png"] forState:UIControlStateNormal];
+        [oldSelection setBackgroundImage:[UIImage imageNamed:@"first.png"] forState:UIControlStateNormal];
         [button setBackgroundImage:[UIImage imageNamed:@"sent_green.png"] forState:UIControlStateNormal];
         q.curSelected = button.tag;
 
