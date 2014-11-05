@@ -72,7 +72,7 @@
         }
     }
     
-    if (![question[@"anwers"] count]) {
+    if (![question[@"answers"] count]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No answers!"
                                                         message:@"Please add answers to your question"
                                                        delegate:nil
