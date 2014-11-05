@@ -19,10 +19,13 @@
 @implementation QuestionViewController {
     NSString *_emptyString;
     NSDictionary *arguments;
+    NSArray *_textFields;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _textFields = @[self.answer1, self.answer2, self.answer3, self.answer4];
+
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -36,10 +39,9 @@
 
 -(void)dismissKeyboard {
     [self.questionTextView resignFirstResponder];
-    [self.answer1 resignFirstResponder];
-    [self.answer2 resignFirstResponder];
-    [self.answer3 resignFirstResponder];
-    [self.answer4 resignFirstResponder];
+    for (UITextField *tf in _textFields) {
+        [tf resignFirstResponder];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,8 +62,15 @@
         return;
     }
     question[@"question"] = self.questionTextView.text;
-    question[@"answers"] = @[self.answer1.text, self.answer2.text, self.answer3.text, self.answer4.text];
-    question[@"counts"] = @[[NSNumber numberWithInt:0],[NSNumber numberWithInt:0],[NSNumber numberWithInt:0], [NSNumber numberWithInt:0]];
+    question[@"answers"] = [[NSMutableArray alloc] init];// @[self.answer1.text, self.answer2.text, self.answer3.text, self.answer4.text];
+    question[@"counts"] = [[NSMutableArray alloc] init];// @[[NSNumber numberWithInt:0],[NSNumber numberWithInt:0],[NSNumber numberWithInt:0], [NSNumber numberWithInt:0]];
+
+    for (UITextField *tf in _textFields) {
+        if(![tf.text isEqualToString:@""]) {
+            [question[@"answers"] addObject:tf.text];
+            [question[@"counts"] addObject:[NSNumber numberWithInt:0]];
+        }
+    }
     
     // Get fb id and save the question
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

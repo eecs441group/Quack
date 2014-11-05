@@ -71,7 +71,8 @@
 }
 
 - (void)addDataToCell:(UITableViewCell *)cell question:(Question *)question{
-    for(int i = 0; i < 4; i++) {
+    int i = 0;
+    for(; i < [question.answers count]; i++) {
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(5, 55 + i*55, 40, 40)];
         button.tag = i + 1;
         [button setBackgroundImage:[UIImage imageNamed:@"first.png"] forState:UIControlStateNormal];
@@ -86,7 +87,7 @@
     }
     
     // Add uitextfield to see if people want to comment
-    UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(50, 55 + 4 * 55, 306, 30)];
+    UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(50, 55 + i * 55, 306, 30)];
     tf.placeholder = @"Comment";
     tf.delegate = self;
     [cell addSubview:tf];
