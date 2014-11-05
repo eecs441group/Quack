@@ -59,10 +59,11 @@
 - (void)addDataToCell:(UITableViewCell *)cell question:(Question *)question{
     
     float total = 0;
-    for(int i = 0; i < 4; i++) {
+    int i = 0;
+    for(; i < [question.counts count]; i++) {
         total += [question.counts[i] intValue];
     }
-    for(int i = 0; i < 4; i++) {
+    for(i = 0; i < [question.answers count]; i++) {
         float proportion = total > 0 ? [question.counts[i] intValue] / total : 0.0;
 
         UIView *v = [self getRectWithColor:[UIColor greenColor] width:(250 * proportion) ycoord:(95 + i*55)];
@@ -75,7 +76,7 @@
         
     }
     
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 55 + 4 * 55, 200, 40)];
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 55 + i * 55, 200, 40)];
     [shareButton setTitle:@"Share Results" forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
