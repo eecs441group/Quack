@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
+        <!--Results-->
+        <scene sceneID="6tl-Vy-j0M">
+            <objects>
+                <navigationController storyboardIdentifier="resultsNavcontroller" id="lsx-1i-WcV" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Results" image="bar_chart" id="E6T-Cj-K2u"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r6m-70-6x5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="9be-7g-Keq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ivX-xA-xjI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="442" y="436"/>
+        </scene>
         <!--Log in/out-->
         <scene sceneID="WcG-Du-7ZQ">
             <objects>
@@ -62,6 +79,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Me" image="user_male3" id="dJk-yg-Y3H"/>
+                    <navigationItem key="navigationItem" title="Me" id="trf-Cc-Pa0"/>
                     <connections>
                         <outlet property="inviteFriendsButton" destination="4jb-DX-1u9" id="7SV-pJ-6Ve"/>
                         <outlet property="nameLabel" destination="TCZ-qH-SDO" id="Wbb-Yu-H6G"/>
@@ -72,7 +90,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eIi-1P-vvi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1160" y="-508"/>
+            <point key="canvasLocation" x="1122" y="1116"/>
+        </scene>
+        <!--Me-->
+        <scene sceneID="I7L-WJ-oMf">
+            <objects>
+                <navigationController storyboardIdentifier="loginNavcontroller" id="adG-y1-hmh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Me" image="user_male3" id="Oan-o0-bM5"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="m3P-fs-h5A">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="XbX-6k-FRa" kind="relationship" relationship="rootViewController" id="bVq-RH-DOA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jvg-Tf-Qpp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="442" y="1116"/>
         </scene>
         <!--Results-->
         <scene sceneID="hNz-n2-bh7">
@@ -98,13 +133,31 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Results" image="bar_chart" id="acW-dT-cKf"/>
+                    <navigationItem key="navigationItem" title="Results" id="MbR-vB-ZtL"/>
                     <connections>
                         <outlet property="tableView" destination="0Lg-6p-aYb" id="AQk-tQ-Onh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1160" y="152"/>
+            <point key="canvasLocation" x="1128" y="436"/>
+        </scene>
+        <!--Feed-->
+        <scene sceneID="ECE-oe-57m">
+            <objects>
+                <navigationController storyboardIdentifier="inboxNavcontroller" id="TdN-Yd-gad" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Feed" image="inbox" id="JFC-K6-0Ba"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nek-df-c3O">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="FsD-3j-cVB" kind="relationship" relationship="rootViewController" id="0Ls-mZ-J5f"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EPM-st-BM5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="442" y="-890"/>
         </scene>
         <!--Feed-->
         <scene sceneID="5LU-Pb-xKt">
@@ -130,15 +183,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Feed" image="inbox" id="vi6-kX-jev"/>
+                    <navigationItem key="navigationItem" title="Feed" id="QQp-WT-HFW"/>
                     <connections>
                         <outlet property="tableView" destination="SfW-7o-L7Y" id="hEK-h7-nQK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xYn-Fc-i4a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="522" y="152"/>
+            <point key="canvasLocation" x="1128" y="-890"/>
         </scene>
-        <!--Quack-->
+        <!--Send A Quack-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController id="8rJ-Kc-sve" customClass="QuestionViewController" sceneMemberID="viewController">
@@ -150,46 +204,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Question" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWa-f0-TXD">
-                                <rect key="frame" x="7" y="30" width="306" height="29"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Possible Answers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1o-Eu-xnB">
-                                <rect key="frame" x="7" y="107" width="306" height="29"/>
+                                <rect key="frame" x="8" y="159" width="306" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 1" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="unO-Z4-04o">
-                                <rect key="frame" x="7" y="135" width="306" height="30"/>
+                                <rect key="frame" x="8" y="187" width="306" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 2" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D3u-GH-oW8">
-                                <rect key="frame" x="7" y="173" width="306" height="30"/>
+                                <rect key="frame" x="8" y="225" width="306" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 3" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UKH-aC-SEF">
-                                <rect key="frame" x="7" y="210" width="306" height="30"/>
+                                <rect key="frame" x="8" y="262" width="306" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 4" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ebs-qM-nSa">
-                                <rect key="frame" x="7" y="247" width="306" height="30"/>
+                                <rect key="frame" x="8" y="299" width="306" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NP1-jt-pHj">
-                                <rect key="frame" x="7" y="57" width="306" height="51"/>
-                                <color key="backgroundColor" red="0.74335006380000002" green="0.95686274510000002" blue="0.89344893780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="8" y="109" width="306" height="51"/>
+                                <color key="backgroundColor" red="0.7882353663444519" green="0.96078437566757202" blue="0.91372555494308472" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfa-hU-ZJN">
-                                <rect key="frame" x="97" y="293" width="125" height="47"/>
+                                <rect key="frame" x="98" y="345" width="125" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" image="quack_word">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -198,6 +246,12 @@
                                     <action selector="quackPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="zbx-Jf-hLG"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Question" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWa-f0-TXD">
+                                <rect key="frame" x="8" y="82" width="306" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -213,6 +267,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Quack" image="quack_black" id="cPa-gy-q4n"/>
+                    <navigationItem key="navigationItem" title="Send A Quack" id="8qk-Om-EQj">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="ODs-aV-Dxu"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="answer1" destination="unO-Z4-04o" id="P2h-zT-3dy"/>
                         <outlet property="answer2" destination="D3u-GH-oW8" id="JlJ-0e-vyb"/>
@@ -223,7 +280,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="522" y="-508"/>
+            <point key="canvasLocation" x="1128" y="-235"/>
+        </scene>
+        <!--Quack-->
+        <scene sceneID="JYo-pT-JKV">
+            <objects>
+                <navigationController storyboardIdentifier="quackNavcontroller" id="MzW-eL-O9t" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Quack" image="quack_black" id="sWy-lr-xao"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9FD-KL-iVy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="HYM-QB-Taz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KLS-iE-Ky6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="442" y="-235"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -236,15 +310,15 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="FsD-3j-cVB" kind="relationship" relationship="viewControllers" id="LNZ-yX-Yhy"/>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
-                        <segue destination="XbX-6k-FRa" kind="relationship" relationship="viewControllers" id="QwB-rD-u8l"/>
+                        <segue destination="TdN-Yd-gad" kind="relationship" relationship="viewControllers" id="ror-Bb-Uun"/>
+                        <segue destination="MzW-eL-O9t" kind="relationship" relationship="viewControllers" id="AQg-QV-gf2"/>
+                        <segue destination="lsx-1i-WcV" kind="relationship" relationship="viewControllers" id="Vie-qu-vZn"/>
+                        <segue destination="adG-y1-hmh" kind="relationship" relationship="viewControllers" id="1p3-uR-MAf"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-394" y="-98"/>
+            <point key="canvasLocation" x="-422" y="-235"/>
         </scene>
     </scenes>
     <resources>
