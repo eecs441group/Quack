@@ -192,7 +192,7 @@
             </objects>
             <point key="canvasLocation" x="1128" y="-890"/>
         </scene>
-        <!--Send A Quack-->
+        <!--Compose-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController id="8rJ-Kc-sve" customClass="QuestionViewController" sceneMemberID="viewController">
@@ -236,22 +236,23 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfa-hU-ZJN">
-                                <rect key="frame" x="98" y="345" width="125" height="47"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" image="quack_word">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="quackPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="zbx-Jf-hLG"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Question" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWa-f0-TXD">
                                 <rect key="frame" x="8" y="82" width="306" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfa-hU-ZJN" userLabel="sendButton">
+                                <rect key="frame" x="8" y="345" width="306" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Send to">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="quackPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="zbx-Jf-hLG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -267,7 +268,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Quack" image="quack_black" id="cPa-gy-q4n"/>
-                    <navigationItem key="navigationItem" title="Send A Quack" id="8qk-Om-EQj">
+                    <navigationItem key="navigationItem" title="Compose" id="8qk-Om-EQj">
                         <barButtonItem key="backBarButtonItem" title="Back" id="ODs-aV-Dxu"/>
                     </navigationItem>
                     <connections>
@@ -276,6 +277,7 @@
                         <outlet property="answer3" destination="UKH-aC-SEF" id="9sX-BF-6qL"/>
                         <outlet property="answer4" destination="ebs-qM-nSa" id="Bby-3z-CVL"/>
                         <outlet property="questionTextView" destination="NP1-jt-pHj" id="8fu-Qp-Dcz"/>
+                        <outlet property="sendButton" destination="bfa-hU-ZJN" id="bMh-GG-Roj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -325,7 +327,6 @@
         <image name="bar_chart" width="25" height="25"/>
         <image name="inbox" width="25" height="25"/>
         <image name="quack_black" width="25" height="25"/>
-        <image name="quack_word" width="125" height="47"/>
         <image name="twitter-gray" width="158" height="28"/>
         <image name="user_male3" width="25" height="25"/>
     </resources>

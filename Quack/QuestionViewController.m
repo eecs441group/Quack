@@ -35,6 +35,11 @@
     
     _emptyString = [NSString stringWithFormat:@""];
     // Do any additional setup after loading the view.
+    
+    //style send button
+    _sendButton.layer.cornerRadius = 2;
+    _sendButton.layer.borderWidth = 1;
+    _sendButton.layer.borderColor = [UIColor colorWithRed:24.0f/255.0f green:148.0f/255.0f blue:251.0f/255.0f alpha:1.0].CGColor;
 }
 
 -(void)dismissKeyboard {

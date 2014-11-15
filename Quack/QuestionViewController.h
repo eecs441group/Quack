@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *answer2;
 @property (strong, nonatomic) IBOutlet UITextField *answer3;
 @property (strong, nonatomic) IBOutlet UITextField *answer4;
+@property (strong, nonatomic) IBOutlet UIButton *sendButton;
 - (IBAction)quackPressed:(id)sender;
 
 @end
