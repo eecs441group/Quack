@@ -26,6 +26,7 @@
 		F9D78AEB19E0990200500B71 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D78AEA19E0990200500B71 /* LoginViewController.m */; };
 		F9D78AEE19E76A8700500B71 /* FacebookInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D78AED19E76A8700500B71 /* FacebookInfo.m */; };
 		F9DCCFDE1A18282300B12E07 /* QuackColors.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DCCFDD1A18282300B12E07 /* QuackColors.m */; };
+		F9DCCFEB1A18414600B12E07 /* SendToViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DCCFEA1A18414600B12E07 /* SendToViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,8 @@
 		F9D78AED19E76A8700500B71 /* FacebookInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookInfo.m; sourceTree = "<group>"; };
 		F9DCCFDD1A18282300B12E07 /* QuackColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuackColors.m; sourceTree = "<group>"; };
 		F9DCCFDF1A18283000B12E07 /* QuackColors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuackColors.h; sourceTree = "<group>"; };
+		F9DCCFE91A18414600B12E07 /* SendToViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendToViewController.h; sourceTree = "<group>"; };
+		F9DCCFEA1A18414600B12E07 /* SendToViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendToViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,8 @@
 			children = (
 				5E2CCB8219E0780600BFC609 /* AppDelegate.h */,
 				5E2CCB8319E0780600BFC609 /* AppDelegate.m */,
+				5E8564F51A00ABC400B44BFE /* ExpandingTableViewController.h */,
+				5E8564F61A00ABC400B44BFE /* ExpandingTableViewController.m */,
 				F9D78AEC19E76A8700500B71 /* FacebookInfo.h */,
 				F9D78AED19E76A8700500B71 /* FacebookInfo.m */,
 				5E2CCB8E19E0780600BFC609 /* Images.xcassets */,
@@ -130,23 +135,23 @@
 				F9D78AE919E0990200500B71 /* LoginViewController.h */,
 				F9D78AEA19E0990200500B71 /* LoginViewController.m */,
 				5E2CCB8B19E0780600BFC609 /* Main.storyboard */,
-				5EB4BEEC1A02E9D70009763A /* social.imageset */,
 				5E6385D019E088F300D00F80 /* MyQuestionsViewController.h */,
 				5E6385D119E088F300D00F80 /* MyQuestionsViewController.m */,
-				5E8564F51A00ABC400B44BFE /* ExpandingTableViewController.h */,
-				5E8564F61A00ABC400B44BFE /* ExpandingTableViewController.m */,
-				5E2AA85C19E75DE20084D717 /* Question.h */,
-				5E2AA85D19E75DE20084D717 /* Question.m */,
-				5E6385CA19E07EF000D00F80 /* QuestionViewController.h */,
-				5E6385CB19E07EF000D00F80 /* QuestionViewController.m */,
 				F9DCCFDF1A18283000B12E07 /* QuackColors.h */,
 				F9DCCFDD1A18282300B12E07 /* QuackColors.m */,
-				5E6385D319E089AE00D00F80 /* Secrets.h */,
-				5E6385D419E089AE00D00F80 /* Secrets.m */,
-				5E2CCB7E19E0780600BFC609 /* Supporting Files */,
+				5E2AA85C19E75DE20084D717 /* Question.h */,
+				F9DCCFE91A18414600B12E07 /* SendToViewController.h */,
+				F9DCCFEA1A18414600B12E07 /* SendToViewController.m */,
+				5E2AA85D19E75DE20084D717 /* Question.m */,
 				5E9323AC19F9A15300022931 /* QuestionTableViewCell.h */,
 				5E9323AD19F9A15300022931 /* QuestionTableViewCell.m */,
 				5E9323AE19F9A15300022931 /* QuestionTableViewCell.xib */,
+				5E6385CA19E07EF000D00F80 /* QuestionViewController.h */,
+				5E6385CB19E07EF000D00F80 /* QuestionViewController.m */,
+				5E6385D319E089AE00D00F80 /* Secrets.h */,
+				5E6385D419E089AE00D00F80 /* Secrets.m */,
+				5EB4BEEC1A02E9D70009763A /* social.imageset */,
+				5E2CCB7E19E0780600BFC609 /* Supporting Files */,
 			);
 			path = Quack;
 			sourceTree = "<group>";
@@ -347,6 +352,7 @@
 				F9D78AEE19E76A8700500B71 /* FacebookInfo.m in Sources */,
 				5E6385D219E088F300D00F80 /* MyQuestionsViewController.m in Sources */,
 				5E6385CC19E07EF000D00F80 /* QuestionViewController.m in Sources */,
+				F9DCCFEB1A18414600B12E07 /* SendToViewController.m in Sources */,
 				5E8564F71A00ABC400B44BFE /* ExpandingTableViewController.m in Sources */,
 				5E6385C919E07AEA00D00F80 /* InboxViewController.m in Sources */,
 				5E2AA85E19E75DE20084D717 /* Question.m in Sources */,

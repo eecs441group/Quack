@@ -31,6 +31,10 @@
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
+    //set selected tab bar item image
+    UITabBarItem *tabBarItem = [self.tabBarController.tabBar.items objectAtIndex:2];
+    UIImage* selectedImage = [UIImage imageNamed:@"bar_chart_active"];
+    tabBarItem.selectedImage = selectedImage;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

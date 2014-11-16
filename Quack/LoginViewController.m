@@ -43,6 +43,11 @@
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
+    //set selected tab bar item image
+    UITabBarItem *tabBarItem = [self.tabBarController.tabBar.items objectAtIndex:3];
+    UIImage* selectedImage = [UIImage imageNamed:@"user_male_active"];
+    tabBarItem.selectedImage = selectedImage;
+    
 }
 
 - (void)didReceiveMemoryWarning {
