@@ -77,7 +77,9 @@ Parse.Cloud.define("sendQuestionToUserInbox", function(request, response) {
 	var sender = request.user;
 	var questionId = request.params.question;
 	var recipient = request.params.friend; 
-
+    console.log(sender.getUsername());
+    var pushQuery = new Parse.Query(Parse.Installation);
+    pushQuery.equalTo('FBUserID', recipient.id);
     var questionQuery = new Parse.Query("Question");
     questionQuery.get(questionId, {
         success: function(question) {
@@ -90,7 +92,19 @@ Parse.Cloud.define("sendQuestionToUserInbox", function(request, response) {
                         friend.save(null, {
                             useMasterKey: true,
                             success: function(result) {
-                                response.success(true);
+                                  Parse.Push.send({
+                                    where: pushQuery, // Set our Installation query
+                                    data: {
+                                        alert: sender.getUsername() + " Quacked you a question!!"
+                                    }
+                                  }, {
+                                    success: function() {
+                                        response.success(true);
+                                    },
+                                    error: function(error) {
+                                        response.error(error);
+                                    }
+                                  });
                             },
                             error: function(result, error) {
                                 response.error(error);
