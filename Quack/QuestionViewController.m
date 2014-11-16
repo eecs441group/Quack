@@ -148,12 +148,6 @@
                                     block:^(id object, NSError *error) {
                                         NSLog(@"success: %@", object);
                                     }];
-                         
-                         PFQuery *pushQuery = [PFInstallation query];
-                         NSString* pushMessage = [result[@"first_name"] stringByAppendingString:@" quacked you a question!!"];
-                         [pushQuery whereKey:@"FBUserID" equalTo: [friend objectForKey:@"id"]];
-                         [PFPush sendPushMessageToQueryInBackground:pushQuery
-                                                        withMessage:pushMessage];
                      }
                  }];
              }

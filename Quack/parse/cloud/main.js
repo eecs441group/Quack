@@ -77,7 +77,6 @@ Parse.Cloud.define("sendQuestionToUserInbox", function(request, response) {
 	var sender = request.user;
 	var questionId = request.params.question;
 	var recipient = request.params.friend; 
-    console.log(sender.getUsername());
     var pushQuery = new Parse.Query(Parse.Installation);
     pushQuery.equalTo('FBUserID', recipient.id);
     var questionQuery = new Parse.Query("Question");

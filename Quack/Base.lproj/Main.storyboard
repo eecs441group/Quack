@@ -80,7 +80,20 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Me" image="user_male3" id="dJk-yg-Y3H"/>
-                    <navigationItem key="navigationItem" title="Me" id="trf-Cc-Pa0"/>
+                    <navigationItem key="navigationItem" title="Me" id="trf-Cc-Pa0">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Jls-p9-gX8">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="i9s-OU-YKH">
+                                <rect key="frame" x="538" y="7" width="84" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add Friends">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Ode-ud-bIy" kind="show" id="SPW-o8-eTT"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="inviteFriendsButton" destination="4jb-DX-1u9" id="7SV-pJ-6Ve"/>
                         <outlet property="nameLabel" destination="TCZ-qH-SDO" id="Wbb-Yu-H6G"/>
@@ -92,6 +105,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eIi-1P-vvi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1122" y="1116"/>
+        </scene>
+        <!--Add Friends-->
+        <scene sceneID="kdP-10-S9f">
+            <objects>
+                <viewController title="Add Friends" id="Ode-ud-bIy" customClass="AddFriendsController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MNL-t9-5H2"/>
+                        <viewControllerLayoutGuide type="bottom" id="vrn-cN-Rtm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dbm-xd-xF6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZIG-Rb-ObZ">
+                                <rect key="frame" x="0.0" y="64" width="306" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Friends" id="HKJ-6P-wib"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nq6-4N-6Qq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1797" y="1116"/>
         </scene>
         <!--Me-->
         <scene sceneID="I7L-WJ-oMf">
