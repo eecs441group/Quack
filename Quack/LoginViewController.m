@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "FacebookInfo.h"
+#import "QuackColors.h"
 #import <Parse/Parse.h>
 
 @interface LoginViewController ()
@@ -34,6 +35,14 @@
     loginView.delegate = self;
     loginView.center = self.view.center;
     [self.view addSubview:loginView];
+    
+    //style navigation bar
+    self.navigationController.navigationBar.barTintColor = [UIColor quackSeaColor];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    [self.navigationController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
 }
 
 - (void)didReceiveMemoryWarning {

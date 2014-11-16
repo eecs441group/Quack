@@ -8,6 +8,7 @@
 
 #import "QuestionViewController.h"
 #import "FacebookInfo.h"
+#import "QuackColors.h"
 #import <Parse/Parse.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import <MBProgressHUD/MBProgressHUD.h>
@@ -36,10 +37,18 @@
     _emptyString = [NSString stringWithFormat:@""];
     // Do any additional setup after loading the view.
     
+    //style navigation bar
+    self.navigationController.navigationBar.barTintColor = [UIColor quackSeaColor];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    [self.navigationController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
     //style send button
-    _sendButton.layer.cornerRadius = 2;
+    _sendButton.layer.cornerRadius = 5;
     _sendButton.layer.borderWidth = 1;
-    _sendButton.layer.borderColor = [UIColor colorWithRed:24.0f/255.0f green:148.0f/255.0f blue:251.0f/255.0f alpha:1.0].CGColor;
+    _sendButton.layer.borderColor = [UIColor quackSeaColor].CGColor;
+    
 }
 
 -(void)dismissKeyboard {

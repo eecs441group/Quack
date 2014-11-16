@@ -8,6 +8,7 @@
 
 #import "MyQuestionsViewController.h"
 #import "Question.h"
+#import "QuackColors.h"
 #import <Parse/Parse.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "MBProgressHud.h"
@@ -18,6 +19,18 @@
 
 @implementation MyQuestionsViewController {
 
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    //style navigation bar
+    self.navigationController.navigationBar.barTintColor = [UIColor quackSeaColor];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    [self.navigationController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -66,7 +79,7 @@
     for(i = 0; i < [question.answers count]; i++) {
         float proportion = total > 0 ? [question.counts[i] intValue] / total : 0.0;
 
-        UIView *v = [self getRectWithColor:[UIColor greenColor] width:(250 * proportion) ycoord:(95 + i*55)];
+        UIView *v = [self getRectWithColor:[UIColor quackSandColor] width:(250 * proportion) ycoord:(95 + i*55)];
         UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 55 + i*55, 200, 40)];
         answerLabel.text = [NSString stringWithFormat:@"%@ (%d)", question.answers[i], [question.counts[i] intValue]];
         [answerLabel setTag:i + 1];

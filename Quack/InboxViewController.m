@@ -11,6 +11,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "Question.h"
 #import "QuestionTableViewCell.h"
+#import "QuackColors.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
 @interface InboxViewController ()
@@ -23,6 +24,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //style navigation bar
+    self.navigationController.navigationBar.barTintColor = [UIColor quackSeaColor];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    [self.navigationController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
 }
 
