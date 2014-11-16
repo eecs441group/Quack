@@ -79,7 +79,7 @@
     for(i = 0; i < [question.answers count]; i++) {
         float proportion = total > 0 ? [question.counts[i] intValue] / total : 0.0;
 
-        UIView *v = [self getRectWithColor:[UIColor quackSandColor] width:(250 * proportion) ycoord:(95 + i*55)];
+        UIView *v = [self getRectWithColor:[UIColor quackGreenColor] width:(250 * proportion) ycoord:(95 + i*55)];
         UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 55 + i*55, 200, 40)];
         answerLabel.text = [NSString stringWithFormat:@"%@ (%d)", question.answers[i], [question.counts[i] intValue]];
         [answerLabel setTag:i + 1];

@@ -15,5 +15,6 @@
 + (UIColor *)quackFoamColor;
 + (UIColor *)quackShellColor;
 + (UIColor *)quackSandColor;
++ (UIColor *)quackGreenColor;
 
 @end

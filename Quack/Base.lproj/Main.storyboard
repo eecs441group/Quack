@@ -260,6 +260,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="tintColor" red="0.1294117719" green="0.76862752440000004" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="D3u-GH-oW8" secondAttribute="centerX" id="2St-D9-QED"/>
                             <constraint firstAttribute="centerX" secondItem="UKH-aC-SEF" secondAttribute="centerX" id="5zp-WP-EdH"/>

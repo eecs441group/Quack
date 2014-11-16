@@ -80,5 +80,19 @@
     return sandColor;
 }
 
++ (UIColor *)quackGreenColor {
+    static UIColor *greenColor;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        greenColor = [UIColor colorWithRed:57.0 / 255.0
+                                    green:214.0 / 255.0
+                                     blue:180.0 / 255.0
+                                    alpha:1.0];
+    });
+    
+    return greenColor;
+}
+
 
 @end

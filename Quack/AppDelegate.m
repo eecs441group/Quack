@@ -10,6 +10,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
 #import "Secrets.h"
+#import "QuackColors.h"
 
 @interface AppDelegate ()
 
@@ -20,6 +21,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [[UITabBar appearance] setTintColor:[UIColor quackSeaColor]];
+
     
     Secrets *secrets = [[Secrets alloc] init];
     [Parse setApplicationId:secrets.parseId
