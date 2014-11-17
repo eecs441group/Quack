@@ -65,9 +65,15 @@
 }
 
 - (IBAction)quackPressed:(id)sender {
-    // Create PFObject for Question
-    PFObject *question = [PFObject objectWithClassName:@"Question"];
-    if ([self.questionTextView.text isEqualToString:@""]) {
+    NSString *question = self.questionTextView.text;
+    NSMutableArray *answers = [[NSMutableArray alloc] init];
+    for (UITextField *tf in _textFields) {
+        if(![tf.text isEqualToString:@""]) {
+            [answers addObject:tf.text];
+        }
+    }
+    
+    if ([question isEqualToString:@""]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No question!"
                                                         message:@"Please add text to your question"
                                                        delegate:nil
@@ -76,18 +82,7 @@
         [alert show];
         return;
     }
-    question[@"question"] = self.questionTextView.text;
-    question[@"answers"] = [[NSMutableArray alloc] init];// @[self.answer1.text, self.answer2.text, self.answer3.text, self.answer4.text];
-    question[@"counts"] = [[NSMutableArray alloc] init];// @[[NSNumber numberWithInt:0],[NSNumber numberWithInt:0],[NSNumber numberWithInt:0], [NSNumber numberWithInt:0]];
-
-    for (UITextField *tf in _textFields) {
-        if(![tf.text isEqualToString:@""]) {
-            [question[@"answers"] addObject:tf.text];
-            [question[@"counts"] addObject:[NSNumber numberWithInt:0]];
-        }
-    }
-    
-    if (![question[@"answers"] count]) {
+    if (![answers count]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No answers!"
                                                         message:@"Please add answers to your question"
                                                        delegate:nil
@@ -97,33 +92,12 @@
         return;
     }
     
-    // Get fb id and save the question
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
-    if (FBSession.activeSession.isOpen) {
-        [FBRequestConnection
-         startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-             if (!error) {
-                 NSString *userId = [result objectForKey:@"id"];
-                 question[@"authorId"] = userId;
-                 question[@"askerName"] = [result objectForKey:@"name"];
-                 
-                 [question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-                 {
-                     [self sendToAllFriends:question];
-                     //send push notifications to all friends
-                     [hud hide:YES];
-                     
-                 }];
-             }
-         }];
-    }
-    
     //show sendTo view
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    SendToViewController *viewController = (SendToViewController *)[storyboard instantiateViewControllerWithIdentifier:@"sendToView"];
-//    viewController._question = question;
-//    [self.navigationController pushViewController:viewController animated:YES];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SendToViewController *viewController = (SendToViewController *)[storyboard instantiateViewControllerWithIdentifier:@"sendToView"];
+    [viewController setQuestion:question
+                        answers:answers];
+    [self.navigationController pushViewController:viewController animated:YES];
     
     // Reload fields
     [self clearFields];
@@ -138,28 +112,5 @@
     }
 }
 
-- (void) sendToAllFriends:(PFObject*) question {
-    if (FBSession.activeSession.isOpen) {
-        [FBRequestConnection
-         startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-             if (!error) {
-                 NSString *userId = [result objectForKey:@"id"];
-                 
-                 FacebookInfo * fbInfo = [[FacebookInfo alloc] initWithAccountID:userId];
-                 [fbInfo getFriends:^(NSArray *friends){
-                     for (NSDictionary *friend in friends) {
-                         
-                         // Call Parse Cloud Code function to add question to friend's inbox relations
-                         [PFCloud callFunctionInBackground:@"sendQuestionToUserInbox"
-                                withParameters:@{@"friend": friend, @"question": question.objectId}
-                                    block:^(id object, NSError *error) {
-                                        NSLog(@"success: %@", object);
-                                    }];
-                     }
-                 }];
-             }
-         }];
-    }
-}
 
 @end

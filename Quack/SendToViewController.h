@@ -11,8 +11,12 @@
 
 @interface SendToViewController : UIViewController
 
-@property (nonatomic, copy) PFObject * _question;
+@property (strong, nonatomic) NSString * _question;
+@property (strong, nonatomic) NSArray * _answers;
 @property (strong, nonatomic) NSMutableArray *_friends;
+- (void)setQuestion:(NSString *)question
+            answers:(NSArray *)answers;
 - (IBAction)sendPressed;
+- (void)sendToUsers:(NSArray *)selectedUsers;
 
 @end

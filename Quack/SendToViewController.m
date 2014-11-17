@@ -16,14 +16,17 @@
 
 @implementation SendToViewController
 
+- (void)setQuestion:(NSString *)question
+            answers:(NSArray *)answers {
+    self._question = question;
+    self._answers = answers;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStylePlain target:self action:@selector(sendPressed)];
     self.navigationItem.rightBarButtonItem = sendButton;
-//    [sendButton release];
-    
-    
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -45,14 +48,46 @@
 }
 
 - (IBAction)sendPressed {
-    NSLog(@"send pressed");
+    [self saveQuestion];
+    
 }
 
+- (void)saveQuestion {
+    PFObject *question = [PFObject objectWithClassName:@"Question"];
+    question[@"question"] = self._question;
+    question[@"answers"] = self._answers;
+    
+    question[@"counts"] = [[NSMutableArray alloc] init];
+    for (NSString *answer in self._answers) {
+        [question[@"counts"] addObject:[NSNumber numberWithInt:0]];
+    }
+    
+    PFUser *user = [PFUser currentUser];
+    question[@"authorId"] = user[@"FBUserID"];
+    question[@"askerName"] = user[@"username"];
+    
+    // Get fb id and save the question
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    if (FBSession.activeSession.isOpen) {
+        [FBRequestConnection
+         startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+             if (!error) {
+                 [question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+                  {
+//                      [self sendToUsers:question];
+                      [hud hide:YES];
+                      
+                  }];
+             }
+         }];
+    }
+}
 
-- (void)send:(NSArray *)selectedUsers {
+- (void)sendToUsers:(NSArray *)selectedUsers {
     // Call Parse Cloud Code function to add question to selected users' inbox relations
     [PFCloud callFunctionInBackground:@"sendQuestionToUsers"
-                       withParameters:@{@"users": selectedUsers, @"question": self._question.objectId}
+                       withParameters:@{@"users": selectedUsers, @"question": self._question}
                                 block:^(id object, NSError *error) {
                                     NSLog(@"success: %@", object);
                                 }];

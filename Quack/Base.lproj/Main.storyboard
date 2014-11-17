@@ -290,7 +290,6 @@
                                 </state>
                                 <connections>
                                     <action selector="quackPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="zbx-Jf-hLG"/>
-                                    <segue destination="rLF-oE-k1L" kind="show" id="Cxc-NB-Woe"/>
                                 </connections>
                             </button>
                         </subviews>
