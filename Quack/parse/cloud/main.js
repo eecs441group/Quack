@@ -40,38 +40,6 @@ Parse.Cloud.define("sendPushToUser", function(request, response) {
 	});
 });
 
-Parse.Cloud.define("sendQuestionToAllUsers", function(request, response) {
-	var sender = request.user;
-	var question = request.params.question;
-	var recipients = request.params.friends; 
-
-	for (i = 0; i < 1; i++) {
-		var query = new Parse.Query(Parse.User);
-		query.equalTo("FBUserID", recipients[i].id).first()
-			.then(function(results){
-				results.add("userInbox",question);
-				//response.success(results);
-			});
-	}
-
-	//response.success("succeded");
-});
-
-Parse.Cloud.define("sendQuestionToUser", function(request, response) {
-    var sender = request.user;
-    var question = request.params.question;
-    var recipient = request.params.friend; 
-    var query = new Parse.Query(Parse.User);
-    query.equalTo("FBUserID", recipient.id).first().then(function(result){
-        if (result){
-            result.add("userInbox",question);
-            result.save(null, { useMasterKey: true });
-            response.success(result);
-        }
-    });
-    response.success("succeded");
-});
-
 // Send a question to a user's inbox via PFRelations
 Parse.Cloud.define("sendQuestionToUserInbox", function(request, response) {
 	var sender = request.user;
@@ -121,5 +89,61 @@ Parse.Cloud.define("sendQuestionToUserInbox", function(request, response) {
             response.error(error);
         }
     });
+});
+
+
+// Send a question to a users' inboxes via PFRelations
+Parse.Cloud.define("sendQuestionToUsers", function(request, response) {
+	var sender = request.user;
+	var questionId = request.params.question;
+	var recipients = request.params.users;
+
+    for (var i = 0; i < recipients.length; ++i) {
+    var recipient = recipients[i]; 
+        var pushQuery = new Parse.Query(Parse.Installation);
+        pushQuery.equalTo('FBUserID', recipient.id);
+        var questionQuery = new Parse.Query("Question");
+        questionQuery.get(questionId, {
+            success: function(question) {
+                if (question) {
+                    var friendQuery = new Parse.Query(Parse.User);
+                    friendQuery.equalTo("FBUserID", recipient.id).first().then(function(friend) {
+                        if (friend) {
+                            var relation = friend.relation("inbox");
+                            relation.add(question);
+                            friend.save(null, {
+                                useMasterKey: true,
+                                success: function(result) {
+                                    Parse.Push.send({
+                                        where: pushQuery, // Set our Installation query
+                                        data: {
+                                            alert: sender.getUsername() + " Quacked you a question!!"
+                                        }
+                                    }, {
+                                        success: function() {
+                                            response.success(true);
+                                        },
+                                        error: function(error) {
+                                            response.error(error);
+                                        }
+                                    });
+                                },
+                                error: function(result, error) {
+                                    response.error(error);
+                                }
+                            });
+                        } else {
+                            response.error("Friend not found when trying to send question");
+                        }
+                    });
+                } else {
+                    response.error("Question not found when trying to send question");
+                }
+            },
+            error: function(error) {
+                response.error(error);
+            }
+        });
+    }
 });
 

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface SendToViewController : UIViewController
+
+@property (nonatomic, copy) PFObject * _question;
+@property (strong, nonatomic) NSMutableArray *_friends;
+- (IBAction)sendPressed;
 
 @end

@@ -27,6 +27,7 @@
 		F9D78AEE19E76A8700500B71 /* FacebookInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D78AED19E76A8700500B71 /* FacebookInfo.m */; };
 		F9DCCFDE1A18282300B12E07 /* QuackColors.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DCCFDD1A18282300B12E07 /* QuackColors.m */; };
 		F9DCCFEB1A18414600B12E07 /* SendToViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DCCFEA1A18414600B12E07 /* SendToViewController.m */; };
+		F9DCCFF11A18932100B12E07 /* AddFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DCCFF01A18932100B12E07 /* AddFriendsController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,8 @@
 		F9DCCFDF1A18283000B12E07 /* QuackColors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuackColors.h; sourceTree = "<group>"; };
 		F9DCCFE91A18414600B12E07 /* SendToViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendToViewController.h; sourceTree = "<group>"; };
 		F9DCCFEA1A18414600B12E07 /* SendToViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendToViewController.m; sourceTree = "<group>"; };
+		F9DCCFEF1A18932100B12E07 /* AddFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendsController.h; sourceTree = "<group>"; };
+		F9DCCFF01A18932100B12E07 /* AddFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendsController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,8 @@
 		5E2CCB7D19E0780600BFC609 /* Quack */ = {
 			isa = PBXGroup;
 			children = (
+				F9DCCFEF1A18932100B12E07 /* AddFriendsController.h */,
+				F9DCCFF01A18932100B12E07 /* AddFriendsController.m */,
 				5E2CCB8219E0780600BFC609 /* AppDelegate.h */,
 				5E2CCB8319E0780600BFC609 /* AppDelegate.m */,
 				5E8564F51A00ABC400B44BFE /* ExpandingTableViewController.h */,
@@ -352,6 +357,7 @@
 				F9D78AEE19E76A8700500B71 /* FacebookInfo.m in Sources */,
 				5E6385D219E088F300D00F80 /* MyQuestionsViewController.m in Sources */,
 				5E6385CC19E07EF000D00F80 /* QuestionViewController.m in Sources */,
+				F9DCCFF11A18932100B12E07 /* AddFriendsController.m in Sources */,
 				F9DCCFEB1A18414600B12E07 /* SendToViewController.m in Sources */,
 				5E8564F71A00ABC400B44BFE /* ExpandingTableViewController.m in Sources */,
 				5E6385C919E07AEA00D00F80 /* InboxViewController.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "QuestionViewController.h"
+#import "SendToViewController.h"
 #import "FacebookInfo.h"
 #import "QuackColors.h"
 #import <Parse/Parse.h>
@@ -117,6 +118,12 @@
              }
          }];
     }
+    
+    //show sendTo view
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    SendToViewController *viewController = (SendToViewController *)[storyboard instantiateViewControllerWithIdentifier:@"sendToView"];
+//    viewController._question = question;
+//    [self.navigationController pushViewController:viewController animated:YES];
     
     // Reload fields
     [self clearFields];
