@@ -98,52 +98,79 @@ Parse.Cloud.define("sendQuestionToUsers", function(request, response) {
 	var questionId = request.params.question;
 	var recipients = request.params.users;
 
-    for (var i = 0; i < recipients.length; ++i) {
-    var recipient = recipients[i]; 
-        var pushQuery = new Parse.Query(Parse.Installation);
-        pushQuery.equalTo('FBUserID', recipient.id);
-        var questionQuery = new Parse.Query("Question");
-        questionQuery.get(questionId, {
-            success: function(question) {
-                if (question) {
+    var sentCount = 0;
+    var questionQuery = new Parse.Query("Question");
+    questionQuery.get(questionId, {
+        success: function(question) {
+            if (question) {
+                for (var i = 0; i < recipients.length; i++) {
+                    console.log((i + 1) + " " + recipients.length);
+                    var recipient = recipients[i]; 
+
+                    var pushQuery = new Parse.Query(Parse.Installation);
+                    pushQuery.equalTo('FBUserID', recipient.id);
+                    
                     var friendQuery = new Parse.Query(Parse.User);
+                    var numSent = i + 1;
                     friendQuery.equalTo("FBUserID", recipient.id).first().then(function(friend) {
+                        console.log("hi");
+                        if (numSent == recipients.length) {
+                            console.log("success count: " + sentCount);
+                        }
                         if (friend) {
                             var relation = friend.relation("inbox");
                             relation.add(question);
                             friend.save(null, {
                                 useMasterKey: true,
                                 success: function(result) {
+                                    sentCount++;
+                                    
                                     Parse.Push.send({
                                         where: pushQuery, // Set our Installation query
                                         data: {
-                                            alert: sender.getUsername() + " Quacked you a question!!"
+                                            alert: sender.getUsername() + " Quacked you a question!"
                                         }
                                     }, {
                                         success: function() {
-                                            response.success(true);
+                                            console.log(true);
                                         },
                                         error: function(error) {
-                                            response.error(error);
+                                            console.log(error);
                                         }
                                     });
+
+                                    if (numSent == recipients.length) {
+                                        console.log("all done");
+                                        console.log("success count: " + sentCount);
+                                        response.success(true);
+                                    }
                                 },
                                 error: function(result, error) {
-                                    response.error(error);
+                                    console.log(error);
+                                    if (numSent == recipients.length) {
+                                        console.log("success count: " + sentCount);
+                                        response.success(true);
+                                    }
                                 }
                             });
                         } else {
-                            response.error("Friend not found when trying to send question");
+                            console.log("Friend not found when trying to send question");
+                            if (numSent == recipients.length) {
+                                console.log("success count: " + sentCount);
+                                response.success(true);
+                            }
                         }
                     });
-                } else {
-                    response.error("Question not found when trying to send question");
                 }
-            },
-            error: function(error) {
-                response.error(error);
+            } else {
+                console.log("Question not found when trying to send question");
             }
-        });
-    }
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+    
+    
 });
 

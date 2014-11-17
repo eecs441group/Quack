@@ -17,6 +17,7 @@
 - (void)setQuestion:(NSString *)question
             answers:(NSArray *)answers;
 - (IBAction)sendPressed;
-- (void)sendToUsers:(NSArray *)selectedUsers;
+- (void)sendToUsers:(NSString *)questionId
+              Users:(NSArray *)selectedUsers;
 
 @end

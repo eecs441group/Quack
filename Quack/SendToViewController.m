@@ -49,7 +49,6 @@
 
 - (IBAction)sendPressed {
     [self saveQuestion];
-    
 }
 
 - (void)saveQuestion {
@@ -75,7 +74,8 @@
              if (!error) {
                  [question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
                   {
-//                      [self sendToUsers:question];
+                      [self sendToUsers:question.objectId
+                                  Users:self._friends];
                       [hud hide:YES];
                       
                   }];
@@ -84,10 +84,11 @@
     }
 }
 
-- (void)sendToUsers:(NSArray *)selectedUsers {
+- (void)sendToUsers:(NSString *)questionId
+              Users:(NSArray *)selectedUsers {
     // Call Parse Cloud Code function to add question to selected users' inbox relations
     [PFCloud callFunctionInBackground:@"sendQuestionToUsers"
-                       withParameters:@{@"users": selectedUsers, @"question": self._question}
+                       withParameters:@{@"question": questionId, @"users": selectedUsers}
                                 block:^(id object, NSError *error) {
                                     NSLog(@"success: %@", object);
                                 }];
