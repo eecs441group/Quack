@@ -16,6 +16,7 @@
 
 @implementation SendToViewController
 
+// Setter for QuestionViewController to pass in the question and answers
 - (void)setQuestion:(NSString *)question
             answers:(NSArray *)answers {
     self._question = question;
@@ -25,7 +26,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStylePlain target:self action:@selector(sendPressed)];
+    UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Send"
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(sendPressed)];
     self.navigationItem.rightBarButtonItem = sendButton;
 }
 
@@ -49,8 +53,11 @@
 
 - (IBAction)sendPressed {
     [self saveQuestion];
+    
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
+// Save question to parse
 - (void)saveQuestion {
     PFObject *question = [PFObject objectWithClassName:@"Question"];
     question[@"question"] = self._question;
@@ -86,7 +93,7 @@
 
 - (void)sendToUsers:(NSString *)questionId
               Users:(NSArray *)selectedUsers {
-    // Call Parse Cloud Code function to add question to selected users' inbox relations
+    // Call Parse Cloud Code function to add question to selectedUsers' inbox relations
     [PFCloud callFunctionInBackground:@"sendQuestionToUsers"
                        withParameters:@{@"question": questionId, @"users": selectedUsers}
                                 block:^(id object, NSError *error) {
