@@ -13,6 +13,7 @@
 #import "QuestionTableViewCell.h"
 #import "QuackColors.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "Title.h"
 
 @interface InboxViewController ()
 
@@ -61,6 +62,7 @@
                      } else {
                          for (PFObject *question in objects) {
                              if(question && ![question isKindOfClass:[NSNull class]]) {
+                                 [self.titles addObject:[[Title alloc] initWithTitle:question[@"question"]]];
                                  [self.questions addObject:[[Question alloc] initWithDictionary:(NSDictionary *)question]];
                              }
                          }
@@ -75,51 +77,18 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{  
-    Question *q = [self.questions objectAtIndex:indexPath.row];
-    QuestionTableViewCell *cell = (QuestionTableViewCell *)[super tableView:self.tableView cellForRowAtIndexPath:indexPath];
-    cell.askerLabel.text = [NSString stringWithFormat:@"%@ wants to know:", q.askerName];
-    return cell;
-}
-
-- (void)addDataToCell:(UITableViewCell *)cell question:(Question *)question{
-    int i = 0;
-    for(; i < [question.answers count]; i++) {
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(5, 55 + i*55, 40, 40)];
-        button.tag = i + 1;
-        [button setBackgroundImage:[UIImage imageNamed:@"first.png"] forState:UIControlStateNormal];
-        [button addTarget:self
-                   action:@selector(selectAnswer:)
-         forControlEvents:UIControlEventTouchUpInside];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 55 + i*55, 200, 40)];
-        answerLabel.text = question.answers[i];
-        [cell addSubview:answerLabel];
-        [cell addSubview:button];
-    }
-    
-    // Add uitextfield to see if people want to comment
-    UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(50, 55 + i * 55, 306, 30)];
-    tf.placeholder = @"Comment";
-    tf.delegate = self;
-    [cell addSubview:tf];
-}
-
-- (void)selectAnswer:(id)sender {
-    UIButton *button = (UIButton *)sender;
-    QuestionTableViewCell *cell = (QuestionTableViewCell *)button.superview;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    Question *q = (Question *)[self.questions objectAtIndex:indexPath.row];
-    
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Question *q = (Question *)[self.questions objectAtIndex:indexPath.section];
+    Title *t = (Title *)[self.titles objectAtIndex:indexPath.section];
     if(!q.answerSet) {
-        [button setBackgroundImage:[UIImage imageNamed:@"sent_green.png"] forState:UIControlStateNormal];
+        // Select an answer
         q.answerSet = true;
-        q.curSelected = button.tag;
-    } else if (q.curSelected == button.tag) {
+        NSLog(@"index path row: %ld", indexPath.row);
+        q.curSelected = indexPath.row + 1;
+    } else if (q.curSelected == indexPath.row + 1) {
+        // Confirm an answer
         [self.questions removeObject:q];
-        [self.expandedCells removeObject:indexPath];
-        [self removeDataFromCell:[self.tableView cellForRowAtIndexPath:indexPath]];
+        [self.titles removeObject:t];
         [self.tableView reloadData];
         
         // get question from Parse
@@ -134,45 +103,15 @@
                 
                 // Update question's counts
                 NSMutableArray *counts = question[@"counts"];
-                counts[button.tag - 1] = [NSNumber numberWithInt:[counts[button.tag - 1] intValue] + 1];
+                counts[indexPath.row] = [NSNumber numberWithInt:[counts[indexPath.row] intValue] + 1];
                 [question saveInBackground];
             }
         }];
         
     } else if(q.answerSet) {
-        // swap selected
-        UIButton *oldSelection = (UIButton *)[cell viewWithTag:q.curSelected];
-        [oldSelection setBackgroundImage:[UIImage imageNamed:@"first.png"] forState:UIControlStateNormal];
-        [button setBackgroundImage:[UIImage imageNamed:@"sent_green.png"] forState:UIControlStateNormal];
-        q.curSelected = button.tag;
-
+        // Different answer selected
+        q.curSelected = indexPath.row + 1;
     }
-}
-
-- (void)removeDataFromCell:(UITableViewCell *)cell {
-    for (UIView *view in cell.subviews) {
-        if ([view isKindOfClass:[UILabel class]] || [view isKindOfClass:[UIButton class]] || [view isKindOfClass:[UITextField class]]) {
-            [view removeFromSuperview];
-        }
-    }
-}
-
-#pragma text field
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    PFQuery *query = [PFQuery queryWithClassName:@"Data"];
-    [query getObjectInBackgroundWithId:@"oIi5UPXKCc" block:^(PFObject *data, NSError *error) {
-        if (!error) {
-            data[@"clickedComment"] = [NSNumber numberWithInt:[data[@"clickedComment"] intValue] + 1];
-            [data saveInBackground];
-        }
-    }];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry"
-                                                    message:@"This feature has not been implemented yet"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
 }
 
 - (void)didReceiveMemoryWarning {
