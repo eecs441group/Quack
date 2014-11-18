@@ -40,38 +40,6 @@ Parse.Cloud.define("sendPushToUser", function(request, response) {
 	});
 });
 
-Parse.Cloud.define("sendQuestionToAllUsers", function(request, response) {
-	var sender = request.user;
-	var question = request.params.question;
-	var recipients = request.params.friends; 
-
-	for (i = 0; i < 1; i++) {
-		var query = new Parse.Query(Parse.User);
-		query.equalTo("FBUserID", recipients[i].id).first()
-			.then(function(results){
-				results.add("userInbox",question);
-				//response.success(results);
-			});
-	}
-
-	//response.success("succeded");
-});
-
-Parse.Cloud.define("sendQuestionToUser", function(request, response) {
-    var sender = request.user;
-    var question = request.params.question;
-    var recipient = request.params.friend; 
-    var query = new Parse.Query(Parse.User);
-    query.equalTo("FBUserID", recipient.id).first().then(function(result){
-        if (result){
-            result.add("userInbox",question);
-            result.save(null, { useMasterKey: true });
-            response.success(result);
-        }
-    });
-    response.success("succeded");
-});
-
 // Send a question to a user's inbox via PFRelations
 Parse.Cloud.define("sendQuestionToUserInbox", function(request, response) {
 	var sender = request.user;
@@ -121,5 +89,88 @@ Parse.Cloud.define("sendQuestionToUserInbox", function(request, response) {
             response.error(error);
         }
     });
+});
+
+
+// Send a question to a users' inboxes via PFRelations
+Parse.Cloud.define("sendQuestionToUsers", function(request, response) {
+	var sender = request.user;
+	var questionId = request.params.question;
+	var recipients = request.params.users;
+
+    var sentCount = 0;
+    var questionQuery = new Parse.Query("Question");
+    questionQuery.get(questionId, {
+        success: function(question) {
+            if (question) {
+                for (var i = 0; i < recipients.length; i++) {
+                    console.log((i + 1) + " " + recipients.length);
+                    var recipient = recipients[i]; 
+
+                    var pushQuery = new Parse.Query(Parse.Installation);
+                    pushQuery.equalTo('FBUserID', recipient.id);
+                    
+                    var friendQuery = new Parse.Query(Parse.User);
+                    var numSent = i + 1;
+                    friendQuery.equalTo("FBUserID", recipient.id).first().then(function(friend) {
+                        console.log("hi");
+                        if (numSent == recipients.length) {
+                            console.log("success count: " + sentCount);
+                        }
+                        if (friend) {
+                            var relation = friend.relation("inbox");
+                            relation.add(question);
+                            friend.save(null, {
+                                useMasterKey: true,
+                                success: function(result) {
+                                    sentCount++;
+                                    
+                                    Parse.Push.send({
+                                        where: pushQuery, // Set our Installation query
+                                        data: {
+                                            alert: sender.getUsername() + " Quacked you a question!"
+                                        }
+                                    }, {
+                                        success: function() {
+                                            console.log(true);
+                                        },
+                                        error: function(error) {
+                                            console.log(error);
+                                        }
+                                    });
+
+                                    if (numSent == recipients.length) {
+                                        console.log("all done");
+                                        console.log("success count: " + sentCount);
+                                        response.success(true);
+                                    }
+                                },
+                                error: function(result, error) {
+                                    console.log(error);
+                                    if (numSent == recipients.length) {
+                                        console.log("success count: " + sentCount);
+                                        response.success(true);
+                                    }
+                                }
+                            });
+                        } else {
+                            console.log("Friend not found when trying to send question");
+                            if (numSent == recipients.length) {
+                                console.log("success count: " + sentCount);
+                                response.success(true);
+                            }
+                        }
+                    });
+                }
+            } else {
+                console.log("Question not found when trying to send question");
+            }
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+    
+    
 });
 

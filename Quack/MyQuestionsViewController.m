@@ -47,10 +47,10 @@
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
              if (!error) {
-                 NSString *userId = [result objectForKey:@"id"];
+                 PFUser *user = [PFUser currentUser];
                  
                  PFQuery *query = [PFQuery queryWithClassName:@"Question"];
-                 [query whereKey:@"authorId" equalTo:userId];
+                 [query whereKey:@"authorId" equalTo:user[@"FBUserID"]];
                  [query orderByDescending:@"createdAt"];
                  
                  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
