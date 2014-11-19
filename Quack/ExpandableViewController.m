@@ -17,6 +17,7 @@ static NSString *kUpArrowImage = @"up4-50.png";
 static NSString *kDownArrowImage = @"down4-50.png";
 static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
 static NSString *kCellIdentifier = @"Cell";
+static int charsPerLine = 35;
 
 @interface ExpandableViewController ()
 
@@ -59,7 +60,8 @@ static NSString *kCellIdentifier = @"Cell";
     if(![_titles[indexPath.section] isExpanded]) {
         return 0;
     } else {
-        return 60.0f;
+        Question *q = self.questions[indexPath.section];
+        return 60.0f + [q.answers[indexPath.row] length] / charsPerLine * 5.0f;
     }
 }
 
@@ -101,8 +103,7 @@ static NSString *kCellIdentifier = @"Cell";
                                                    
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     Title *t = _titles[section];
-    NSLog(@"heeeey: %lu", (unsigned long)[t.title length]);
-    return 60.0f + [t.title length] / 35 * 10.0f;
+    return 60.0f + [t.title length] / charsPerLine * 10.0f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
