@@ -31,6 +31,10 @@
                                                                   target:self
                                                                   action:@selector(sendPressed)];
     self.navigationItem.rightBarButtonItem = sendButton;
+    
+    self.tableSectionTitles = [[NSMutableArray alloc] init];
+    [self.tableSectionTitles addObject:@"Friends"];
+    [self.tableSectionTitles addObject:@"Groups"];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -45,10 +49,75 @@
                  FacebookInfo * fbInfo = [[FacebookInfo alloc] initWithAccountID:userId];
                  [fbInfo getFriends:^(NSArray *friends){
                      [self._friends addObjectsFromArray:friends];
+                     [self.tableView reloadData];
                  }];
              }
          }];
     }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self._friends count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [self.tableSectionTitles objectAtIndex:section];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *MyIdentifier = @"MyReuseIdentifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:MyIdentifier];
+    }
+    NSDictionary *friend = [self._friends objectAtIndex:indexPath.row];
+    cell.textLabel.text = friend[@"name"];
+    
+    if ([self._selectedUsers containsObject:friend]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    
+    if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+        NSLog(@"with checkmark");
+    }
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+   
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    NSLog(@"row selected %@", cell.textLabel.text);
+    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    
+    
+    NSDictionary *friend = [self._friends objectAtIndex:indexPath.row];
+    NSLog(@"for %@", friend[@"name"]);
+    [self._selectedUsers addObject:[[Question alloc] initWithDictionary:friend]];
+    
+    for (NSDictionary *selected in self._selectedUsers) {
+        NSLog(@"sending to %@", selected[@"name"]);
+    }
+    
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    [tableView reloadData];
+
+}
+
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+    
+    NSDictionary *friend = [self._friends objectAtIndex:indexPath.row];
+    [self._selectedUsers removeObject:friend];
+//    [tableView reloadData];
 }
 
 - (IBAction)sendPressed {
@@ -93,6 +162,10 @@
 
 - (void)sendToUsers:(NSString *)questionId
               Users:(NSArray *)selectedUsers {
+    for (NSDictionary *friend in selectedUsers) {
+        NSLog(@"sending to %@", friend[@"name"]);
+    }
+    
     // Call Parse Cloud Code function to add question to selectedUsers' inbox relations
     [PFCloud callFunctionInBackground:@"sendQuestionToUsers"
                        withParameters:@{@"question": questionId, @"users": selectedUsers}
