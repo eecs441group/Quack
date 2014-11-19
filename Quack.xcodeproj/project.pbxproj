@@ -22,6 +22,10 @@
 		5E8564F71A00ABC400B44BFE /* ExpandingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8564F61A00ABC400B44BFE /* ExpandingTableViewController.m */; };
 		5E9323AF19F9A15300022931 /* QuestionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E9323AD19F9A15300022931 /* QuestionTableViewCell.m */; };
 		5E9323B019F9A15300022931 /* QuestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E9323AE19F9A15300022931 /* QuestionTableViewCell.xib */; };
+		5EAF7DDF1A1BF30300FA5525 /* ClickableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF7DD91A1BF30300FA5525 /* ClickableHeader.m */; };
+		5EAF7DE01A1BF30300FA5525 /* ClickableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EAF7DDA1A1BF30300FA5525 /* ClickableHeader.xib */; };
+		5EAF7DE11A1BF30300FA5525 /* ExpandableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF7DDC1A1BF30300FA5525 /* ExpandableViewController.m */; };
+		5EAF7DE21A1BF30300FA5525 /* Title.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF7DDE1A1BF30300FA5525 /* Title.m */; };
 		5EB4BEEE1A02E9D70009763A /* twitter-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB4BEED1A02E9D70009763A /* twitter-gray.png */; };
 		F9D78AEB19E0990200500B71 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D78AEA19E0990200500B71 /* LoginViewController.m */; };
 		F9D78AEE19E76A8700500B71 /* FacebookInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D78AED19E76A8700500B71 /* FacebookInfo.m */; };
@@ -68,6 +72,13 @@
 		5E9323AC19F9A15300022931 /* QuestionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionTableViewCell.h; sourceTree = "<group>"; };
 		5E9323AD19F9A15300022931 /* QuestionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionTableViewCell.m; sourceTree = "<group>"; };
 		5E9323AE19F9A15300022931 /* QuestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTableViewCell.xib; sourceTree = "<group>"; };
+		5EAF7DD81A1BF30300FA5525 /* ClickableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickableHeader.h; sourceTree = "<group>"; };
+		5EAF7DD91A1BF30300FA5525 /* ClickableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickableHeader.m; sourceTree = "<group>"; };
+		5EAF7DDA1A1BF30300FA5525 /* ClickableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClickableHeader.xib; sourceTree = "<group>"; };
+		5EAF7DDB1A1BF30300FA5525 /* ExpandableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableViewController.h; sourceTree = "<group>"; };
+		5EAF7DDC1A1BF30300FA5525 /* ExpandableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableViewController.m; sourceTree = "<group>"; };
+		5EAF7DDD1A1BF30300FA5525 /* Title.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Title.h; sourceTree = "<group>"; };
+		5EAF7DDE1A1BF30300FA5525 /* Title.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Title.m; sourceTree = "<group>"; };
 		5EB4BEED1A02E9D70009763A /* twitter-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-gray.png"; sourceTree = "<group>"; };
 		657F35ED5A75533C4FBF2C46 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6F86B3A92149818E9D6D1579 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +136,7 @@
 		5E2CCB7D19E0780600BFC609 /* Quack */ = {
 			isa = PBXGroup;
 			children = (
+				5EAF7DD71A1BF2EB00FA5525 /* ExpandableViewController */,
 				F9DCCFEF1A18932100B12E07 /* AddFriendsController.h */,
 				F9DCCFF01A18932100B12E07 /* AddFriendsController.m */,
 				5E2CCB8219E0780600BFC609 /* AppDelegate.h */,
@@ -185,6 +197,20 @@
 				5E2CCB9C19E0780600BFC609 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5EAF7DD71A1BF2EB00FA5525 /* ExpandableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5EAF7DD81A1BF30300FA5525 /* ClickableHeader.h */,
+				5EAF7DD91A1BF30300FA5525 /* ClickableHeader.m */,
+				5EAF7DDA1A1BF30300FA5525 /* ClickableHeader.xib */,
+				5EAF7DDB1A1BF30300FA5525 /* ExpandableViewController.h */,
+				5EAF7DDC1A1BF30300FA5525 /* ExpandableViewController.m */,
+				5EAF7DDD1A1BF30300FA5525 /* Title.h */,
+				5EAF7DDE1A1BF30300FA5525 /* Title.m */,
+			);
+			name = ExpandableViewController;
 			sourceTree = "<group>";
 		};
 		5EB4BEEC1A02E9D70009763A /* social.imageset */ = {
@@ -302,6 +328,7 @@
 				5E2CCB9219E0780600BFC609 /* LaunchScreen.xib in Resources */,
 				5E9323B019F9A15300022931 /* QuestionTableViewCell.xib in Resources */,
 				5E2CCB8F19E0780600BFC609 /* Images.xcassets in Resources */,
+				5EAF7DE01A1BF30300FA5525 /* ClickableHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,17 +380,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E2CCB8419E0780600BFC609 /* AppDelegate.m in Sources */,
+				5EAF7DDF1A1BF30300FA5525 /* ClickableHeader.m in Sources */,
 				F9DCCFDE1A18282300B12E07 /* QuackColors.m in Sources */,
 				F9D78AEE19E76A8700500B71 /* FacebookInfo.m in Sources */,
 				5E6385D219E088F300D00F80 /* MyQuestionsViewController.m in Sources */,
 				5E6385CC19E07EF000D00F80 /* QuestionViewController.m in Sources */,
 				F9DCCFF11A18932100B12E07 /* AddFriendsController.m in Sources */,
 				F9DCCFEB1A18414600B12E07 /* SendToViewController.m in Sources */,
+				5EAF7DE11A1BF30300FA5525 /* ExpandableViewController.m in Sources */,
 				5E8564F71A00ABC400B44BFE /* ExpandingTableViewController.m in Sources */,
 				5E6385C919E07AEA00D00F80 /* InboxViewController.m in Sources */,
 				5E2AA85E19E75DE20084D717 /* Question.m in Sources */,
 				F9D78AEB19E0990200500B71 /* LoginViewController.m in Sources */,
 				5E2CCB8119E0780600BFC609 /* main.m in Sources */,
+				5EAF7DE21A1BF30300FA5525 /* Title.m in Sources */,
 				5E9323AF19F9A15300022931 /* QuestionTableViewCell.m in Sources */,
 				5E6385D519E089AE00D00F80 /* Secrets.m in Sources */,
 			);
