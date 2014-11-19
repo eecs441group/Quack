@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,24 +14,35 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0G-C7-jP1">
-                        <rect key="frame" x="8" y="5" width="273" height="42"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0G-C7-jP1">
+                        <rect key="frame" x="8" y="5" width="264" height="42"/>
                         <rect key="contentStretch" x="1.3877787807814457e-17" y="0.0" width="1" height="1"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NcF-az-JdX">
-                        <rect key="frame" x="280" y="14" width="32" height="25"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="down4-50" translatesAutoresizingMaskIntoConstraints="NO" id="NcF-az-JdX">
+                        <rect key="frame" x="280" y="10" width="32" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="jWk-d6-Apf"/>
+                            <constraint firstAttribute="width" constant="32" id="mhH-N7-Hjx"/>
+                        </constraints>
                     </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="o0G-C7-jP1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="1uc-kQ-LHM"/>
+                    <constraint firstItem="NcF-az-JdX" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="NbB-bq-mHE"/>
+                </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.92965495586395264" green="0.92962712049484253" blue="0.92964291572570801" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="arrowImageView" destination="NcF-az-JdX" id="dJp-Jf-9kA"/>
                 <outlet property="sectionLabel" destination="o0G-C7-jP1" id="50d-tz-Gsl"/>
             </connections>
-            <point key="canvasLocation" x="392" y="350"/>
+            <point key="canvasLocation" x="392" y="344"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="down4-50" width="50" height="50"/>
+    </resources>
 </document>

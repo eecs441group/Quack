@@ -11,6 +11,7 @@
 #import "Title.h"
 #import "QuestionTableViewCell.h"
 #import "Question.h"
+#import "QuackColors.h"
 
 @interface ExpandableViewController ()
 
@@ -64,7 +65,7 @@
     if(![_titles[indexPath.section] isExpanded]) {
         return 0;
     } else {
-        return 80.0f;
+        return 45.0f;
     }
 }
 
@@ -85,6 +86,7 @@
     
     header.tag = section;
     header.sectionLabel.text = t.title;
+    header.contentView.backgroundColor = [UIColor quackFoamColor];
     
     UITapGestureRecognizer *singleTapRecogniser = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gestureHandler:)];
     [singleTapRecogniser setDelegate:self];
@@ -99,7 +101,6 @@
     NSInteger section = gestureRecognizer.view.tag;
     Title *t = [_titles objectAtIndex:gestureRecognizer.view.tag];
     [t toggleExpansion];
-    ClickableHeader *header = (ClickableHeader *)gestureRecognizer.view;
     NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
     Question *cur = [_questions objectAtIndex:section];
     for(int i = 0; i < [cur.answers count]; i++) {
@@ -108,7 +109,6 @@
     }
     [self.tableView reloadData];
     [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-
 }
                                                    
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

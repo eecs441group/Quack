@@ -7,18 +7,11 @@
 //
 
 #import "ClickableHeader.h"
+#import "QuackColors.h"
 
 @implementation ClickableHeader 
 
 - (void)awakeFromNib {
     // Initialization code
 }
-
-- (id)init {
-    if(self = [super init]) {
-        self.sectionLabel = [[UILabel alloc] init];
-    }
-    return self;
-}
-
 @end

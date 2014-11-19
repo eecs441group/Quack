@@ -85,6 +85,14 @@
         q.answerSet = true;
         NSLog(@"index path row: %ld", indexPath.row);
         q.curSelected = indexPath.row + 1;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Submit?"
+                                                       message:@"Click yes to confirm your answer!"
+                                                      delegate:nil
+                                             cancelButtonTitle:@"Cancel"
+                                             otherButtonTitles:@"OK", nil];
+        alert.delegate = self;
+        [alert show];
+        
     } else if (q.curSelected == indexPath.row + 1) {
         // Confirm an answer
         [self.questions removeObject:q];
@@ -111,6 +119,15 @@
     } else if(q.answerSet) {
         // Different answer selected
         q.curSelected = indexPath.row + 1;
+
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(buttonIndex == 0) {
+        NSLog(@"Cancelled!");
+    } else {
+        NSLog(@"Submitted!");
     }
 }
 

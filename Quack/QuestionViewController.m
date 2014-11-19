@@ -27,6 +27,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _textFields = @[self.answer1, self.answer2, self.answer3, self.answer4];
+    for(UITextField *tf in _textFields) {
+        tf.delegate = self;
+    }
 
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
@@ -110,6 +113,11 @@
             textField.text = _emptyString;
         }
     }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self quackPressed:self.sendButton];
+    return YES;
 }
 
 
