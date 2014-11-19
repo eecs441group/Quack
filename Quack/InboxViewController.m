@@ -64,8 +64,9 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
                      } else {
                          for (PFObject *question in objects) {
                              if(question && ![question isKindOfClass:[NSNull class]]) {
-                                 [self.titles addObject:[[Title alloc] initWithTitle:question[@"question"]]];
-                                 [self.questions addObject:[[Question alloc] initWithDictionary:(NSDictionary *)question]];
+                                 Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)question];
+                                 [self.titles addObject:[[Title alloc] initWithTitle:q.question]];
+                                 [self.questions addObject:q];
                              }
                          }
                          [self.tableView reloadData];
