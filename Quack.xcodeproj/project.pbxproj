@@ -113,6 +113,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E2087ED1A1D3146008275BC /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F9DCCFDF1A18283000B12E07 /* QuackColors.h */,
+				F9DCCFDD1A18282300B12E07 /* QuackColors.m */,
+				5E2AA85C19E75DE20084D717 /* Question.h */,
+				5E2AA85D19E75DE20084D717 /* Question.m */,
+				F9D78AEC19E76A8700500B71 /* FacebookInfo.h */,
+				F9D78AED19E76A8700500B71 /* FacebookInfo.m */,
+				5E6385D319E089AE00D00F80 /* Secrets.h */,
+				5E6385D419E089AE00D00F80 /* Secrets.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		5E2087EF1A1D3183008275BC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F9DCCFEF1A18932100B12E07 /* AddFriendsController.h */,
+				F9DCCFF01A18932100B12E07 /* AddFriendsController.m */,
+				5E2087EA1A1D291D008275BC /* ExpandingTableViewController.h */,
+				5E2087EB1A1D291D008275BC /* ExpandingTableViewController.m */,
+				F9DCCFE91A18414600B12E07 /* SendToViewController.h */,
+				F9DCCFEA1A18414600B12E07 /* SendToViewController.m */,
+				5E6385CA19E07EF000D00F80 /* QuestionViewController.h */,
+				5E6385CB19E07EF000D00F80 /* QuestionViewController.m */,
+				5E6385C719E07AEA00D00F80 /* InboxViewController.h */,
+				5E6385C819E07AEA00D00F80 /* InboxViewController.m */,
+				5E6385D019E088F300D00F80 /* ResultsViewController.h */,
+				5E6385D119E088F300D00F80 /* ResultsViewController.m */,
+				F9D78AE919E0990200500B71 /* LoginViewController.h */,
+				F9D78AEA19E0990200500B71 /* LoginViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5E2087F01A1D3198008275BC /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				5E9323AC19F9A15300022931 /* AnswerTableViewCell.h */,
+				5E9323AD19F9A15300022931 /* AnswerTableViewCell.m */,
+				5E9323AE19F9A15300022931 /* AnswerTableViewCell.xib */,
+			);
+			name = Xibs;
+			sourceTree = "<group>";
+		};
 		5E2CCB7219E0780600BFC609 = {
 			isa = PBXGroup;
 			children = (
@@ -136,37 +182,15 @@
 		5E2CCB7D19E0780600BFC609 /* Quack */ = {
 			isa = PBXGroup;
 			children = (
+				5E2087F01A1D3198008275BC /* Xibs */,
+				5E2087EF1A1D3183008275BC /* ViewControllers */,
+				5E2087ED1A1D3146008275BC /* Classes */,
 				5EAF7DD71A1BF2EB00FA5525 /* ExpandableViewController */,
-				F9DCCFEF1A18932100B12E07 /* AddFriendsController.h */,
-				F9DCCFF01A18932100B12E07 /* AddFriendsController.m */,
-				5E2087EA1A1D291D008275BC /* ExpandingTableViewController.h */,
-				5E2087EB1A1D291D008275BC /* ExpandingTableViewController.m */,
 				5E2CCB8219E0780600BFC609 /* AppDelegate.h */,
 				5E2CCB8319E0780600BFC609 /* AppDelegate.m */,
-				F9D78AEC19E76A8700500B71 /* FacebookInfo.h */,
-				F9D78AED19E76A8700500B71 /* FacebookInfo.m */,
 				5E2CCB8E19E0780600BFC609 /* Images.xcassets */,
-				5E6385C719E07AEA00D00F80 /* InboxViewController.h */,
-				5E6385C819E07AEA00D00F80 /* InboxViewController.m */,
-				5E6385D019E088F300D00F80 /* ResultsViewController.h */,
-				5E6385D119E088F300D00F80 /* ResultsViewController.m */,
 				5E2CCB9019E0780600BFC609 /* LaunchScreen.xib */,
-				F9D78AE919E0990200500B71 /* LoginViewController.h */,
-				F9D78AEA19E0990200500B71 /* LoginViewController.m */,
 				5E2CCB8B19E0780600BFC609 /* Main.storyboard */,
-				F9DCCFDF1A18283000B12E07 /* QuackColors.h */,
-				F9DCCFDD1A18282300B12E07 /* QuackColors.m */,
-				5E2AA85C19E75DE20084D717 /* Question.h */,
-				F9DCCFE91A18414600B12E07 /* SendToViewController.h */,
-				F9DCCFEA1A18414600B12E07 /* SendToViewController.m */,
-				5E2AA85D19E75DE20084D717 /* Question.m */,
-				5E9323AC19F9A15300022931 /* AnswerTableViewCell.h */,
-				5E9323AD19F9A15300022931 /* AnswerTableViewCell.m */,
-				5E9323AE19F9A15300022931 /* AnswerTableViewCell.xib */,
-				5E6385CA19E07EF000D00F80 /* QuestionViewController.h */,
-				5E6385CB19E07EF000D00F80 /* QuestionViewController.m */,
-				5E6385D319E089AE00D00F80 /* Secrets.h */,
-				5E6385D419E089AE00D00F80 /* Secrets.m */,
 				5EB4BEEC1A02E9D70009763A /* social.imageset */,
 				5E2CCB7E19E0780600BFC609 /* Supporting Files */,
 			);
