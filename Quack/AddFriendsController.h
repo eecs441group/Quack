@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ExpandingTableViewController.h"
 
-@interface AddFriendsController : ExpandingTableViewController
+@interface AddFriendsController : UITableViewController
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end

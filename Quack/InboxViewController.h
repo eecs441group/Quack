@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ExpandingTableViewController.h"
 #import "ExpandableViewController.h"
 
 @interface InboxViewController : ExpandableViewController <UITextFieldDelegate, UIAlertViewDelegate>

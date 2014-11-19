@@ -89,6 +89,7 @@
     [self removeDataFromCell:cell];
     [self addDataToCell:cell question:(Question *)self.questions[indexPath.section]];
     [cell setClipsToBounds:YES];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
 
@@ -101,8 +102,8 @@
     }
     for(i = 0; i < [question.answers count]; i++) {
         float proportion = total > 0 ? [question.counts[i] intValue] / total : 0.0;
-
-        UIView *v = [self getRectWithColor:[UIColor quackGreenColor] width:(250 * proportion) ycoord:(50 + i*55)];
+        CGFloat width = 250 * proportion;
+        UIView *v = [self getRectWithColor:(width ? [UIColor quackGreenColor] : [UIColor quackSandColor]) width:width ycoord:(50 + i*55)];
         UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 10 + i*55, 200, 40)];
         answerLabel.text = [NSString stringWithFormat:@"%@ (%d)", question.answers[i], [question.counts[i] intValue]];
         [answerLabel setTag:i + 1];
@@ -159,7 +160,7 @@
 }
 
 - (UIView *)getRectWithColor:(UIColor *)color width:(int)width ycoord:(int)ycoord {
-    CGRect rectangle = CGRectMake(50, ycoord, width + 10, 10);
+    CGRect rectangle = CGRectMake(50, ycoord, width + 5, 10);
     UIView *bar = [[UIView alloc] initWithFrame:rectangle];
     bar.backgroundColor = color;
     return bar;

@@ -59,7 +59,7 @@ static NSString *kCellIdentifier = @"Cell";
     if(![_titles[indexPath.section] isExpanded]) {
         return 0;
     } else {
-        return 45.0f;
+        return 60.0f;
     }
 }
 
@@ -100,7 +100,9 @@ static NSString *kCellIdentifier = @"Cell";
 }
                                                    
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 50.0f;
+    Title *t = _titles[section];
+    NSLog(@"heeeey: %lu", (unsigned long)[t.title length]);
+    return 60.0f + [t.title length] / 35 * 10.0f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
