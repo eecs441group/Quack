@@ -82,11 +82,9 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Question *q = (Question *)[self.questions objectAtIndex:indexPath.section];
-    Title *t = (Title *)[self.titles objectAtIndex:indexPath.section];
     if(!q.answerSet) {
         // Select an answer
         q.answerSet = true;
-        NSLog(@"index path row: %ld", indexPath.row);
         q.curSelected = indexPath.row + 1;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Submit?"
                                                        message:@"Click yes to confirm your answer!"
@@ -94,31 +92,11 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
                                              cancelButtonTitle:@"Cancel"
                                              otherButtonTitles:@"OK", nil];
         alert.delegate = self;
+        alert.tag = indexPath.section + 1;
         [alert show];
         
-    } else if (q.curSelected == indexPath.row + 1) {
-        // Confirm an answer
-        [self.questions removeObject:q];
-        [self.titles removeObject:t];
-        [self.tableView reloadData];
-        
-        // get question from Parse
-        PFQuery *query = [PFQuery queryWithClassName:@"Question"];
-        [query getObjectInBackgroundWithId:q.questionId block:^(PFObject *question, NSError *error) {
-            if (!error) {
-                // Remove question from user's inbox
-                PFUser *user = [PFUser currentUser];
-                PFRelation *relation = [user relationForKey:@"inbox"];
-                [relation removeObject:question];
-                [user saveInBackground];
-                
-                // Update question's counts
-                NSMutableArray *counts = question[@"counts"];
-                counts[indexPath.row] = [NSNumber numberWithInt:[counts[indexPath.row] intValue] + 1];
-                [question saveInBackground];
-            }
-        }];
-        
+        // If they end up not submitting, need to re-alert them
+        q.answerSet = false;
     } else if(q.answerSet) {
         // Different answer selected
         q.curSelected = indexPath.row + 1;
@@ -134,11 +112,35 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
     return cell;
 }
 
+- (void)submitAnswerForQuestionAtIndex:(NSInteger)index {
+    Question *q = [self.questions objectAtIndex:index];
+    Title *t = [self.titles objectAtIndex:index];
+    [self.questions removeObject:q];
+    [self.titles removeObject:t];
+    [self.tableView reloadData];
+    
+    // get question from Parse
+    PFQuery *query = [PFQuery queryWithClassName:@"Question"];
+    [query getObjectInBackgroundWithId:q.questionId block:^(PFObject *question, NSError *error) {
+        if (!error) {
+            // Remove question from user's inbox
+            PFUser *user = [PFUser currentUser];
+            PFRelation *relation = [user relationForKey:@"inbox"];
+            [relation removeObject:question];
+            [user saveInBackground];
+            
+            // Update question's counts
+            NSMutableArray *counts = question[@"counts"];
+            counts[q.curSelected - 1] = [NSNumber numberWithInt:[counts[q.curSelected - 1] intValue] + 1];
+            [question saveInBackground];
+        }
+    }];
+    
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(buttonIndex == 0) {
-        NSLog(@"Cancelled!");
-    } else {
-        NSLog(@"Submitted!");
+    if(buttonIndex) {
+        [self submitAnswerForQuestionAtIndex:alertView.tag - 1];
     }
 }
 
