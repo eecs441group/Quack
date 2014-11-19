@@ -6,18 +6,19 @@
 //
 //
 
-#import "MyQuestionsViewController.h"
+#import "ResultsViewController.h"
 #import "Question.h"
 #import "QuackColors.h"
 #import <Parse/Parse.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "MBProgressHud.h"
+#import "Title.h"
 
-@interface MyQuestionsViewController ()
+@interface ResultsViewController ()
 
 @end
 
-@implementation MyQuestionsViewController {
+@implementation ResultsViewController {
 
 }
 
@@ -58,6 +59,7 @@
                          for (PFObject *object in objects) {
                              Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)object];
                              [self.questions addObject:q];
+                             [self.titles addObject:[[Title alloc] initWithTitle:q.question]];
                          }
                          [self.tableView reloadData];
                      } else {
@@ -73,6 +75,23 @@
     }
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    }
+    [self removeDataFromCell:cell];
+    [self addDataToCell:cell question:(Question *)self.questions[indexPath.section]];
+    [cell setClipsToBounds:YES];
+    return cell;
+}
+
 - (void)addDataToCell:(UITableViewCell *)cell question:(Question *)question{
     
     float total = 0;
@@ -83,8 +102,8 @@
     for(i = 0; i < [question.answers count]; i++) {
         float proportion = total > 0 ? [question.counts[i] intValue] / total : 0.0;
 
-        UIView *v = [self getRectWithColor:[UIColor quackGreenColor] width:(250 * proportion) ycoord:(95 + i*55)];
-        UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 55 + i*55, 200, 40)];
+        UIView *v = [self getRectWithColor:[UIColor quackGreenColor] width:(250 * proportion) ycoord:(50 + i*55)];
+        UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 10 + i*55, 200, 40)];
         answerLabel.text = [NSString stringWithFormat:@"%@ (%d)", question.answers[i], [question.counts[i] intValue]];
         [answerLabel setTag:i + 1];
         [v setTag:i + 1];
@@ -98,6 +117,28 @@
     [shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [cell addSubview:shareButton];
+}
+
+- (void) gestureHandler:(UIGestureRecognizer *)gestureRecognizer {
+    NSInteger section = gestureRecognizer.view.tag;
+    Title *t = [self.titles objectAtIndex:gestureRecognizer.view.tag];
+    [t toggleExpansion];
+    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+    for(int i = 0; i < 1; i++) {
+        NSIndexPath *curPath = [NSIndexPath indexPathForRow:i inSection:section];
+        [indexPaths addObject:curPath];
+    }
+    [self.tableView reloadData];
+    [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(![self.titles[indexPath.section] isExpanded]) {
+        return 0;
+    } else {
+        Question *q = self.questions[indexPath.section];
+        return 60.0 * q.answers.count + 5;
+    }
 }
 
 - (IBAction)shareButtonPressed:(id)sender {
@@ -118,7 +159,7 @@
 }
 
 - (UIView *)getRectWithColor:(UIColor *)color width:(int)width ycoord:(int)ycoord {
-    CGRect rectangle = CGRectMake(50, ycoord, width, 10);
+    CGRect rectangle = CGRectMake(50, ycoord, width + 10, 10);
     UIView *bar = [[UIView alloc] initWithFrame:rectangle];
     bar.backgroundColor = color;
     return bar;

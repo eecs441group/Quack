@@ -45,22 +45,6 @@
     return [self.questions count];
 }
 
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *simpleTableIdentifier = @"QuestionTableViewCell";
-    
-    QuestionTableViewCell *cell = (QuestionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
-    if (cell == nil) {
-        cell = [[QuestionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-    }
-    
-    Question *q = [self.questions objectAtIndex:indexPath.section];
-    cell.questionLabel.text = q.answers[indexPath.row];
-    [cell setClipsToBounds:YES];
-    return cell;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(![_titles[indexPath.section] isExpanded]) {
         return 0;
