@@ -17,7 +17,6 @@ static NSString *kUpArrowImage = @"up4-50.png";
 static NSString *kDownArrowImage = @"down4-50.png";
 static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
 static NSString *kCellIdentifier = @"Cell";
-static int charsPerLine = 35;
 
 @interface ExpandableViewController ()
 
@@ -61,7 +60,8 @@ static int charsPerLine = 35;
         return 0;
     } else {
         Question *q = self.questions[indexPath.section];
-        return 60.0f + [q.answers[indexPath.row] length] / charsPerLine * 5.0f;
+        int _charsPerLine = ceil(self.view.window.frame.size.width / 15);
+        return 60.0f + [q.answers[indexPath.row] length] / _charsPerLine * 5.0f;
     }
 }
 
@@ -103,7 +103,8 @@ static int charsPerLine = 35;
                                                    
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     Title *t = _titles[section];
-    return 60.0f + [t.title length] / charsPerLine * 10.0f;
+    int _charsPerLine = ceil(self.view.window.frame.size.width / 15);
+    return 60.0f + [t.title length] / _charsPerLine * 10.0f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
