@@ -11,8 +11,10 @@
 #import "Question.h"
 #import <Parse/Parse.h>
 #import <FacebookSDK/FacebookSDK.h>
-#import "QuestionTableViewCell.h"
+#import "AnswerTableViewCell.h"
 #import "MBProgressHud.h"
+
+static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
 
 @implementation ExpandingTableViewController {
     
@@ -29,8 +31,8 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    UINib *nib = [UINib nibWithNibName:@"QuestionTableViewCell" bundle:nil];
-    [self.tableView registerNib:nib forCellReuseIdentifier:@"QuestionTableViewCell"];
+    UINib *nib = [UINib nibWithNibName:@"AnswerTableViewCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"AnswerTableViewCell"];
     
 }
 
@@ -52,13 +54,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *simpleTableIdentifier = @"QuestionTableViewCell";
     
-    QuestionTableViewCell *cell = (QuestionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
-    if (cell == nil) {
-        cell = [[QuestionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-    }
+    AnswerTableViewCell *cell = (AnswerTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kAnswerCellIdentifier];
     
     Question *q = [self.questions objectAtIndex:indexPath.row];
     

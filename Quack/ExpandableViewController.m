@@ -9,9 +9,14 @@
 #import "ExpandableViewController.h"
 #import "ClickableHeader.h"
 #import "Title.h"
-#import "QuestionTableViewCell.h"
+#import "AnswerTableViewCell.h"
 #import "Question.h"
 #import "QuackColors.h"
+
+static NSString *kUpArrowImage = @"up4-50.png";
+static NSString *kDownArrowImage = @"down4-50.png";
+static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
+static NSString *kCellIdentifier = @"Cell";
 
 @interface ExpandableViewController ()
 
@@ -28,8 +33,8 @@
     UINib *nib = [UINib nibWithNibName:@"ClickableHeader" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"ClickableHeader"];
     
-    UINib *nibQ = [UINib nibWithNibName:@"QuestionTableViewCell" bundle:nil];
-    [self.tableView registerNib:nibQ forCellReuseIdentifier:@"QuestionTableViewCell"];
+    UINib *nibQ = [UINib nibWithNibName:@"AnswerTableViewCell" bundle:nil];
+    [self.tableView registerNib:nibQ forCellReuseIdentifier:@"AnswerTableViewCell"];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -39,6 +44,11 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
+    return cell;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -54,18 +64,12 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    static NSString *simpleTableIdentifier = @"ClickableHeader";
-    ClickableHeader *header = (ClickableHeader *)[self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
-    if(header == nil) {
-        header = [[ClickableHeader alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-    }
+    ClickableHeader *header = (ClickableHeader *)[self.tableView dequeueReusableCellWithIdentifier:kClickableHeaderIdentifier];
     Title *t = self.titles[section];
-    
     if(t.isExpanded) {
-        [header.arrowImageView setImage:[UIImage imageNamed:@"up4-50.png"]];
+        [header.arrowImageView setImage:[UIImage imageNamed:kUpArrowImage]];
     } else {
-        [header.arrowImageView setImage:[UIImage imageNamed:@"down4-50.png"]];
+        [header.arrowImageView setImage:[UIImage imageNamed:kDownArrowImage]];
     }
     
     header.tag = section;

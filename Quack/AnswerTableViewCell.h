@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QuestionTableViewCell : UITableViewCell
+@interface AnswerTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *questionLabel;
 @property (strong, nonatomic) IBOutlet UILabel *askerLabel;

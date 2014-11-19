@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 eecs441group. All rights reserved.
 //
 
-#import "QuestionTableViewCell.h"
+#import "AnswerTableViewCell.h"
 
-@implementation QuestionTableViewCell
+@implementation AnswerTableViewCell
 
 - (void)awakeFromNib {
     

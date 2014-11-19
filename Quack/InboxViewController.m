@@ -10,10 +10,12 @@
 #import <Parse/Parse.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "Question.h"
-#import "QuestionTableViewCell.h"
+#import "AnswerTableViewCell.h"
 #import "QuackColors.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "Title.h"
+
+static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
 
 @interface InboxViewController ()
 
@@ -124,14 +126,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *simpleTableIdentifier = @"QuestionTableViewCell";
-    
-    QuestionTableViewCell *cell = (QuestionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
-    if (cell == nil) {
-        cell = [[QuestionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-    }
-    
+    AnswerTableViewCell *cell = (AnswerTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kAnswerCellIdentifier];
     Question *q = [self.questions objectAtIndex:indexPath.section];
     cell.questionLabel.text = q.answers[indexPath.row];
     [cell setClipsToBounds:YES];

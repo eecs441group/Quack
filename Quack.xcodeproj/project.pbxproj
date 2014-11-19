@@ -20,8 +20,8 @@
 		5E6385CC19E07EF000D00F80 /* QuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6385CB19E07EF000D00F80 /* QuestionViewController.m */; };
 		5E6385D219E088F300D00F80 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6385D119E088F300D00F80 /* ResultsViewController.m */; };
 		5E6385D519E089AE00D00F80 /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6385D419E089AE00D00F80 /* Secrets.m */; };
-		5E9323AF19F9A15300022931 /* QuestionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E9323AD19F9A15300022931 /* QuestionTableViewCell.m */; };
-		5E9323B019F9A15300022931 /* QuestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E9323AE19F9A15300022931 /* QuestionTableViewCell.xib */; };
+		5E9323AF19F9A15300022931 /* AnswerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E9323AD19F9A15300022931 /* AnswerTableViewCell.m */; };
+		5E9323B019F9A15300022931 /* AnswerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E9323AE19F9A15300022931 /* AnswerTableViewCell.xib */; };
 		5EAF7DDF1A1BF30300FA5525 /* ClickableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF7DD91A1BF30300FA5525 /* ClickableHeader.m */; };
 		5EAF7DE01A1BF30300FA5525 /* ClickableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EAF7DDA1A1BF30300FA5525 /* ClickableHeader.xib */; };
 		5EAF7DE11A1BF30300FA5525 /* ExpandableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF7DDC1A1BF30300FA5525 /* ExpandableViewController.m */; };
@@ -69,9 +69,9 @@
 		5E6385D119E088F300D00F80 /* ResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
 		5E6385D319E089AE00D00F80 /* Secrets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Secrets.h; sourceTree = "<group>"; };
 		5E6385D419E089AE00D00F80 /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
-		5E9323AC19F9A15300022931 /* QuestionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionTableViewCell.h; sourceTree = "<group>"; };
-		5E9323AD19F9A15300022931 /* QuestionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionTableViewCell.m; sourceTree = "<group>"; };
-		5E9323AE19F9A15300022931 /* QuestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTableViewCell.xib; sourceTree = "<group>"; };
+		5E9323AC19F9A15300022931 /* AnswerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerTableViewCell.h; sourceTree = "<group>"; };
+		5E9323AD19F9A15300022931 /* AnswerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerTableViewCell.m; sourceTree = "<group>"; };
+		5E9323AE19F9A15300022931 /* AnswerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnswerTableViewCell.xib; sourceTree = "<group>"; };
 		5EAF7DD81A1BF30300FA5525 /* ClickableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickableHeader.h; sourceTree = "<group>"; };
 		5EAF7DD91A1BF30300FA5525 /* ClickableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickableHeader.m; sourceTree = "<group>"; };
 		5EAF7DDA1A1BF30300FA5525 /* ClickableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClickableHeader.xib; sourceTree = "<group>"; };
@@ -160,9 +160,9 @@
 				F9DCCFE91A18414600B12E07 /* SendToViewController.h */,
 				F9DCCFEA1A18414600B12E07 /* SendToViewController.m */,
 				5E2AA85D19E75DE20084D717 /* Question.m */,
-				5E9323AC19F9A15300022931 /* QuestionTableViewCell.h */,
-				5E9323AD19F9A15300022931 /* QuestionTableViewCell.m */,
-				5E9323AE19F9A15300022931 /* QuestionTableViewCell.xib */,
+				5E9323AC19F9A15300022931 /* AnswerTableViewCell.h */,
+				5E9323AD19F9A15300022931 /* AnswerTableViewCell.m */,
+				5E9323AE19F9A15300022931 /* AnswerTableViewCell.xib */,
 				5E6385CA19E07EF000D00F80 /* QuestionViewController.h */,
 				5E6385CB19E07EF000D00F80 /* QuestionViewController.m */,
 				5E6385D319E089AE00D00F80 /* Secrets.h */,
@@ -326,7 +326,7 @@
 				5E2CCB8D19E0780600BFC609 /* Main.storyboard in Resources */,
 				5EB4BEEE1A02E9D70009763A /* twitter-gray.png in Resources */,
 				5E2CCB9219E0780600BFC609 /* LaunchScreen.xib in Resources */,
-				5E9323B019F9A15300022931 /* QuestionTableViewCell.xib in Resources */,
+				5E9323B019F9A15300022931 /* AnswerTableViewCell.xib in Resources */,
 				5E2CCB8F19E0780600BFC609 /* Images.xcassets in Resources */,
 				5EAF7DE01A1BF30300FA5525 /* ClickableHeader.xib in Resources */,
 			);
@@ -394,7 +394,7 @@
 				F9D78AEB19E0990200500B71 /* LoginViewController.m in Sources */,
 				5E2CCB8119E0780600BFC609 /* main.m in Sources */,
 				5EAF7DE21A1BF30300FA5525 /* Title.m in Sources */,
-				5E9323AF19F9A15300022931 /* QuestionTableViewCell.m in Sources */,
+				5E9323AF19F9A15300022931 /* AnswerTableViewCell.m in Sources */,
 				5E6385D519E089AE00D00F80 /* Secrets.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
