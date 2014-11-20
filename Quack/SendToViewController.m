@@ -167,7 +167,7 @@
     }
     
     // Call Parse Cloud Code function to add question to selectedUsers' inbox relations
-    [PFCloud callFunctionInBackground:@"sendQuestionToUsers"
+    [PFCloud callFunctionInBackground:@"sendQuestion"
                        withParameters:@{@"question": questionId, @"users": selectedUsers}
                                 block:^(id object, NSError *error) {
                                     NSLog(@"success: %@", object);
