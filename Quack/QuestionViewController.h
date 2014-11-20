@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QuestionViewController : UIViewController
+@interface QuestionViewController : UIViewController <UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextView *questionTextView;
 @property (strong, nonatomic) IBOutlet UITextField *answer1;

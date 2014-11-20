@@ -13,9 +13,9 @@
 
 @interface LoginViewController ()
 
-@property (strong, nonatomic) IBOutlet FBProfilePictureView *profilePictureView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *profilePicView;
+@property (strong, nonatomic) IBOutlet FBLoginView *loginView;
 - (IBAction)inviteFriends:(id)sender;
 - (IBAction)twitterSignIn:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *twitterButton;
@@ -29,12 +29,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    FBLoginView *loginView =
+    self.loginView =
         [[FBLoginView alloc] initWithReadPermissions:
          @[@"public_profile", @"email", @"user_friends"]];
-    loginView.delegate = self;
-    loginView.center = self.view.center;
-    [self.view addSubview:loginView];
+    self.loginView.delegate = self;
+    self.loginView.center = self.view.center;
     
     //style navigation bar
     self.navigationController.navigationBar.barTintColor = [UIColor quackSeaColor];
@@ -47,7 +46,6 @@
     UITabBarItem *tabBarItem = [self.tabBarController.tabBar.items objectAtIndex:3];
     UIImage* selectedImage = [UIImage imageNamed:@"user_male_active"];
     tabBarItem.selectedImage = selectedImage;
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,8 +66,12 @@
 // This method will be called when the user information has been fetched
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
                             user:(id<FBGraphUser>)user {
-    self.profilePictureView.profileID = user.objectID;
     self.nameLabel.text = user.name;
+    
+    //set profile picture
+    NSString *userImageURL = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200&height=200", user.objectID];
+    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:userImageURL]];
+    self.profilePicView.image = [UIImage imageWithData:imageData];
     
     //Check if logged in user exists in PFUser
     PFQuery *userQuery = [PFUser query];
@@ -82,8 +84,6 @@
                 newUser.username = user.name;
                 newUser.password = @"password";
                 newUser[@"FBUserID"] = user.objectID;
-                //TODO: delete this userInbox
-                newUser[@"userInbox"] = [NSMutableArray array];
                 [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if (!error) {
                         NSLog(@"signup successful!");
@@ -126,7 +126,6 @@
 
 // Implement the loginViewShowingLoggedInUser: delegate method to modify your app's UI for a logged-in user experience
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
-    self.statusLabel.text = @"You're logged in as";
     
     [self.twitterButton setHidden:YES];
     [self.inviteFriendsButton setHidden:NO];
@@ -136,9 +135,7 @@
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
     [self.inviteFriendsButton setHidden:YES];
     [self.twitterButton setHidden:NO];
-    self.profilePictureView.profileID = nil;
     self.nameLabel.text = @"";
-    self.statusLabel.text= @"You're not logged in!";
 }
 
 // You need to override loginView:handleError in order to handle possible errors that can occur during login

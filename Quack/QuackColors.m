@@ -66,6 +66,20 @@
     return shellColor;
 }
 
++ (UIColor *)quackCharcoalColor {
+    static UIColor *charcoalColor;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        charcoalColor = [UIColor colorWithRed:51.0 / 255.0
+                                    green:51.0 / 255.0
+                                     blue:51.0 / 255.0
+                                    alpha:1.0];
+    });
+    
+    return charcoalColor;
+}
+
 + (UIColor *)quackSandColor {
     static UIColor *sandColor;
     
@@ -92,6 +106,20 @@
     });
     
     return greenColor;
+}
+
++ (UIColor *)quackNavyColor {
+    static UIColor *navyColor;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        navyColor = [UIColor colorWithRed:0.0 / 255.0
+                                     green:0.0 / 255.0
+                                      blue:89.0 / 255.0
+                                     alpha:1.0];
+    });
+    
+    return navyColor;
 }
 
 

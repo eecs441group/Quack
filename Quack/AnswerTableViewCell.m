@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 eecs441group. All rights reserved.
 //
 
-#import "QuestionTableViewCell.h"
+#import "AnswerTableViewCell.h"
 
-@implementation QuestionTableViewCell
+@implementation AnswerTableViewCell
 
 - (void)awakeFromNib {
     
@@ -17,8 +17,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

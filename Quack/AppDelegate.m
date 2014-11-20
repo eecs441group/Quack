@@ -111,8 +111,8 @@
 - (void)showLoginViewController:(BOOL)animated {
     // Get login screen from storyboard and present it
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    // "loginScreen" is the Storyboard Id for the Login ViewController
-    UIViewController *viewController = (UIViewController *)[storyboard instantiateViewControllerWithIdentifier:@"loginScreen"];
+    // "loginView" is the Storyboard Id for the Login ViewController
+    UIViewController *viewController = (UIViewController *)[storyboard instantiateViewControllerWithIdentifier:@"loginView"];
     [self.window makeKeyAndVisible];
     [self.window.rootViewController presentViewController:viewController
                                                  animated:animated
