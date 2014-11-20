@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Quack/SendToViewController.h">
+   </FileRef>
+   <FileRef
+      location = "group:Quack/SendToViewController.m">
+   </FileRef>
+   <FileRef
       location = "group:Quack.xcodeproj">
    </FileRef>
    <FileRef

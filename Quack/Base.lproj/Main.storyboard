@@ -89,7 +89,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Ode-ud-bIy" kind="show" id="SPW-o8-eTT"/>
+                                    <segue destination="Xbw-mA-b1u" kind="show" id="fka-p2-jVT"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -107,29 +107,59 @@
             <point key="canvasLocation" x="1122" y="1116"/>
         </scene>
         <!--Add Friends-->
-        <scene sceneID="kdP-10-S9f">
+        <scene sceneID="Wyu-E7-hKd">
             <objects>
-                <viewController title="Add Friends" id="Ode-ud-bIy" customClass="AddFriendsController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="MNL-t9-5H2"/>
-                        <viewControllerLayoutGuide type="bottom" id="vrn-cN-Rtm"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Dbm-xd-xF6">
+                <tableViewController title="Add Friends" id="Xbw-mA-b1u" customClass="AddFriendsController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" id="tfc-0I-LmT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZIG-Rb-ObZ">
-                                <rect key="frame" x="0.0" y="64" width="306" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Add Friends" id="HKJ-6P-wib"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nq6-4N-6Qq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddFriendCell" rowHeight="50" id="Bzc-lI-uBX">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="100" contentMode="center" tableViewCell="Bzc-lI-uBX" id="CCH-LW-zNA">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgL-AU-DtU">
+                                            <rect key="frame" x="20" y="5" width="160" height="40"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" tag="102" contentMode="scaleToFill" fixedFrame="YES" placeholderIntrinsicWidth="566" placeholderIntrinsicHeight="50" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d3u-bA-Erp">
+                                            <rect key="frame" x="0.0" y="0.0" width="566" height="50"/>
+                                            <state key="normal" title="+">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Xbw-mA-b1u" id="m61-wk-Zvf"/>
+                            <outlet property="delegate" destination="Xbw-mA-b1u" id="lBI-aD-48x"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Add Friends" id="hJS-Mg-2Xd">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Zpm-fx-eBY">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0kg-Wf-1ks">
+                                <rect key="frame" x="551" y="7" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="tfc-0I-LmT" id="VNo-Z9-c5H"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RqW-Cj-tpk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1797" y="1116"/>
+            <point key="canvasLocation" x="1789" y="1108"/>
         </scene>
         <!--Me-->
         <scene sceneID="I7L-WJ-oMf">

@@ -23,6 +23,7 @@
 		5E9323AF19F9A15300022931 /* QuestionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E9323AD19F9A15300022931 /* QuestionTableViewCell.m */; };
 		5E9323B019F9A15300022931 /* QuestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E9323AE19F9A15300022931 /* QuestionTableViewCell.xib */; };
 		5EB4BEEE1A02E9D70009763A /* twitter-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB4BEED1A02E9D70009763A /* twitter-gray.png */; };
+		637AADD01A186F1300E88A05 /* AddFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 637AADCF1A186F1300E88A05 /* AddFriendsController.m */; };
 		F9D78AEB19E0990200500B71 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D78AEA19E0990200500B71 /* LoginViewController.m */; };
 		F9D78AEE19E76A8700500B71 /* FacebookInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D78AED19E76A8700500B71 /* FacebookInfo.m */; };
 		F9DCCFDE1A18282300B12E07 /* QuackColors.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DCCFDD1A18282300B12E07 /* QuackColors.m */; };
@@ -68,6 +69,8 @@
 		5E9323AD19F9A15300022931 /* QuestionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionTableViewCell.m; sourceTree = "<group>"; };
 		5E9323AE19F9A15300022931 /* QuestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTableViewCell.xib; sourceTree = "<group>"; };
 		5EB4BEED1A02E9D70009763A /* twitter-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-gray.png"; sourceTree = "<group>"; };
+		637AADCE1A186F1300E88A05 /* AddFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendsController.h; sourceTree = "<group>"; };
+		637AADCF1A186F1300E88A05 /* AddFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendsController.m; sourceTree = "<group>"; };
 		657F35ED5A75533C4FBF2C46 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6F86B3A92149818E9D6D1579 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9D78AE919E0990200500B71 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -140,9 +143,11 @@
 				F9DCCFDF1A18283000B12E07 /* QuackColors.h */,
 				F9DCCFDD1A18282300B12E07 /* QuackColors.m */,
 				5E2AA85C19E75DE20084D717 /* Question.h */,
+				5E2AA85D19E75DE20084D717 /* Question.m */,
 				F9DCCFE91A18414600B12E07 /* SendToViewController.h */,
 				F9DCCFEA1A18414600B12E07 /* SendToViewController.m */,
-				5E2AA85D19E75DE20084D717 /* Question.m */,
+				637AADCE1A186F1300E88A05 /* AddFriendsController.h */,
+				637AADCF1A186F1300E88A05 /* AddFriendsController.m */,
 				5E9323AC19F9A15300022931 /* QuestionTableViewCell.h */,
 				5E9323AD19F9A15300022931 /* QuestionTableViewCell.m */,
 				5E9323AE19F9A15300022931 /* QuestionTableViewCell.xib */,
@@ -352,6 +357,7 @@
 				F9D78AEE19E76A8700500B71 /* FacebookInfo.m in Sources */,
 				5E6385D219E088F300D00F80 /* MyQuestionsViewController.m in Sources */,
 				5E6385CC19E07EF000D00F80 /* QuestionViewController.m in Sources */,
+				637AADD01A186F1300E88A05 /* AddFriendsController.m in Sources */,
 				F9DCCFEB1A18414600B12E07 /* SendToViewController.m in Sources */,
 				5E8564F71A00ABC400B44BFE /* ExpandingTableViewController.m in Sources */,
 				5E6385C919E07AEA00D00F80 /* InboxViewController.m in Sources */,

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ExpandingTableViewController.h"
 
-@interface AddFriendsController : ExpandingTableViewController
+@interface AddFriendsController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
+@property (strong, nonatomic) NSArray *friends;
 @end
