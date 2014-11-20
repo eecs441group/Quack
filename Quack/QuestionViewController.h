@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QuestionViewController : UIViewController <UITextFieldDelegate>
+@interface QuestionViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextView *questionTextView;
 @property (strong, nonatomic) IBOutlet UITextField *answer1;
@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *answer3;
 @property (strong, nonatomic) IBOutlet UITextField *answer4;
 @property (strong, nonatomic) IBOutlet UIButton *sendButton;
+@property (strong, nonatomic) UIView *inputAccView;
 - (IBAction)quackPressed:(id)sender;
 
 @end
