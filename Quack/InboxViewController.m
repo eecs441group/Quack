@@ -40,6 +40,7 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
     UIImage* selectedImage = [UIImage imageNamed:@"inbox_active"];
     tabBarItem.selectedImage = selectedImage;
     
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -107,8 +108,10 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     AnswerTableViewCell *cell = (AnswerTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kAnswerCellIdentifier];
     Question *q = [self.questions objectAtIndex:indexPath.section];
-    cell.questionLabel.text = q.answers[indexPath.row];
+    cell.answerLabel.text = q.answers[indexPath.row];
     [cell setClipsToBounds:YES];
+    cell.selectedBackgroundView = [UIView new];
+    cell.selectedBackgroundView.backgroundColor = [UIColor quackFoamColor];
     return cell;
 }
 
@@ -141,6 +144,11 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex) {
         [self submitAnswerForQuestionAtIndex:alertView.tag - 1];
+    } else {
+        Question *q = [self.questions objectAtIndex:(alertView.tag - 1)];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(q.curSelected - 1) inSection:(alertView.tag - 1)];
+        AnswerTableViewCell *cell = (AnswerTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        [cell setSelected:NO];
     }
 }
 

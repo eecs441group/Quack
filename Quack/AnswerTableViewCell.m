@@ -7,11 +7,12 @@
 //
 
 #import "AnswerTableViewCell.h"
+#import "QuackColors.h"
 
 @implementation AnswerTableViewCell
 
 - (void)awakeFromNib {
-    
+    self.answerLabel.textColor = [UIColor quackCharcoalColor];
 }
 
 

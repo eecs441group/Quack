@@ -12,6 +12,6 @@
 @implementation ClickableHeader 
 
 - (void)awakeFromNib {
-    // Initialization code
+    self.sectionLabel.textColor = [UIColor quackCharcoalColor];
 }
 @end

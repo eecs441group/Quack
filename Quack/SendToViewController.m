@@ -13,6 +13,10 @@
 #import "FacebookInfo.h"
 #import "Question.h"
 #import "QuackColors.h"
+#import "ClickableHeader.h"
+
+static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
+
 
 @implementation SendToViewController
 
@@ -35,6 +39,13 @@
     self.tableSectionTitles = [[NSMutableArray alloc] init];
     [self.tableSectionTitles addObject:@"Friends"];
     [self.tableSectionTitles addObject:@"Groups"];
+    
+    UINib *nib = [UINib nibWithNibName:@"ClickableHeader" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"ClickableHeader"];
+    
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -69,34 +80,22 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *MyIdentifier = @"MyReuseIdentifier";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:MyIdentifier];
-    }
+    ClickableHeader *cell = [tableView dequeueReusableCellWithIdentifier:kClickableHeaderIdentifier];
+    cell.selectedBackgroundView.backgroundColor = [UIColor quackFoamColor];
+    cell.arrowImageView.image = [UIImage imageNamed:@"checkmark.png"];
     NSDictionary *friend = [self._friends objectAtIndex:indexPath.row];
-    cell.textLabel.text = friend[@"name"];
-    
-    if ([self._selectedUsers containsObject:friend]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }
-    
-    if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-        NSLog(@"with checkmark");
-    }
-    
+    cell.sectionLabel.text = friend[@"name"];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-   
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60.0f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ClickableHeader *cell = (ClickableHeader *)[tableView cellForRowAtIndexPath:indexPath];
+    cell.arrowImageView.image = [UIImage imageNamed:@"checkmark_green.png"];
     NSLog(@"row selected %@", cell.textLabel.text);
-    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-    
     
     NSDictionary *friend = [self._friends objectAtIndex:indexPath.row];
     NSLog(@"for %@", friend[@"name"]);
