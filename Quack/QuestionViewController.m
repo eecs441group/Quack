@@ -37,6 +37,8 @@
     self.questionTextView.textColor = [UIColor quackCharcoalColor];
     self.questionHeading.textColor = [UIColor quackCharcoalColor];
     self.answerHeading.textColor = [UIColor quackCharcoalColor];
+    
+    _questionTextView.layer.cornerRadius = 5;
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self

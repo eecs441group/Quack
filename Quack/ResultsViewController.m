@@ -82,7 +82,6 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
@@ -102,22 +101,18 @@
     }
     for(i = 0; i < [question.answers count]; i++) {
         float proportion = total > 0 ? [question.counts[i] intValue] / total : 0.0;
-        CGFloat width = 250 * proportion;
-        UIView *v = [self getRectWithColor:(width ? [UIColor quackGreenColor] : [UIColor quackSandColor]) width:width ycoord:(50 + i*55)];
-        UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 10 + i*55, 200, 40)];
+        CGFloat width = (self.view.frame.size.width - 25) * proportion;
+        UIView *v = [self getRectWithColor:(width ? [UIColor quackGreenColor] : [UIColor quackRedColor]) width:width ycoord:(50 + i*55)];
+        UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10 + i*55, self.view.frame.size.width - 20, 40)];
+        answerLabel.textColor = [UIColor quackCharcoalColor];
         answerLabel.text = [NSString stringWithFormat:@"%@ (%d)", question.answers[i], [question.counts[i] intValue]];
+        answerLabel.font = [UIFont fontWithName:@"Thonburi" size:14.0f];
         [answerLabel setTag:i + 1];
         [v setTag:i + 1];
         [cell addSubview:answerLabel];
         [cell addSubview:v];
         
     }
-    
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 55 + i * 55, 200, 40)];
-    [shareButton setTitle:@"Share Results" forState:UIControlStateNormal];
-    [shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [shareButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [cell addSubview:shareButton];
 }
 
 - (void) gestureHandler:(UIGestureRecognizer *)gestureRecognizer {
@@ -138,7 +133,7 @@
         return 0;
     } else {
         Question *q = self.questions[indexPath.section];
-        return 60.0 * q.answers.count + 5;
+        return 55.0 * q.answers.count + 35;
     }
 }
 
@@ -160,7 +155,7 @@
 }
 
 - (UIView *)getRectWithColor:(UIColor *)color width:(int)width ycoord:(int)ycoord {
-    CGRect rectangle = CGRectMake(50, ycoord, width + 5, 10);
+    CGRect rectangle = CGRectMake(10, ycoord, width + 5, 20);
     UIView *bar = [[UIView alloc] initWithFrame:rectangle];
     bar.backgroundColor = color;
     return bar;
