@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface QuestionViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate>
+@property (strong, nonatomic) IBOutlet UILabel *questionHeading;
+@property (strong, nonatomic) IBOutlet UILabel *answerHeading;
 
 @property (strong, nonatomic) IBOutlet UITextView *questionTextView;
 @property (strong, nonatomic) IBOutlet UITextField *answer1;

@@ -76,7 +76,7 @@ static NSString *kCellIdentifier = @"Cell";
     
     header.tag = section;
     header.sectionLabel.text = t.title;
-    header.contentView.backgroundColor = [UIColor quackFoamColor];
+    header.contentView.backgroundColor = [UIColor quackShellColor];
     
     UITapGestureRecognizer *singleTapRecogniser = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gestureHandler:)];
     [singleTapRecogniser setDelegate:self];

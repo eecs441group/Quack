@@ -26,7 +26,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="questionLabel" destination="cUl-Uy-K2s" id="GfM-gr-3Eh"/>
+                <outlet property="answerLabel" destination="cUl-Uy-K2s" id="HGQ-ug-dZc"/>
             </connections>
             <point key="canvasLocation" x="555" y="10.5"/>
         </tableViewCell>

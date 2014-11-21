@@ -29,9 +29,14 @@
     _textFields = @[self.answer1, self.answer2, self.answer3, self.answer4];
     for(UITextField *tf in _textFields) {
         tf.delegate = self;
+        tf.textColor = [UIColor quackCharcoalColor];
     }
     self.questionTextView.delegate = self;
     self.questionTextView.returnKeyType = UIReturnKeyNext;
+    
+    self.questionTextView.textColor = [UIColor quackCharcoalColor];
+    self.questionHeading.textColor = [UIColor quackCharcoalColor];
+    self.answerHeading.textColor = [UIColor quackCharcoalColor];
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -40,7 +45,6 @@
     [self.view addGestureRecognizer:tap];
     
     _emptyString = [NSString stringWithFormat:@""];
-    // Do any additional setup after loading the view.
     
     //style navigation bar
     self.navigationController.navigationBar.barTintColor = [UIColor quackSeaColor];
@@ -138,6 +142,7 @@
         if ([view isKindOfClass:[UITextField class]] || [view isKindOfClass:[UITextView class]]) {
             UITextField *textField = (UITextField *)view;
             textField.text = _emptyString;
+            [textField resignFirstResponder];
         }
     }
 }

@@ -13,6 +13,10 @@
 #import "FacebookInfo.h"
 #import "Question.h"
 #import "QuackColors.h"
+#import "ClickableHeader.h"
+
+static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
+
 
 @implementation SendToViewController
 
@@ -36,7 +40,16 @@
     [self.tableSectionTitles addObject:@"Friends"];
     [self.tableSectionTitles addObject:@"Groups"];
     
+<<<<<<< HEAD
     self.selectedIndices = [[NSMutableArray alloc] init];
+=======
+    UINib *nib = [UINib nibWithNibName:@"ClickableHeader" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"ClickableHeader"];
+    
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+>>>>>>> 9770e7df330db0dc4899a578cf22e6370a64f6ac
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -71,6 +84,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+<<<<<<< HEAD
     static NSString *MyIdentifier = @"MyReuseIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if (cell == nil) {
@@ -99,6 +113,32 @@
     
     [self.selectedIndices addObject:indexPath];
 
+=======
+    ClickableHeader *cell = [tableView dequeueReusableCellWithIdentifier:kClickableHeaderIdentifier];
+    cell.selectedBackgroundView.backgroundColor = [UIColor quackFoamColor];
+    cell.arrowImageView.image = [UIImage imageNamed:@"checkmark.png"];
+    NSDictionary *friend = [self._friends objectAtIndex:indexPath.row];
+    cell.sectionLabel.text = friend[@"name"];
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60.0f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ClickableHeader *cell = (ClickableHeader *)[tableView cellForRowAtIndexPath:indexPath];
+    cell.arrowImageView.image = [UIImage imageNamed:@"checkmark_green.png"];
+    NSLog(@"row selected %@", cell.textLabel.text);
+    
+    NSDictionary *friend = [self._friends objectAtIndex:indexPath.row];
+    NSLog(@"for %@", friend[@"name"]);
+    [self._selectedUsers addObject:[[Question alloc] initWithDictionary:friend]];
+    
+    for (NSDictionary *selected in self._selectedUsers) {
+        NSLog(@"sending to %@", selected[@"name"]);
+    }
+>>>>>>> 9770e7df330db0dc4899a578cf22e6370a64f6ac
     
 //    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
