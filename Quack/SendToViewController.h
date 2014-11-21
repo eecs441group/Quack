@@ -11,10 +11,11 @@
 
 @interface SendToViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) NSString * _question;
-@property (strong, nonatomic) NSArray * _answers;
-@property (strong, nonatomic) NSMutableArray *_friends;
-@property (strong, nonatomic) NSMutableArray *_selectedUsers;
+@property (strong, nonatomic) NSString * question;
+@property (strong, nonatomic) NSArray * answers;
+@property (strong, nonatomic) NSMutableArray *friends;
+@property (strong, nonatomic) NSMutableArray *selectedIndices;
+@property (strong, nonatomic) NSMutableArray *selectedUsers;
 @property (strong, nonatomic) NSMutableArray * tableSectionTitles;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 

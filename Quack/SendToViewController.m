@@ -19,8 +19,8 @@
 // Setter for QuestionViewController to pass in the question and answers
 - (void)setQuestion:(NSString *)question
             answers:(NSArray *)answers {
-    self._question = question;
-    self._answers = answers;
+    self.question = question;
+    self.answers = answers;
 }
 
 - (void)viewDidLoad {
@@ -35,10 +35,12 @@
     self.tableSectionTitles = [[NSMutableArray alloc] init];
     [self.tableSectionTitles addObject:@"Friends"];
     [self.tableSectionTitles addObject:@"Groups"];
+    
+    self.selectedIndices = [[NSMutableArray alloc] init];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-    self._friends = [[NSMutableArray alloc] init];
+    self.friends = [[NSMutableArray alloc] init];
     
     if (FBSession.activeSession.isOpen) {
         [FBRequestConnection
@@ -48,7 +50,7 @@
                  
                  FacebookInfo * fbInfo = [[FacebookInfo alloc] initWithAccountID:userId];
                  [fbInfo getFriends:^(NSArray *friends){
-                     [self._friends addObjectsFromArray:friends];
+                     [self.friends addObjectsFromArray:friends];
                      [self.tableView reloadData];
                  }];
              }
@@ -61,7 +63,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self._friends count];
+    return [self.friends count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -74,10 +76,10 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:MyIdentifier];
     }
-    NSDictionary *friend = [self._friends objectAtIndex:indexPath.row];
+    NSDictionary *friend = [self.friends objectAtIndex:indexPath.row];
     cell.textLabel.text = friend[@"name"];
     
-    if ([self._selectedUsers containsObject:friend]) {
+    if ([self.selectedUsers containsObject:friend]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -92,33 +94,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    NSLog(@"row selected %@", cell.textLabel.text);
     [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     
-    
-    NSDictionary *friend = [self._friends objectAtIndex:indexPath.row];
-    NSLog(@"for %@", friend[@"name"]);
-    [self._selectedUsers addObject:[[Question alloc] initWithDictionary:friend]];
-    
-    for (NSDictionary *selected in self._selectedUsers) {
-        NSLog(@"sending to %@", selected[@"name"]);
-    }
+    [self.selectedIndices addObject:indexPath];
+
     
 //    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    [tableView reloadData];
-
 }
 
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [cell setAccessoryType:UITableViewCellAccessoryNone];
-    
-    NSDictionary *friend = [self._friends objectAtIndex:indexPath.row];
-    [self._selectedUsers removeObject:friend];
-//    [tableView reloadData];
-}
+//-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//    [cell setAccessoryType:UITableViewCellAccessoryNone];
+//    
+//    NSDictionary *friend = [self.friends objectAtIndex:indexPath.row];
+//    [self.selectedUsers removeObject:friend];
+////    [tableView reloadData];
+//}
 
 - (IBAction)sendPressed {
     [self saveQuestion];
@@ -129,11 +121,11 @@
 // Save question to parse
 - (void)saveQuestion {
     PFObject *question = [PFObject objectWithClassName:@"Question"];
-    question[@"question"] = self._question;
-    question[@"answers"] = self._answers;
+    question[@"question"] = self.question;
+    question[@"answers"] = self.answers;
     
     question[@"counts"] = [[NSMutableArray alloc] init];
-    for (NSString *answer in self._answers) {
+    for (NSString *answer in self.answers) {
         [question[@"counts"] addObject:[NSNumber numberWithInt:0]];
     }
     
@@ -151,7 +143,7 @@
                  [question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
                   {
                       [self sendToUsers:question.objectId
-                                  Users:self._friends];
+                                  Users:self.selectedIndices];
                       [hud hide:YES];
                       
                   }];
@@ -161,8 +153,12 @@
 }
 
 - (void)sendToUsers:(NSString *)questionId
-              Users:(NSArray *)selectedUsers {
-    for (NSDictionary *friend in selectedUsers) {
+              Users:(NSArray *)selectedIndices {
+    NSMutableArray *selectedUsers = [[NSMutableArray alloc] init];
+    
+    for (NSIndexPath *indexPath in selectedIndices) {
+        NSDictionary *friend = [self.friends objectAtIndex:indexPath.row];
+        [selectedUsers addObject:[[NSDictionary alloc] initWithDictionary:friend]];
         NSLog(@"sending to %@", friend[@"name"]);
     }
     
