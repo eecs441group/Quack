@@ -23,8 +23,8 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
 // Setter for QuestionViewController to pass in the question and answers
 - (void)setQuestion:(NSString *)question
             answers:(NSArray *)answers {
-    self._question = question;
-    self._answers = answers;
+    self.question = question;
+    self.answers = answers;
 }
 
 - (void)viewDidLoad {
@@ -40,16 +40,20 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
     [self.tableSectionTitles addObject:@"Friends"];
     [self.tableSectionTitles addObject:@"Groups"];
     
+<<<<<<< HEAD
+    self.selectedIndices = [[NSMutableArray alloc] init];
+=======
     UINib *nib = [UINib nibWithNibName:@"ClickableHeader" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"ClickableHeader"];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+>>>>>>> 9770e7df330db0dc4899a578cf22e6370a64f6ac
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-    self._friends = [[NSMutableArray alloc] init];
+    self.friends = [[NSMutableArray alloc] init];
     
     if (FBSession.activeSession.isOpen) {
         [FBRequestConnection
@@ -59,7 +63,7 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
                  
                  FacebookInfo * fbInfo = [[FacebookInfo alloc] initWithAccountID:userId];
                  [fbInfo getFriends:^(NSArray *friends){
-                     [self._friends addObjectsFromArray:friends];
+                     [self.friends addObjectsFromArray:friends];
                      [self.tableView reloadData];
                  }];
              }
@@ -72,7 +76,7 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self._friends count];
+    return [self.friends count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -80,6 +84,36 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+<<<<<<< HEAD
+    static NSString *MyIdentifier = @"MyReuseIdentifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:MyIdentifier];
+    }
+    NSDictionary *friend = [self.friends objectAtIndex:indexPath.row];
+    cell.textLabel.text = friend[@"name"];
+    
+    if ([self.selectedUsers containsObject:friend]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    
+    if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+        NSLog(@"with checkmark");
+    }
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    
+    [self.selectedIndices addObject:indexPath];
+
+=======
     ClickableHeader *cell = [tableView dequeueReusableCellWithIdentifier:kClickableHeaderIdentifier];
     cell.selectedBackgroundView.backgroundColor = [UIColor quackFoamColor];
     cell.arrowImageView.image = [UIImage imageNamed:@"checkmark.png"];
@@ -105,20 +139,19 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
     for (NSDictionary *selected in self._selectedUsers) {
         NSLog(@"sending to %@", selected[@"name"]);
     }
+>>>>>>> 9770e7df330db0dc4899a578cf22e6370a64f6ac
     
 //    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    [tableView reloadData];
-
 }
 
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [cell setAccessoryType:UITableViewCellAccessoryNone];
-    
-    NSDictionary *friend = [self._friends objectAtIndex:indexPath.row];
-    [self._selectedUsers removeObject:friend];
-//    [tableView reloadData];
-}
+//-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//    [cell setAccessoryType:UITableViewCellAccessoryNone];
+//    
+//    NSDictionary *friend = [self.friends objectAtIndex:indexPath.row];
+//    [self.selectedUsers removeObject:friend];
+////    [tableView reloadData];
+//}
 
 - (IBAction)sendPressed {
     [self saveQuestion];
@@ -129,11 +162,11 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
 // Save question to parse
 - (void)saveQuestion {
     PFObject *question = [PFObject objectWithClassName:@"Question"];
-    question[@"question"] = self._question;
-    question[@"answers"] = self._answers;
+    question[@"question"] = self.question;
+    question[@"answers"] = self.answers;
     
     question[@"counts"] = [[NSMutableArray alloc] init];
-    for (NSString *answer in self._answers) {
+    for (NSString *answer in self.answers) {
         [question[@"counts"] addObject:[NSNumber numberWithInt:0]];
     }
     
@@ -151,7 +184,7 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
                  [question saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
                   {
                       [self sendToUsers:question.objectId
-                                  Users:self._friends];
+                                  Users:self.selectedIndices];
                       [hud hide:YES];
                       
                   }];
@@ -161,8 +194,12 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
 }
 
 - (void)sendToUsers:(NSString *)questionId
-              Users:(NSArray *)selectedUsers {
-    for (NSDictionary *friend in selectedUsers) {
+              Users:(NSArray *)selectedIndices {
+    NSMutableArray *selectedUsers = [[NSMutableArray alloc] init];
+    
+    for (NSIndexPath *indexPath in selectedIndices) {
+        NSDictionary *friend = [self.friends objectAtIndex:indexPath.row];
+        [selectedUsers addObject:[[NSDictionary alloc] initWithDictionary:friend]];
         NSLog(@"sending to %@", friend[@"name"]);
     }
     
