@@ -84,7 +84,7 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ClickableHeader *cell = [tableView dequeueReusableCellWithIdentifier:kClickableHeaderIdentifier];
     cell.selectedBackgroundView.backgroundColor = [UIColor quackFoamColor];
-    cell.arrowImageView.image = [UIImage imageNamed:@"checkmark.png"];
+    cell.arrowImageView.image = nil;
     NSDictionary *friend = [self.friends objectAtIndex:indexPath.row];
     cell.sectionLabel.text = friend[@"name"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -98,12 +98,14 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ClickableHeader *cell = (ClickableHeader *)[tableView cellForRowAtIndexPath:indexPath];
-    cell.arrowImageView.image = [UIImage imageNamed:@"checkmark_green.png"];
     
-    [self.selectedIndices addObject:indexPath];
-
-    
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([self.selectedIndices containsObject:indexPath]) {
+        [self.selectedIndices removeObject:indexPath];
+        cell.arrowImageView.image = nil;
+    } else {
+        [self.selectedIndices addObject:indexPath];
+        cell.arrowImageView.image = [UIImage imageNamed:@"checkmark_green.png"];
+    }
 }
 
 - (IBAction)sendPressed {
