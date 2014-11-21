@@ -87,6 +87,7 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
     cell.arrowImageView.image = [UIImage imageNamed:@"checkmark.png"];
     NSDictionary *friend = [self.friends objectAtIndex:indexPath.row];
     cell.sectionLabel.text = friend[@"name"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
