@@ -1,3 +1,5 @@
+var numSaved = 0;
+
 // Send a push notification to a s
 var sendPushToUser = function(request) {
     var sender = request.sender;
@@ -65,8 +67,9 @@ var sendQuestionToUser = function(request, response) {
 
 Parse.Cloud.define("sendQuestion", function(request, response) {
     var recipients = request.params.users;
+    numSaved = 0;
+
     for (var i = 0; i < recipients.length; ++i) {
-        var index = i;
         var params = {
             sender: request.user,
             questionId: request.params.question,
@@ -77,13 +80,16 @@ Parse.Cloud.define("sendQuestion", function(request, response) {
             success: function(sendResponse) {
                 // call response callback when we're finished with the last
                 // recipient
-                if (index >= recipients.length - 1) {
+                numSaved++;
+                console.log("in success, numsaved is " + numSaved);
+
+                if (numSaved >= recipients.length) {
                     console.log("all done");
                     response.success(true);
                 }
-            },
+            }(i),
             error: function(sendResponse) {
-                if (index >= recipients.length - 1) {
+                if (numSaved >= recipients.length) {
                     if (sendResponse == "Friend not found when trying to send question"){
                         // if friend isn't found in database, ignore this error
                         // for now
