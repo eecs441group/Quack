@@ -155,7 +155,7 @@
 }
 
 - (UIView *)getRectWithColor:(UIColor *)color width:(int)width ycoord:(int)ycoord {
-    CGRect rectangle = CGRectMake(10, ycoord, width + 5, 20);
+    CGRect rectangle = CGRectMake(10, ycoord, width + 5, 15);
     UIView *bar = [[UIView alloc] initWithFrame:rectangle];
     bar.backgroundColor = color;
     return bar;

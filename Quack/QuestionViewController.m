@@ -74,7 +74,11 @@
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    [textField setInputAccessoryView:self.inputAccView];
+    if(![self.questionTextView.text isEqualToString:@""] && ![self.answer1.text isEqualToString:@""]) {
+        [textField setInputAccessoryView:self.inputAccView];
+    } else {
+        [textField setInputAccessoryView:nil];
+    }
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
