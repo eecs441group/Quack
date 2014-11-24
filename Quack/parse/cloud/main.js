@@ -52,14 +52,17 @@ var sendQuestionToUser = function(request, response) {
                             }
                         });
                     } else {
+                        console.log("friend not found " + recipient.name);
                         response.error("Friend not found when trying to send question");
                     }
                 });
             } else {
+                console.log("question object not found " + questionId);
                 response.error("Question not found when trying to send question");
             }
         },
         error: function(error) {
+            console.log('question query failed');
             response.error(error);
         }
     });
@@ -87,7 +90,7 @@ Parse.Cloud.define("sendQuestion", function(request, response) {
                     console.log("all done");
                     response.success(true);
                 }
-            }(i),
+            },
             error: function(sendResponse) {
                 if (numSaved >= recipients.length) {
                     if (sendResponse == "Friend not found when trying to send question"){
