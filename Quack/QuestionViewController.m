@@ -29,9 +29,17 @@
     _textFields = @[self.answer1, self.answer2, self.answer3, self.answer4];
     for(UITextField *tf in _textFields) {
         tf.delegate = self;
+        tf.textColor = [UIColor quackCharcoalColor];
     }
-
+    self.questionTextView.delegate = self;
+    self.questionTextView.returnKeyType = UIReturnKeyNext;
     
+    self.questionTextView.textColor = [UIColor quackCharcoalColor];
+    self.questionHeading.textColor = [UIColor quackCharcoalColor];
+    self.answerHeading.textColor = [UIColor quackCharcoalColor];
+    
+    _questionTextView.layer.cornerRadius = 5;
+
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
@@ -39,7 +47,6 @@
     [self.view addGestureRecognizer:tap];
     
     _emptyString = [NSString stringWithFormat:@""];
-    // Do any additional setup after loading the view.
     
     //style navigation bar
     self.navigationController.navigationBar.barTintColor = [UIColor quackSeaColor];
@@ -48,11 +55,41 @@
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
-    //style send button
-    _sendButton.layer.cornerRadius = 5;
-    _sendButton.layer.borderWidth = 1;
-    _sendButton.layer.borderColor = [UIColor quackSeaColor].CGColor;
+
     
+    _sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    NSLog(@"%f", self.view.frame.size.width);
+    
+    [_sendButton setFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, 40.0f)];
+    [_sendButton setTitle:@"Send" forState:UIControlStateNormal];
+    [_sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_sendButton addTarget:self action:@selector(quackPressed:) forControlEvents:UIControlEventTouchUpInside];
+    _sendButton.backgroundColor = [UIColor quackSeaColor];
+
+    
+    self.inputAccView = [[UIView alloc] initWithFrame:CGRectMake(10.0, 0.0, 310.0, 40.0)];
+    [self.inputAccView setBackgroundColor:[UIColor clearColor]];
+    [self.inputAccView setAlpha: 0.8];
+    [self.inputAccView addSubview:_sendButton];
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    if(![self.questionTextView.text isEqualToString:@""] && ![self.answer1.text isEqualToString:@""]) {
+        [textField setInputAccessoryView:self.inputAccView];
+    } else {
+        [textField setInputAccessoryView:nil];
+    }
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    BOOL shouldChangeText = YES;
+    
+    if ([text isEqualToString:@"\n"]) {
+        [[_textFields objectAtIndex:0] becomeFirstResponder];
+        shouldChangeText = NO;  
+    }  
+    
+    return shouldChangeText;
 }
 
 -(void)dismissKeyboard {
@@ -111,12 +148,18 @@
         if ([view isKindOfClass:[UITextField class]] || [view isKindOfClass:[UITextView class]]) {
             UITextField *textField = (UITextField *)view;
             textField.text = _emptyString;
+            [textField resignFirstResponder];
         }
     }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self quackPressed:self.sendButton];
+    //[self quackPressed:self.sendButton];
+    NSInteger index = [_textFields indexOfObject:textField];
+    if(index < _textFields.count - 1) {
+        UITextField *next = [_textFields objectAtIndex:index + 1];
+        [next becomeFirstResponder];
+    }
     return YES;
 }
 
