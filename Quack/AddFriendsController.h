@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddFriendsController : UITableViewController
+@interface AddFriendsController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *friends;
+@property (strong, nonatomic) NSMutableSet *friendSet;
+- (void)buttonClicked: (id)sender;
+- (IBAction)saveFriends:(id)sender;
 
 @end
