@@ -19,11 +19,14 @@
 @end
 
 @implementation ResultsViewController {
+    UILabel *_noQuestionssLabel;
 
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _noQuestionssLabel = [self getLabelWithText:@"You haven't Quack'd any questions :-("];
+    [self.view addSubview:_noQuestionssLabel];
     
     //style navigation bar
     self.navigationController.navigationBar.barTintColor = [UIColor quackSeaColor];
@@ -60,6 +63,11 @@
                              Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)object];
                              [self.questions addObject:q];
                              [self.titles addObject:[[Title alloc] initWithTitle:q.question]];
+                         }
+                         if([self.questions count]) {
+                             _noQuestionssLabel.hidden = YES;
+                         } else {
+                             _noQuestionssLabel.hidden = NO;
                          }
                          [self.tableView reloadData];
                      } else {

@@ -37,6 +37,15 @@ static NSString *kCellIdentifier = @"Cell";
     [self.tableView registerNib:nibQ forCellReuseIdentifier:@"AnswerTableViewCell"];
 }
 
+- (UILabel *)getLabelWithText:(NSString *)text {
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height)];
+    lbl.text = text;
+    lbl.font = [UIFont fontWithName:@"Thonburi" size:17.0f];
+    lbl.textColor = [UIColor quackCharcoalColor];
+    lbl.textAlignment = UITextAlignmentCenter;
+    return lbl;
+}
+
 - (void) viewDidAppear:(BOOL)animated {
     self.questions = [[NSMutableArray alloc] init];
     self.titles = [[NSMutableArray alloc] init];

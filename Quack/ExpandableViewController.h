@@ -12,6 +12,6 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *questions;
 @property (strong, nonatomic) NSMutableArray *titles;
-
+- (UILabel *)getLabelWithText:(NSString *)text;
 @end
 

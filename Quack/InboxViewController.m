@@ -23,10 +23,15 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
 
 @implementation InboxViewController {
     PFObject *_user;
+    UILabel *_noQuestionssLabel;
 }
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _noQuestionssLabel = [self getLabelWithText:@"You have no questions in your feed :-("];
+    [self.view addSubview:_noQuestionssLabel];
     
     //style navigation bar
     self.navigationController.navigationBar.barTintColor = [UIColor quackSeaColor];
@@ -69,6 +74,11 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
                                  [self.titles addObject:[[Title alloc] initWithTitle:q.question]];
                                  [self.questions addObject:q];
                              }
+                         }
+                         if([self.questions count]) {
+                             _noQuestionssLabel.hidden = YES;
+                         } else {
+                             _noQuestionssLabel.hidden = NO;
                          }
                          [self.tableView reloadData];
                      }
@@ -121,6 +131,12 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
     [self.questions removeObject:q];
     [self.titles removeObject:t];
     [self.tableView reloadData];
+    
+    if([self.questions count]) {
+        _noQuestionssLabel.hidden = YES;
+    } else {
+        _noQuestionssLabel.hidden = NO;
+    }
     
     // get question from Parse
     PFQuery *query = [PFQuery queryWithClassName:@"Question"];
