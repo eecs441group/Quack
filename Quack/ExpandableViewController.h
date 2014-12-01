@@ -13,5 +13,7 @@
 @property (strong, nonatomic) NSMutableArray *questions;
 @property (strong, nonatomic) NSMutableArray *titles;
 - (UILabel *)getLabelWithText:(NSString *)text;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
+
 @end
 

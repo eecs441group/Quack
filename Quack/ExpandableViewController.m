@@ -26,6 +26,9 @@ static NSString *kCellIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.questions = [NSMutableArray new];
+    self.titles = [NSMutableArray new];
+    
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -42,13 +45,8 @@ static NSString *kCellIdentifier = @"Cell";
     lbl.text = text;
     lbl.font = [UIFont fontWithName:@"Thonburi" size:17.0f];
     lbl.textColor = [UIColor quackCharcoalColor];
-    lbl.textAlignment = UITextAlignmentCenter;
+    lbl.textAlignment = NSTextAlignmentCenter;
     return lbl;
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-    self.questions = [[NSMutableArray alloc] init];
-    self.titles = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,6 +68,9 @@ static NSString *kCellIdentifier = @"Cell";
     } else {
         Question *q = self.questions[indexPath.section];
         int _charsPerLine = ceil(self.view.window.frame.size.width / 15);
+        if(!_charsPerLine) {
+            _charsPerLine = 30;
+        }
         return 60.0f + [q.answers[indexPath.row] length] / _charsPerLine * 5.0f;
     }
 }
@@ -113,6 +114,9 @@ static NSString *kCellIdentifier = @"Cell";
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     Title *t = _titles[section];
     int _charsPerLine = ceil(self.view.window.frame.size.width / 15);
+    if(!_charsPerLine) {
+        _charsPerLine = 30;
+    }
     return 60.0f + [t.title length] / _charsPerLine * 10.0f;
 }
 

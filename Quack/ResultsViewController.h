@@ -11,5 +11,6 @@
 
 @interface ResultsViewController : ExpandableViewController
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+- (void)getNewData;
 
 @end

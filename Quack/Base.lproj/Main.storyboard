@@ -216,6 +216,7 @@
         <!--Feed-->
         <scene sceneID="5LU-Pb-xKt">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xYn-Fc-i4a" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="FsD-3j-cVB" customClass="InboxViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OGO-1z-xok"/>
@@ -250,7 +251,6 @@
                         <outlet property="tableView" destination="SfW-7o-L7Y" id="hEK-h7-nQK"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xYn-Fc-i4a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1128" y="-890"/>
         </scene>

@@ -30,6 +30,16 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self getNewData];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor purpleColor];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:nil
+                            action:@selector(getNewData)
+                  forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+    
+    
     _noQuestionssLabel = [self getLabelWithText:@"You have no questions in your feed :-("];
     [self.view addSubview:_noQuestionssLabel];
     
@@ -44,15 +54,17 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
     UITabBarItem *tabBarItem = [self.tabBarController.tabBar.items objectAtIndex:0];
     UIImage* selectedImage = [UIImage imageNamed:@"inbox_active"];
     tabBarItem.selectedImage = selectedImage;
-    
-    
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:YES];
-    
+}
+
+- (void)getNewData {
+    self.questions = [NSMutableArray new];
+    self.titles = [NSMutableArray new];
     if (FBSession.activeSession.isOpen) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
              if (!error) {
@@ -67,6 +79,7 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
                  [questionQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                      if (error) {
                          // There was an error
+                         NSLog(@"error");
                      } else {
                          for (PFObject *question in objects) {
                              if(question && ![question isKindOfClass:[NSNull class]]) {
@@ -80,11 +93,24 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
                          } else {
                              _noQuestionssLabel.hidden = NO;
                          }
+                         
                          [self.tableView reloadData];
+                         
+                         if (self.refreshControl) {
+                             
+                             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                             [formatter setDateFormat:@"MMM d, h:mm a"];
+                             NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+                             NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+                                                                                         forKey:NSForegroundColorAttributeName];
+                             NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+                             self.refreshControl.attributedTitle = attributedTitle;
+                             [self.refreshControl endRefreshing];
+                         }
+                         
                      }
                  }];
              }
-             [hud hide:YES];
          }];
     } else {
         NSLog(@"fb session not active");

@@ -25,6 +25,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self getNewData];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor purpleColor];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:nil
+                            action:@selector(getNewData)
+                  forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+    
     _noQuestionssLabel = [self getLabelWithText:@"You haven't Quack'd any questions :-("];
     [self.view addSubview:_noQuestionssLabel];
     
@@ -41,13 +51,8 @@
     tabBarItem.selectedImage = selectedImage;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:YES];
-    
-    // Get all questions that this user authored and show them in the view
+- (void)getNewData {
     if (FBSession.activeSession.isOpen) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
              if (!error) {
@@ -69,18 +74,31 @@
                          } else {
                              _noQuestionssLabel.hidden = NO;
                          }
+                         
                          [self.tableView reloadData];
+                         
+                         if (self.refreshControl) {
+                             
+                             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                             [formatter setDateFormat:@"MMM d, h:mm a"];
+                             NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+                             NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+                                                                                         forKey:NSForegroundColorAttributeName];
+                             NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+                             self.refreshControl.attributedTitle = attributedTitle;
+                             [self.refreshControl endRefreshing];
+                         }
                      } else {
                          // Log details of the failure
                          NSLog(@"Error: %@ %@", error, [error userInfo]);
                      }
-                     [hud hide:YES];
                  }];
              }
          }];
     } else {
         NSLog(@"fb session not active");
     }
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
