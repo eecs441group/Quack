@@ -128,13 +128,13 @@
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
     
     [self.twitterButton setHidden:YES];
-    [self.inviteFriendsButton setHidden:NO];
+    [self.inviteFriendsButton setHidden:YES];
 }
 
 // Implement the loginViewShowingLoggedOutUser: delegate method to modify your app's UI for a logged-out user experience
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
     [self.inviteFriendsButton setHidden:YES];
-    [self.twitterButton setHidden:NO];
+    [self.twitterButton setHidden:YES];
     self.nameLabel.text = @"";
 }
 
