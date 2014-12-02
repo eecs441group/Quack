@@ -52,8 +52,8 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
              if (!error) {
                  PFUser *user = [PFUser currentUser];
+                 NSSet *friendSet = [[NSSet alloc] initWithArray:user[@"friends"]];
                  PFRelation *relation = [user relationForKey:@"inbox"];
-                 
                  // Find user's inbox questions, add them to the _userInbox array and reload the tableView
                  PFQuery *questionQuery = [relation query];
                  [questionQuery orderByDescending:@"createdAt"];
@@ -64,7 +64,7 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
                          // There was an error
                      } else {
                          for (PFObject *question in objects) {
-                             if(question && ![question isKindOfClass:[NSNull class]]) {
+                             if(question && ![question isKindOfClass:[NSNull class]] && [friendSet containsObject:question[@"authorId"]]) {
                                  Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)question];
                                  [self.titles addObject:[[Title alloc] initWithTitle:q.question]];
                                  [self.questions addObject:q];

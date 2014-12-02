@@ -93,6 +93,12 @@
                         [installation saveInBackground];
                         NSLog(@"pfinstallation initialized");
                         
+                        //automatically get friends and add to friendlist for new users
+                        FacebookInfo *fbInfo = [[FacebookInfo alloc] initWithAccountID:user.objectID];
+                        [fbInfo getFriends:^(NSArray *friends){
+                            newUser[@"friends"] = friends;
+                            [newUser saveInBackground];
+                        }];
                     } else {
                         NSString *errorString = [error userInfo][@"error"];
                         NSLog(@" %@", errorString);

@@ -51,8 +51,9 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
 }
 
 - (void) viewDidAppear:(BOOL)animated {
+    PFUser *currentUser = [PFUser currentUser];
     self.friends = [[NSMutableArray alloc] init];
-    
+    NSSet *friendSet = [[NSSet alloc] initWithArray:currentUser[@"friends"]];
     if (FBSession.activeSession.isOpen) {
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -61,7 +62,11 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
                  
                  FacebookInfo * fbInfo = [[FacebookInfo alloc] initWithAccountID:userId];
                  [fbInfo getFriends:^(NSArray *friends){
-                     [self.friends addObjectsFromArray:friends];
+                     for (NSDictionary *friend in friends) {
+                         if ([friendSet containsObject:friend[@"id"]]){
+                             [self.friends addObject:friend];
+                         }
+                     }
                      [self.tableView reloadData];
                  }];
              }
