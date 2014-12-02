@@ -12,4 +12,5 @@
 @interface InboxViewController : ExpandableViewController <UITextFieldDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 - (void)getNewData;
+- (void) gestureHandler:(UIGestureRecognizer *)gestureRecognizer;
 @end
