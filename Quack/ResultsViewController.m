@@ -145,14 +145,17 @@
 }
 
 - (IBAction)deleteQuestions:(id)sender {
-    
+    NSLog(@"%@", self.questions);
     for (Question *question in self.questions) {
         PFObject *object = [PFObject objectWithoutDataWithClassName:@"Question"
                                                            objectId:question.questionId];
         [object deleteEventually];
     }
-    [self getNewData];
-    NSLog(@"%@", self.questions);
+    self.questions = [[NSMutableArray alloc] init];
+    self.titles = [[NSMutableArray alloc] init];
+    [self.tableView reloadData];
+    _noQuestionssLabel = [self getLabelWithText:@"No Quacked questions :-("];
+    [self.view addSubview:_noQuestionssLabel];
 }
 
 
