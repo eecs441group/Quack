@@ -104,7 +104,6 @@
 }
 
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
@@ -144,6 +143,18 @@
         
     }
 }
+
+- (IBAction)deleteQuestions:(id)sender {
+    
+    for (Question *question in self.questions) {
+        PFObject *object = [PFObject objectWithoutDataWithClassName:@"Question"
+                                                           objectId:question.questionId];
+        [object deleteEventually];
+    }
+    [self getNewData];
+    NSLog(@"%@", self.questions);
+}
+
 
 - (void) gestureHandler:(UIGestureRecognizer *)gestureRecognizer {
     NSInteger section = gestureRecognizer.view.tag;

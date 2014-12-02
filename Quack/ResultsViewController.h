@@ -12,5 +12,6 @@
 @interface ResultsViewController : ExpandableViewController
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 - (void)getNewData;
+- (IBAction)deleteQuestions:(id)sender;
 
 @end
