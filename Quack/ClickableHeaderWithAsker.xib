@@ -14,19 +14,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RtU-Iv-JAv">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RtU-Iv-JAv">
                         <rect key="frame" x="8" y="8" width="260" height="27"/>
                         <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ya3-FK-CFQ">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ya3-FK-CFQ">
                         <rect key="frame" x="8" y="31" width="260" height="68"/>
                         <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="down4-50" translatesAutoresizingMaskIntoConstraints="NO" id="5cB-Ag-bYp">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="down4-50" translatesAutoresizingMaskIntoConstraints="NO" id="5cB-Ag-bYp">
                         <rect key="frame" x="290" y="54" width="22" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="22" id="Fv5-Rg-t7g"/>
@@ -39,6 +39,11 @@
                     <constraint firstItem="5cB-Ag-bYp" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-8" id="Xvv-cC-WwP"/>
                     <constraint firstItem="RtU-Iv-JAv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="Y08-Ac-eOM"/>
                     <constraint firstItem="Ya3-FK-CFQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="aBH-8D-HvM"/>
+                    <constraint firstItem="RtU-Iv-JAv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="c2D-lC-okO"/>
+                    <constraint firstItem="RtU-Iv-JAv" firstAttribute="trailing" secondItem="Ya3-FK-CFQ" secondAttribute="trailing" id="dUu-za-m8r"/>
+                    <constraint firstItem="5cB-Ag-bYp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="46" id="ezp-TZ-zJF"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="RtU-Iv-JAv" secondAttribute="bottom" constant="63" id="nKc-XL-Y16"/>
+                    <constraint firstItem="5cB-Ag-bYp" firstAttribute="centerY" secondItem="Ya3-FK-CFQ" secondAttribute="centerY" id="saN-xk-gjZ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

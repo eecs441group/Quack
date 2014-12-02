@@ -26,6 +26,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self registerForKeyboardNotifications];
+    self.scrollView.scrollEnabled = YES;
+    self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 1.5);
+
     _textFields = @[self.answer1, self.answer2, self.answer3, self.answer4];
     for(UITextField *tf in _textFields) {
         tf.delegate = self;
@@ -84,6 +88,7 @@
     } else {
         [textField setInputAccessoryView:nil];
     }
+    self.curActiveField = textField;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -92,7 +97,7 @@
     if ([text isEqualToString:@"\n"]) {
         [[_textFields objectAtIndex:0] becomeFirstResponder];
         shouldChangeText = NO;  
-    }  
+    }
     
     return shouldChangeText;
 }
@@ -145,11 +150,12 @@
     [self.navigationController pushViewController:viewController animated:YES];
     
     // Reload fields
+    [self dismissKeyboard];
     [self clearFields];
 }
 
 - (void) clearFields {
-    for (UIView *view in self.view.subviews) {
+    for (UIView *view in self.scrollView.subviews) {
         if ([view isKindOfClass:[UITextField class]] || [view isKindOfClass:[UITextView class]]) {
             UITextField *textField = (UITextField *)view;
             textField.text = _emptyString;
@@ -164,8 +170,44 @@
     if(index < _textFields.count - 1) {
         UITextField *next = [_textFields objectAtIndex:index + 1];
         [next becomeFirstResponder];
+        self.curActiveField = next;
     }
     return YES;
+}
+
+# pragma mark - scroll view
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, self.curActiveField.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, self.curActiveField.frame.origin.y-kbSize.height);
+        [self.scrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
 }
 
 

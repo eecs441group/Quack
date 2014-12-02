@@ -19,6 +19,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *answer4;
 @property (strong, nonatomic) IBOutlet UIButton *sendButton;
 @property (strong, nonatomic) UIView *inputAccView;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) UITextField *curActiveField;
 - (IBAction)quackPressed:(id)sender;
 
 @end
