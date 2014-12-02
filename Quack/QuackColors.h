@@ -19,5 +19,6 @@
 + (UIColor *)quackGreenColor;
 + (UIColor *)quackNavyColor;
 + (UIColor *)quackRedColor;
++ (UIColor *)quackPurpleColor;
 
 @end

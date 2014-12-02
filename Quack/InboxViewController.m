@@ -23,10 +23,25 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
 
 @implementation InboxViewController {
     PFObject *_user;
+    UILabel *_noQuestionssLabel;
 }
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self getNewData];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor quackPurpleColor];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:nil
+                            action:@selector(getNewData)
+                  forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+    
+    
+    _noQuestionssLabel = [self getLabelWithText:@"You have no questions in your feed :-("];
+    [self.view addSubview:_noQuestionssLabel];
     
     //style navigation bar
     self.navigationController.navigationBar.barTintColor = [UIColor quackSeaColor];
@@ -39,15 +54,17 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
     UITabBarItem *tabBarItem = [self.tabBarController.tabBar.items objectAtIndex:0];
     UIImage* selectedImage = [UIImage imageNamed:@"inbox_active"];
     tabBarItem.selectedImage = selectedImage;
-    
-    
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:YES];
-    
+}
+
+- (void)getNewData {
+//    self.questions = [NSMutableArray new];
+//    self.titles = [NSMutableArray new];
     if (FBSession.activeSession.isOpen) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
              if (!error) {
@@ -62,19 +79,41 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
                  [questionQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                      if (error) {
                          // There was an error
+                         NSLog(@"error");
                      } else {
                          for (PFObject *question in objects) {
                              if(question && ![question isKindOfClass:[NSNull class]] && [friendSet containsObject:question[@"authorId"]]) {
                                  Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)question];
-                                 [self.titles addObject:[[Title alloc] initWithTitle:q.question]];
-                                 [self.questions addObject:q];
+                                 Title *t = [[Title alloc] initWithTitle:q.question];
+                                 BOOL found = NO;
+                                 for(Question *existing in self.questions) {
+                                     if([existing.questionId isEqualToString:q.questionId]) {
+                                         found = YES;
+                                     }
+                                 }
+                                 if(!found) {
+                                     [self.questions insertObject:q atIndex:0];
+                                     [self.titles insertObject:t atIndex:0];
+                                 }
                              }
+                             
+                             
                          }
+                         if([self.questions count]) {
+                             _noQuestionssLabel.hidden = YES;
+                         } else {
+                             _noQuestionssLabel.hidden = NO;
+                         }
+                         
                          [self.tableView reloadData];
+                         
+                         if (self.refreshControl) {
+                             [self.refreshControl endRefreshing];
+                         }
+                         
                      }
                  }];
              }
-             [hud hide:YES];
          }];
     } else {
         NSLog(@"fb session not active");
@@ -121,6 +160,12 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
     [self.questions removeObject:q];
     [self.titles removeObject:t];
     [self.tableView reloadData];
+    
+    if([self.questions count]) {
+        _noQuestionssLabel.hidden = YES;
+    } else {
+        _noQuestionssLabel.hidden = NO;
+    }
     
     // get question from Parse
     PFQuery *query = [PFQuery queryWithClassName:@"Question"];

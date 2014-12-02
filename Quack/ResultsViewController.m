@@ -19,11 +19,24 @@
 @end
 
 @implementation ResultsViewController {
+    UILabel *_noQuestionssLabel;
 
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self getNewData];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor quackPurpleColor];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:nil
+                            action:@selector(getNewData)
+                  forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+    
+    _noQuestionssLabel = [self getLabelWithText:@"You haven't Quack'd any questions :-("];
+    [self.view addSubview:_noQuestionssLabel];
     
     //style navigation bar
     self.navigationController.navigationBar.barTintColor = [UIColor quackSeaColor];
@@ -38,13 +51,8 @@
     tabBarItem.selectedImage = selectedImage;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:YES];
-    
-    // Get all questions that this user authored and show them in the view
+- (void)getNewData {
     if (FBSession.activeSession.isOpen) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
              if (!error) {
@@ -52,28 +60,50 @@
                  
                  PFQuery *query = [PFQuery queryWithClassName:@"Question"];
                  [query whereKey:@"authorId" equalTo:user[@"FBUserID"]];
-                 [query orderByDescending:@"createdAt"];
+                 [query orderByAscending:@"createdAt"];
                  
                  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                      if (!error) {
                          for (PFObject *object in objects) {
                              Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)object];
-                             [self.questions addObject:q];
-                             [self.titles addObject:[[Title alloc] initWithTitle:q.question]];
+                             Title *t = [[Title alloc] initWithTitle:q.question];
+
+                        
+                             BOOL found = NO;
+                             for(Question *existing in self.questions) {
+                                 if([existing.questionId isEqualToString:q.questionId]) {
+                                     found = YES;
+                                 }
+                             }
+                             if(!found) {
+                                 [self.questions insertObject:q atIndex:0];
+                                 [self.titles insertObject:t atIndex:0];
+                             }
                          }
+                         if([self.questions count]) {
+                             _noQuestionssLabel.hidden = YES;
+                         } else {
+                             _noQuestionssLabel.hidden = NO;
+                         }
+                         
                          [self.tableView reloadData];
+                         
+                         if (self.refreshControl) {
+                             [self.refreshControl endRefreshing];
+                         }
                      } else {
-                         // Log details of the failure
                          NSLog(@"Error: %@ %@", error, [error userInfo]);
                      }
-                     [hud hide:YES];
                  }];
              }
          }];
     } else {
         NSLog(@"fb session not active");
     }
+
 }
+
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
@@ -123,6 +153,10 @@
     for(int i = 0; i < 1; i++) {
         NSIndexPath *curPath = [NSIndexPath indexPathForRow:i inSection:section];
         [indexPaths addObject:curPath];
+//        if(t.isExpanded) {
+//            [self removeDataFromCell:[self.tableView cellForRowAtIndexPath:curPath]];
+//            [self addDataToCell:[self.tableView cellForRowAtIndexPath:curPath] question:(Question *)self.questions[section]];
+//        }
     }
     [self.tableView reloadData];
     [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];

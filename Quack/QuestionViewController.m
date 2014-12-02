@@ -55,6 +55,11 @@
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
+    //set selected tab bar item image
+    UITabBarItem *tabBarItem = [self.tabBarController.tabBar.items objectAtIndex:1];
+    UIImage* selectedImage = [UIImage imageNamed:@"quack_icon_black"];
+    tabBarItem.selectedImage = selectedImage;
+    
 
     
     _sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
