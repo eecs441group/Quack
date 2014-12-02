@@ -93,6 +93,7 @@
         [textField setInputAccessoryView:nil];
     }
     self.curActiveField = textField;
+    [self scrollToActiveTextField];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -198,13 +199,11 @@
     self.scrollView.contentInset = contentInsets;
     self.scrollView.scrollIndicatorInsets = contentInsets;
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 400.0);
+}
 
-//    CGRect aRect = self.view.frame;
-//    aRect.size.height -= kbSize.height;
-//    if (!CGRectContainsPoint(aRect, self.curActiveField.frame.origin) ) {
-//        CGPoint scrollPoint = CGPointMake(0.0, self.curActiveField.frame.origin.y-kbSize.height);
-//        [self.scrollView setContentOffset:scrollPoint animated:YES];
-//    }
+- (void)scrollToActiveTextField {
+    CGPoint scrollPoint = CGPointMake(0.0, self.curActiveField.frame.origin.y - 84.0f);
+    [self.scrollView setContentOffset:scrollPoint animated:YES];
 }
 
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
