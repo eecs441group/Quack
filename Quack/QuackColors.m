@@ -127,9 +127,9 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        redColor = [UIColor colorWithRed:164.0 / 255.0
-                                    green:15.0 / 255.0
-                                     blue:173.0 / 255.0
+        redColor = [UIColor colorWithRed:255.0 / 255.0
+                                    green:105.0 / 255.0
+                                     blue:97.0 / 255.0
                                     alpha:1.0];
     });
     
@@ -143,7 +143,7 @@
     dispatch_once(&onceToken, ^{
         purpleColor = [UIColor colorWithRed:138.0 / 255.0
                                    green:29.0 / 255.0
-                                    blue:125.0 / 255.0
+                                    blue:201.0 / 255.0
                                    alpha:1.0];
     });
     

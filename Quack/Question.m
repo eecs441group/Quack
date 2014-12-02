@@ -17,6 +17,7 @@
         self.counts = [dictionary objectForKey:@"counts"];
         self.questionId = [dictionary valueForKey:@"objectId"];
         self.askerName = [dictionary valueForKey:@"askerName"];
+        self.authorId = [dictionary valueForKey:@"authorId"];
         self.curSelected = 0;
         self.answerSet = false;
         

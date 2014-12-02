@@ -19,6 +19,8 @@
 		5E6385CC19E07EF000D00F80 /* QuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6385CB19E07EF000D00F80 /* QuestionViewController.m */; };
 		5E6385D219E088F300D00F80 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6385D119E088F300D00F80 /* ResultsViewController.m */; };
 		5E6385D519E089AE00D00F80 /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6385D419E089AE00D00F80 /* Secrets.m */; };
+		5E877EEC1A2D47EF0019CBA8 /* ClickableHeaderWithAsker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E877EEA1A2D47EF0019CBA8 /* ClickableHeaderWithAsker.m */; };
+		5E877EED1A2D47EF0019CBA8 /* ClickableHeaderWithAsker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E877EEB1A2D47EF0019CBA8 /* ClickableHeaderWithAsker.xib */; };
 		5E9323AF19F9A15300022931 /* AnswerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E9323AD19F9A15300022931 /* AnswerTableViewCell.m */; };
 		5E9323B019F9A15300022931 /* AnswerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E9323AE19F9A15300022931 /* AnswerTableViewCell.xib */; };
 		5EAF7DDF1A1BF30300FA5525 /* ClickableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF7DD91A1BF30300FA5525 /* ClickableHeader.m */; };
@@ -66,6 +68,9 @@
 		5E6385D119E088F300D00F80 /* ResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
 		5E6385D319E089AE00D00F80 /* Secrets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Secrets.h; sourceTree = "<group>"; };
 		5E6385D419E089AE00D00F80 /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
+		5E877EE91A2D47EF0019CBA8 /* ClickableHeaderWithAsker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickableHeaderWithAsker.h; sourceTree = "<group>"; };
+		5E877EEA1A2D47EF0019CBA8 /* ClickableHeaderWithAsker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickableHeaderWithAsker.m; sourceTree = "<group>"; };
+		5E877EEB1A2D47EF0019CBA8 /* ClickableHeaderWithAsker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClickableHeaderWithAsker.xib; sourceTree = "<group>"; };
 		5E9323AC19F9A15300022931 /* AnswerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerTableViewCell.h; sourceTree = "<group>"; };
 		5E9323AD19F9A15300022931 /* AnswerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerTableViewCell.m; sourceTree = "<group>"; };
 		5E9323AE19F9A15300022931 /* AnswerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnswerTableViewCell.xib; sourceTree = "<group>"; };
@@ -150,6 +155,9 @@
 				5E9323AC19F9A15300022931 /* AnswerTableViewCell.h */,
 				5E9323AD19F9A15300022931 /* AnswerTableViewCell.m */,
 				5E9323AE19F9A15300022931 /* AnswerTableViewCell.xib */,
+				5E877EE91A2D47EF0019CBA8 /* ClickableHeaderWithAsker.h */,
+				5E877EEA1A2D47EF0019CBA8 /* ClickableHeaderWithAsker.m */,
+				5E877EEB1A2D47EF0019CBA8 /* ClickableHeaderWithAsker.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -347,6 +355,7 @@
 				5E2CCB9219E0780600BFC609 /* LaunchScreen.xib in Resources */,
 				5E9323B019F9A15300022931 /* AnswerTableViewCell.xib in Resources */,
 				5E2CCB8F19E0780600BFC609 /* Images.xcassets in Resources */,
+				5E877EED1A2D47EF0019CBA8 /* ClickableHeaderWithAsker.xib in Resources */,
 				5EAF7DE01A1BF30300FA5525 /* ClickableHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,6 +413,7 @@
 				F9D78AEE19E76A8700500B71 /* FacebookInfo.m in Sources */,
 				5E6385D219E088F300D00F80 /* ResultsViewController.m in Sources */,
 				5E6385CC19E07EF000D00F80 /* QuestionViewController.m in Sources */,
+				5E877EEC1A2D47EF0019CBA8 /* ClickableHeaderWithAsker.m in Sources */,
 				F9DCCFF11A18932100B12E07 /* AddFriendsController.m in Sources */,
 				F9DCCFEB1A18414600B12E07 /* SendToViewController.m in Sources */,
 				5EAF7DE11A1BF30300FA5525 /* ExpandableViewController.m in Sources */,

@@ -38,6 +38,9 @@ static NSString *kCellIdentifier = @"Cell";
     
     UINib *nibQ = [UINib nibWithNibName:@"AnswerTableViewCell" bundle:nil];
     [self.tableView registerNib:nibQ forCellReuseIdentifier:@"AnswerTableViewCell"];
+    
+    UINib *nibA = [UINib nibWithNibName:@"ClickableHeaderWithAsker" bundle:nil];
+    [self.tableView registerNib:nibA forCellReuseIdentifier:@"ClickableHeaderWithAsker"];
 }
 
 - (UILabel *)getLabelWithText:(NSString *)text {
