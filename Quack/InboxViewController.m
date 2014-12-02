@@ -32,7 +32,7 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
     [super viewDidLoad];
     [self getNewData];
     self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.backgroundColor = [UIColor purpleColor];
+    self.refreshControl.backgroundColor = [UIColor quackPurpleColor];
     self.refreshControl.tintColor = [UIColor whiteColor];
     [self.refreshControl addTarget:nil
                             action:@selector(getNewData)
@@ -61,8 +61,8 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
 }
 
 - (void)getNewData {
-    self.questions = [NSMutableArray new];
-    self.titles = [NSMutableArray new];
+//    self.questions = [NSMutableArray new];
+//    self.titles = [NSMutableArray new];
     if (FBSession.activeSession.isOpen) {
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -83,9 +83,20 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
                          for (PFObject *question in objects) {
                              if(question && ![question isKindOfClass:[NSNull class]]) {
                                  Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)question];
-                                 [self.titles addObject:[[Title alloc] initWithTitle:q.question]];
-                                 [self.questions addObject:q];
+                                 Title *t = [[Title alloc] initWithTitle:q.question];
+                                 BOOL found = NO;
+                                 for(Question *existing in self.questions) {
+                                     if([existing.questionId isEqualToString:q.questionId]) {
+                                         found = YES;
+                                     }
+                                 }
+                                 if(!found) {
+                                     [self.questions insertObject:q atIndex:0];
+                                     [self.titles insertObject:t atIndex:0];
+                                 }
                              }
+                             
+                             
                          }
                          if([self.questions count]) {
                              _noQuestionssLabel.hidden = YES;
@@ -97,14 +108,6 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
                          [self updateBadge];
                          
                          if (self.refreshControl) {
-                             
-                             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                             [formatter setDateFormat:@"MMM d, h:mm a"];
-                             NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
-                             NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
-                                                                                         forKey:NSForegroundColorAttributeName];
-                             NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
-                             self.refreshControl.attributedTitle = attributedTitle;
                              [self.refreshControl endRefreshing];
                          }
                          
