@@ -13,7 +13,6 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *friends;
 @property (strong, nonatomic) NSMutableSet *friendSet;
-- (void)buttonClicked: (id)sender;
 - (IBAction)saveFriends:(id)sender;
 
 @end

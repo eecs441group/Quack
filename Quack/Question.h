@@ -17,6 +17,7 @@
 @property (assign, nonatomic) long curSelected;
 @property (strong, nonatomic) NSMutableArray *counts;
 @property (strong, nonatomic) NSString *askerName;
+@property (strong, nonatomic) NSString *authorId;
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

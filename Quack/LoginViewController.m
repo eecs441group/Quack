@@ -93,6 +93,12 @@
                         [installation saveInBackground];
                         NSLog(@"pfinstallation initialized");
                         
+                        //automatically get friends and add to friendlist for new users
+                        FacebookInfo *fbInfo = [[FacebookInfo alloc] initWithAccountID:user.objectID];
+                        [fbInfo getFriends:^(NSArray *friends){
+                            newUser[@"friends"] = friends;
+                            [newUser saveInBackground];
+                        }];
                     } else {
                         NSString *errorString = [error userInfo][@"error"];
                         NSLog(@" %@", errorString);
@@ -128,13 +134,13 @@
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
     
     [self.twitterButton setHidden:YES];
-    [self.inviteFriendsButton setHidden:NO];
+    [self.inviteFriendsButton setHidden:YES];
 }
 
 // Implement the loginViewShowingLoggedOutUser: delegate method to modify your app's UI for a logged-out user experience
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
     [self.inviteFriendsButton setHidden:YES];
-    [self.twitterButton setHidden:NO];
+    [self.twitterButton setHidden:YES];
     self.nameLabel.text = @"";
 }
 

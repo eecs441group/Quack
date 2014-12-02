@@ -62,7 +62,6 @@ static NSString *kDownArrowImage = @"down4-50.png";
     UITabBarItem *tabBarItem = [self.tabBarController.tabBar.items objectAtIndex:0];
     UIImage* selectedImage = [UIImage imageNamed:@"inbox_active"];
     tabBarItem.selectedImage = selectedImage;
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -75,8 +74,8 @@ static NSString *kDownArrowImage = @"down4-50.png";
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
              if (!error) {
                  PFUser *user = [PFUser currentUser];
+                 NSSet *friendSet = [[NSSet alloc] initWithArray:user[@"friends"]];
                  PFRelation *relation = [user relationForKey:@"inbox"];
-                 
                  // Find user's inbox questions, add them to the _userInbox array and reload the tableView
                  PFQuery *questionQuery = [relation query];
                  [questionQuery orderByDescending:@"createdAt"];
@@ -88,7 +87,7 @@ static NSString *kDownArrowImage = @"down4-50.png";
                          NSLog(@"error");
                      } else {
                          for (PFObject *question in objects) {
-                             if(question && ![question isKindOfClass:[NSNull class]]) {
+                             if(question && ![question isKindOfClass:[NSNull class]] && [friendSet containsObject:question[@"authorId"]]) {
                                  Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)question];
                                  Title *t = [[Title alloc] initWithTitle:q.question];
                                  BOOL found = NO;
@@ -112,6 +111,7 @@ static NSString *kDownArrowImage = @"down4-50.png";
                          }
                          
                          [self.tableView reloadData];
+                         [self updateBadge];
                          
                          if (self.refreshControl) {
                              [self.refreshControl endRefreshing];
@@ -166,6 +166,7 @@ static NSString *kDownArrowImage = @"down4-50.png";
     [self.questions removeObject:q];
     [self.titles removeObject:t];
     [self.tableView reloadData];
+    [self updateBadge];
     
     if([self.questions count]) {
         _noQuestionssLabel.hidden = YES;
@@ -254,6 +255,19 @@ static NSString *kDownArrowImage = @"down4-50.png";
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+// update tab bar item badge to be the number of questions a user has in their inbox
+- (void)updateBadge {
+    if ([self.questions count]) {
+        NSString *questionCount = [@([self.questions count]) stringValue];
+        [[[[[self tabBarController] tabBar] items]
+          objectAtIndex:0] setBadgeValue:questionCount];
+    } else {
+        [[[[[self tabBarController] tabBar] items]
+          objectAtIndex:0] setBadgeValue:nil];
+    }
+    
 }
 
 
