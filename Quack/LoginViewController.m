@@ -69,9 +69,16 @@
     self.nameLabel.text = user.name;
     
     //set profile picture
-    NSString *userImageURL = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200&height=200", user.objectID];
+    NSString *userImageURL = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=400&height=400", user.objectID];
     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:userImageURL]];
-    self.profilePicView.image = [UIImage imageWithData:imageData];
+    UIImage *image = [UIImage imageWithData:imageData];
+    
+    //Resize the image to be for retina
+    image = [UIImage imageWithCGImage:[image CGImage]
+                                scale:image.size.height/200
+                          orientation:UIImageOrientationUp];
+    
+    self.profilePicView.image = image;
     
     //Check if logged in user exists in PFUser
     PFQuery *userQuery = [PFUser query];
