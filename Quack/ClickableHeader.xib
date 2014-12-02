@@ -30,9 +30,9 @@
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="o0G-C7-jP1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="1uc-kQ-LHM"/>
-                    <constraint firstItem="NcF-az-JdX" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="NbB-bq-mHE"/>
+                    <constraint firstItem="NcF-az-JdX" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-8" id="89k-MB-Pnu"/>
                     <constraint firstItem="NcF-az-JdX" firstAttribute="leading" secondItem="o0G-C7-jP1" secondAttribute="trailing" constant="8" id="PvJ-UM-Fiu"/>
+                    <constraint firstItem="o0G-C7-jP1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="TVy-jB-m0H"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.92965495586395264" green="0.92962712049484253" blue="0.92964291572570801" alpha="1" colorSpace="calibratedRGB"/>
