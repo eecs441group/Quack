@@ -48,7 +48,7 @@ static NSString *kDownArrowImage = @"down4-50.png";
     [self.tableView addSubview:self.refreshControl];
     
     
-    _noQuestionssLabel = [self getLabelWithText:@"You have no questions in your feed :-("];
+    _noQuestionssLabel = [self getLabelWithText:@"No questions in your feed :-("];
     [self.view addSubview:_noQuestionssLabel];
     
     //style navigation bar

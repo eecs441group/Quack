@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "QuestionViewController.h"
 
 @interface SendToViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
@@ -18,9 +19,11 @@
 @property (strong, nonatomic) NSMutableArray *selectedUsers;
 @property (strong, nonatomic) NSMutableArray * tableSectionTitles;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) QuestionViewController *qvc;
 
 - (void)setQuestion:(NSString *)question
-            answers:(NSArray *)answers;
+            answers:(NSArray *)answers
+             parent:(QuestionViewController *)parent;
 - (IBAction)sendPressed;
 - (void)sendToUsers:(NSString *)questionId
               Users:(NSArray *)selectedUsers;
