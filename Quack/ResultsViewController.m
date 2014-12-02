@@ -28,7 +28,7 @@
     
     [self getNewData];
     self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.backgroundColor = [UIColor purpleColor];
+    self.refreshControl.backgroundColor = [UIColor quackPurpleColor];
     self.refreshControl.tintColor = [UIColor whiteColor];
     [self.refreshControl addTarget:nil
                             action:@selector(getNewData)
@@ -60,14 +60,25 @@
                  
                  PFQuery *query = [PFQuery queryWithClassName:@"Question"];
                  [query whereKey:@"authorId" equalTo:user[@"FBUserID"]];
-                 [query orderByDescending:@"createdAt"];
+                 [query orderByAscending:@"createdAt"];
                  
                  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                      if (!error) {
                          for (PFObject *object in objects) {
                              Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)object];
-                             [self.questions addObject:q];
-                             [self.titles addObject:[[Title alloc] initWithTitle:q.question]];
+                             Title *t = [[Title alloc] initWithTitle:q.question];
+
+                        
+                             BOOL found = NO;
+                             for(Question *existing in self.questions) {
+                                 if([existing.questionId isEqualToString:q.questionId]) {
+                                     found = YES;
+                                 }
+                             }
+                             if(!found) {
+                                 [self.questions insertObject:q atIndex:0];
+                                 [self.titles insertObject:t atIndex:0];
+                             }
                          }
                          if([self.questions count]) {
                              _noQuestionssLabel.hidden = YES;
@@ -78,18 +89,9 @@
                          [self.tableView reloadData];
                          
                          if (self.refreshControl) {
-                             
-                             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                             [formatter setDateFormat:@"MMM d, h:mm a"];
-                             NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
-                             NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
-                                                                                         forKey:NSForegroundColorAttributeName];
-                             NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
-                             self.refreshControl.attributedTitle = attributedTitle;
                              [self.refreshControl endRefreshing];
                          }
                      } else {
-                         // Log details of the failure
                          NSLog(@"Error: %@ %@", error, [error userInfo]);
                      }
                  }];
@@ -100,6 +102,8 @@
     }
 
 }
+
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
@@ -149,6 +153,10 @@
     for(int i = 0; i < 1; i++) {
         NSIndexPath *curPath = [NSIndexPath indexPathForRow:i inSection:section];
         [indexPaths addObject:curPath];
+//        if(t.isExpanded) {
+//            [self removeDataFromCell:[self.tableView cellForRowAtIndexPath:curPath]];
+//            [self addDataToCell:[self.tableView cellForRowAtIndexPath:curPath] question:(Question *)self.questions[section]];
+//        }
     }
     [self.tableView reloadData];
     [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
