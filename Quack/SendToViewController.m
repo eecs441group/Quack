@@ -115,7 +115,6 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
 
 - (IBAction)sendPressed {
     [self saveQuestion];
-    
     [self.navigationController popViewControllerAnimated:NO];
 }
 

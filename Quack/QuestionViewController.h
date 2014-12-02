@@ -23,4 +23,6 @@
 @property (strong, nonatomic) UITextField *curActiveField;
 - (IBAction)quackPressed:(id)sender;
 
+- (void) clearFields;
+
 @end

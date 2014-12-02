@@ -266,11 +266,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7sT-Hr-6YJ">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7sT-Hr-6YJ">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 1" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JSJ-dU-9Nh">
-                                        <rect key="frame" x="8" y="166" width="306" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 1" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JSJ-dU-9Nh">
+                                        <rect key="frame" x="8" y="185" width="584" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="306" id="CZF-V7-17z"/>
                                             <constraint firstAttribute="height" constant="30" id="JZW-I8-eVF"/>
@@ -278,8 +278,8 @@
                                         <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 2" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sea-Yi-glV">
-                                        <rect key="frame" x="8" y="204" width="306" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 2" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sea-Yi-glV">
+                                        <rect key="frame" x="8" y="223" width="584" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="LLx-EM-d8W"/>
                                             <constraint firstAttribute="width" constant="306" id="bP0-yg-tlN"/>
@@ -287,8 +287,8 @@
                                         <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 3" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pIJ-Fs-5T3">
-                                        <rect key="frame" x="8" y="241" width="306" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 3" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pIJ-Fs-5T3">
+                                        <rect key="frame" x="8" y="260" width="584" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="aIq-ML-9I8"/>
                                             <constraint firstAttribute="width" constant="306" id="sd5-00-s0N"/>
@@ -296,8 +296,8 @@
                                         <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 4" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x8d-IO-BBm">
-                                        <rect key="frame" x="8" y="278" width="306" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 4" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x8d-IO-BBm">
+                                        <rect key="frame" x="8" y="297" width="584" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="306" id="ppy-fj-JuW"/>
                                             <constraint firstAttribute="height" constant="30" id="rdQ-NT-PdF"/>
@@ -305,20 +305,20 @@
                                         <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                     </textField>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6f-NY-oEj">
-                                        <rect key="frame" x="8" y="93" width="306" height="42"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6f-NY-oEj">
+                                        <rect key="frame" x="8" y="93" width="584" height="63"/>
                                         <color key="backgroundColor" red="0.81176477670000002" green="0.95294123890000004" blue="0.98431378599999997" alpha="1" colorSpace="deviceRGB"/>
                                         <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
                                     </textView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Question" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FpO-WG-zbn">
-                                        <rect key="frame" x="8" y="66" width="306" height="29"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Question" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FpO-WG-zbn">
+                                        <rect key="frame" x="8" y="66" width="584" height="29"/>
                                         <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Possible Answers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4g8-jp-s6v">
-                                        <rect key="frame" x="8" y="138" width="306" height="29"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Possible Answers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4g8-jp-s6v">
+                                        <rect key="frame" x="8" y="157" width="584" height="29"/>
                                         <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -326,34 +326,61 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="JSJ-dU-9Nh" firstAttribute="top" secondItem="c6f-NY-oEj" secondAttribute="bottom" constant="31" id="0Sa-2b-WQk"/>
+                                    <constraint firstAttribute="centerX" secondItem="pIJ-Fs-5T3" secondAttribute="centerX" id="1Rc-Vz-CKY"/>
                                     <constraint firstAttribute="centerX" secondItem="pIJ-Fs-5T3" secondAttribute="centerX" id="2gY-Df-9xn"/>
+                                    <constraint firstAttribute="centerX" secondItem="c6f-NY-oEj" secondAttribute="centerX" id="31R-jI-jkn"/>
+                                    <constraint firstItem="FpO-WG-zbn" firstAttribute="leading" secondItem="7sT-Hr-6YJ" secondAttribute="leading" constant="8" id="6R1-J1-b74"/>
+                                    <constraint firstAttribute="trailing" secondItem="FpO-WG-zbn" secondAttribute="trailing" constant="8" id="7Nl-dn-01r"/>
                                     <constraint firstItem="FpO-WG-zbn" firstAttribute="top" secondItem="7sT-Hr-6YJ" secondAttribute="top" constant="66" id="7Y9-8X-BaN"/>
+                                    <constraint firstAttribute="centerX" secondItem="JSJ-dU-9Nh" secondAttribute="centerX" id="8Ib-6y-mLi"/>
                                     <constraint firstAttribute="centerX" secondItem="c6f-NY-oEj" secondAttribute="centerX" id="Ecj-fy-tmQ"/>
                                     <constraint firstAttribute="centerX" secondItem="4g8-jp-s6v" secondAttribute="centerX" id="FnZ-61-ay1"/>
                                     <constraint firstAttribute="centerX" secondItem="Sea-Yi-glV" secondAttribute="centerX" id="GX7-jQ-IMO"/>
                                     <constraint firstItem="c6f-NY-oEj" firstAttribute="top" secondItem="7sT-Hr-6YJ" secondAttribute="top" constant="93" id="Iqg-pl-cTB"/>
                                     <constraint firstAttribute="centerX" secondItem="pIJ-Fs-5T3" secondAttribute="centerX" id="K5Y-n8-cVz"/>
+                                    <constraint firstItem="JSJ-dU-9Nh" firstAttribute="leading" secondItem="7sT-Hr-6YJ" secondAttribute="leading" constant="8" id="L5x-qV-O1q"/>
+                                    <constraint firstAttribute="trailing" secondItem="x8d-IO-BBm" secondAttribute="trailing" constant="8" id="M0I-XN-ypN"/>
+                                    <constraint firstItem="4g8-jp-s6v" firstAttribute="leading" secondItem="7sT-Hr-6YJ" secondAttribute="leading" constant="8" id="Mu2-TK-9Ri"/>
                                     <constraint firstAttribute="centerX" secondItem="JSJ-dU-9Nh" secondAttribute="centerX" id="NyY-sh-ij9"/>
                                     <constraint firstAttribute="centerX" secondItem="JSJ-dU-9Nh" secondAttribute="centerX" id="Obw-cG-G0d"/>
+                                    <constraint firstAttribute="trailing" secondItem="JSJ-dU-9Nh" secondAttribute="trailing" constant="8" id="QUJ-BC-aPl"/>
                                     <constraint firstItem="4g8-jp-s6v" firstAttribute="top" secondItem="c6f-NY-oEj" secondAttribute="bottom" constant="3" id="Ubc-qe-Z3i"/>
                                     <constraint firstAttribute="centerX" secondItem="c6f-NY-oEj" secondAttribute="centerX" id="UeE-uc-PlA"/>
+                                    <constraint firstAttribute="trailing" secondItem="pIJ-Fs-5T3" secondAttribute="trailing" constant="8" id="Uug-qU-Aeg"/>
                                     <constraint firstAttribute="centerX" secondItem="FpO-WG-zbn" secondAttribute="centerX" id="WkM-kq-YAW"/>
+                                    <constraint firstItem="x8d-IO-BBm" firstAttribute="leading" secondItem="7sT-Hr-6YJ" secondAttribute="leading" constant="8" id="WuS-i3-mEM"/>
+                                    <constraint firstItem="Sea-Yi-glV" firstAttribute="leading" secondItem="7sT-Hr-6YJ" secondAttribute="leading" constant="8" id="Xkf-Cs-3RP"/>
                                     <constraint firstAttribute="centerX" secondItem="x8d-IO-BBm" secondAttribute="centerX" id="YN1-4V-uTO"/>
                                     <constraint firstItem="Sea-Yi-glV" firstAttribute="top" secondItem="4g8-jp-s6v" secondAttribute="bottom" constant="37" id="bT5-ta-5Oz"/>
                                     <constraint firstAttribute="centerX" secondItem="FpO-WG-zbn" secondAttribute="centerX" id="eC0-GA-CNT"/>
                                     <constraint firstItem="pIJ-Fs-5T3" firstAttribute="top" secondItem="Sea-Yi-glV" secondAttribute="bottom" constant="7" id="f27-vG-Dxh"/>
+                                    <constraint firstAttribute="trailing" secondItem="c6f-NY-oEj" secondAttribute="trailing" constant="8" id="fQ2-TA-M1s"/>
                                     <constraint firstAttribute="bottom" secondItem="x8d-IO-BBm" secondAttribute="bottom" constant="292" id="fjH-6S-0F4"/>
+                                    <constraint firstItem="c6f-NY-oEj" firstAttribute="leading" secondItem="7sT-Hr-6YJ" secondAttribute="leading" constant="8" id="iGZ-pe-uaA"/>
+                                    <constraint firstAttribute="centerX" secondItem="4g8-jp-s6v" secondAttribute="centerX" id="ieR-aP-8uk"/>
                                     <constraint firstItem="4g8-jp-s6v" firstAttribute="top" secondItem="FpO-WG-zbn" secondAttribute="bottom" constant="43" id="jR1-wK-aTp"/>
+                                    <constraint firstAttribute="trailing" secondItem="Sea-Yi-glV" secondAttribute="trailing" constant="8" id="jov-ZN-vGd"/>
                                     <constraint firstItem="Sea-Yi-glV" firstAttribute="top" secondItem="JSJ-dU-9Nh" secondAttribute="bottom" constant="8" id="kgv-v5-Wbt"/>
                                     <constraint firstAttribute="centerX" secondItem="Sea-Yi-glV" secondAttribute="centerX" id="kze-Ef-JzT"/>
                                     <constraint firstAttribute="centerX" secondItem="4g8-jp-s6v" secondAttribute="centerX" id="pTq-2V-xzs"/>
+                                    <constraint firstAttribute="centerX" secondItem="Sea-Yi-glV" secondAttribute="centerX" id="r13-Er-6S7"/>
+                                    <constraint firstAttribute="trailing" secondItem="4g8-jp-s6v" secondAttribute="trailing" constant="8" id="rPb-oi-lQW"/>
                                     <constraint firstAttribute="centerX" secondItem="x8d-IO-BBm" secondAttribute="centerX" id="sF4-q2-9k3"/>
                                     <constraint firstItem="x8d-IO-BBm" firstAttribute="top" secondItem="pIJ-Fs-5T3" secondAttribute="bottom" constant="7" id="uIi-T0-I7c"/>
+                                    <constraint firstItem="pIJ-Fs-5T3" firstAttribute="leading" secondItem="7sT-Hr-6YJ" secondAttribute="leading" constant="8" id="ud0-wx-lsD"/>
+                                    <constraint firstAttribute="centerX" secondItem="FpO-WG-zbn" secondAttribute="centerX" id="ygN-95-9HP"/>
+                                    <constraint firstAttribute="centerX" secondItem="x8d-IO-BBm" secondAttribute="centerX" id="yw9-kH-mGL"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="deviceRGB"/>
                         <color key="tintColor" red="0.1294117719" green="0.76862752440000004" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstItem="7sT-Hr-6YJ" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="topMargin" id="EIo-DX-xrL"/>
+                            <constraint firstItem="7sT-Hr-6YJ" firstAttribute="bottom" secondItem="QS5-Rx-YEW" secondAttribute="bottomMargin" id="FN2-u8-b3X"/>
+                            <constraint firstItem="7sT-Hr-6YJ" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" constant="-16" id="Lo2-eA-OwR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7sT-Hr-6YJ" secondAttribute="trailing" constant="-16" id="hzW-aM-mE7"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Quack" image="quack_icon" id="cPa-gy-q4n"/>
                     <navigationItem key="navigationItem" title="Compose" id="8qk-Om-EQj">

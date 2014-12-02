@@ -155,7 +155,6 @@
     
     // Reload fields
     [self dismissKeyboard];
-    [self clearFields];
 }
 
 - (void) clearFields {
@@ -202,8 +201,13 @@
 }
 
 - (void)scrollToActiveTextField {
-    CGPoint scrollPoint = CGPointMake(0.0, self.curActiveField.frame.origin.y - 84.0f);
-    [self.scrollView setContentOffset:scrollPoint animated:YES];
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= 293;
+    if (!CGRectContainsPoint(aRect, self.curActiveField.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, self.curActiveField.frame.origin.y - 84.0f);
+        [self.scrollView setContentOffset:scrollPoint animated:YES];
+    }
 }
 
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
