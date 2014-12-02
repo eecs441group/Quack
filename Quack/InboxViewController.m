@@ -54,7 +54,6 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
     UITabBarItem *tabBarItem = [self.tabBarController.tabBar.items objectAtIndex:0];
     UIImage* selectedImage = [UIImage imageNamed:@"inbox_active"];
     tabBarItem.selectedImage = selectedImage;
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -106,6 +105,7 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
                          }
                          
                          [self.tableView reloadData];
+                         [self updateBadge];
                          
                          if (self.refreshControl) {
                              [self.refreshControl endRefreshing];
@@ -160,6 +160,7 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
     [self.questions removeObject:q];
     [self.titles removeObject:t];
     [self.tableView reloadData];
+    [self updateBadge];
     
     if([self.questions count]) {
         _noQuestionssLabel.hidden = YES;
@@ -199,6 +200,19 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+// update tab bar item badge to be the number of questions a user has in their inbox
+- (void)updateBadge {
+    if ([self.questions count]) {
+        NSString *questionCount = [@([self.questions count]) stringValue];
+        [[[[[self tabBarController] tabBar] items]
+          objectAtIndex:0] setBadgeValue:questionCount];
+    } else {
+        [[[[[self tabBarController] tabBar] items]
+          objectAtIndex:0] setBadgeValue:nil];
+    }
+    
 }
 
 
