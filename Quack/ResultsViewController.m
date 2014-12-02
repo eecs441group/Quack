@@ -35,7 +35,7 @@
                   forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:self.refreshControl];
     
-    _noQuestionssLabel = [self getLabelWithText:@"You haven't Quack'd any questions :-("];
+    _noQuestionssLabel = [self getLabelWithText:@"No Quacked questions :-("];
     [self.view addSubview:_noQuestionssLabel];
     
     //style navigation bar

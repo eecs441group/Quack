@@ -14,8 +14,12 @@
 #import "QuackColors.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "Title.h"
+#import "ClickableHeaderWithAsker.h"
 
+static NSString *kClickableHeaderAskerIdentifier = @"ClickableHeaderWithAsker";
 static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
+static NSString *kUpArrowImage = @"up4-50.png";
+static NSString *kDownArrowImage = @"down4-50.png";
 
 @interface InboxViewController ()
 
@@ -30,6 +34,10 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UINib *nibA = [UINib nibWithNibName:@"ClickableHeaderWithAsker" bundle:nil];
+    [self.tableView registerNib:nibA forCellReuseIdentifier:@"ClickableHeaderWithAsker"];
+    
     [self getNewData];
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor quackPurpleColor];
@@ -40,7 +48,7 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
     [self.tableView addSubview:self.refreshControl];
     
     
-    _noQuestionssLabel = [self getLabelWithText:@"You have no questions in your feed :-("];
+    _noQuestionssLabel = [self getLabelWithText:@"No questions in your feed :-("];
     [self.view addSubview:_noQuestionssLabel];
     
     //style navigation bar
@@ -61,8 +69,6 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
 }
 
 - (void)getNewData {
-//    self.questions = [NSMutableArray new];
-//    self.titles = [NSMutableArray new];
     if (FBSession.activeSession.isOpen) {
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -75,14 +81,15 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
                  [questionQuery orderByDescending:@"createdAt"];
                  questionQuery.limit = 100;
                  
+                 NSMutableArray *curQuestions = [[NSMutableArray alloc] init];
                  [questionQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                      if (error) {
-                         // There was an error
                          NSLog(@"error");
                      } else {
                          for (PFObject *question in objects) {
                              if(question && ![question isKindOfClass:[NSNull class]] && [friendSet containsObject:question[@"authorId"]]) {
                                  Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)question];
+                                 [curQuestions addObject:q];
                                  Title *t = [[Title alloc] initWithTitle:q.question];
                                  BOOL found = NO;
                                  for(Question *existing in self.questions) {
@@ -98,6 +105,27 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
                              
                              
                          }
+                         
+                         NSMutableArray *removed = [[NSMutableArray alloc] initWithArray:self.questions];
+                         NSMutableArray *removedTitles = [[NSMutableArray alloc] initWithArray:self.titles];
+                         for(Question *old in self.questions) {
+                             for(Question *cur in curQuestions) {
+                                 if([old.questionId isEqualToString:cur.questionId]) {
+                                     Title *t = [self.titles objectAtIndex:[self.questions indexOfObject:old]];
+                                     [removed removeObject:old];
+                                     [removedTitles removeObject:t];
+                                 }
+                             }
+                         }
+                         
+                         for(Question *removedQ in removed) {
+                             [self.questions removeObject:removedQ];
+                         }
+                         
+                         for(Title *removedT in removedTitles) {
+                             [self.titles removeObject:removedT];
+                         }
+                         
                          if([self.questions count]) {
                              _noQuestionssLabel.hidden = YES;
                          } else {
@@ -196,6 +224,55 @@ static NSString *kAnswerCellIdentifier = @"AnswerTableViewCell";
         AnswerTableViewCell *cell = (AnswerTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
         [cell setSelected:NO];
     }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    ClickableHeaderWithAsker *header = (ClickableHeaderWithAsker *)[tableView dequeueReusableCellWithIdentifier:kClickableHeaderAskerIdentifier];
+
+    Title *t = self.titles[section];
+    Question *q = self.questions[section];
+    if(t.isExpanded) {
+        [header.arrowImageView setImage:[UIImage imageNamed:kUpArrowImage]];
+    } else {
+        [header.arrowImageView setImage:[UIImage imageNamed:kDownArrowImage]];
+    }
+    
+    header.tag = section;
+    header.sectionLabel.text = t.title;
+    header.askerLabel.text = [NSString stringWithFormat:@"%@ wants to know: ", q.askerName ];
+    header.contentView.backgroundColor = [UIColor quackShellColor];
+    
+    UITapGestureRecognizer *singleTapRecogniser = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gestureHandler:)];
+    [singleTapRecogniser setDelegate:self];
+    singleTapRecogniser.numberOfTouchesRequired = 1;
+    singleTapRecogniser.numberOfTapsRequired = 1;
+    [header addGestureRecognizer:singleTapRecogniser];
+    
+    return header;
+}
+
+
+- (void) gestureHandler:(UIGestureRecognizer *)gestureRecognizer {
+    NSInteger section = gestureRecognizer.view.tag;
+    Title *t = [self.titles objectAtIndex:gestureRecognizer.view.tag];
+    [t toggleExpansion];
+    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+    Question *cur = [self.questions objectAtIndex:section];
+    for(int i = 0; i < [cur.answers count]; i++) {
+        NSIndexPath *curPath = [NSIndexPath indexPathForRow:i inSection:section];
+        [indexPaths addObject:curPath];
+    }
+    [self.tableView reloadData];
+    [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    Title *t = self.titles[section];
+    int _charsPerLine = ceil(self.view.window.frame.size.width / 15);
+    if(!_charsPerLine) {
+        _charsPerLine = 30;
+    }
+    return 95.0f + [t.title length] / _charsPerLine * 10.0f;
 }
 
 - (void)didReceiveMemoryWarning {

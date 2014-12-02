@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ClickableHeaderWithAsker" rowHeight="107" id="KGk-i7-Jjw" customClass="ClickableHeaderWithAsker">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="107"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RtU-Iv-JAv">
+                        <rect key="frame" x="8" y="8" width="260" height="27"/>
+                        <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ya3-FK-CFQ">
+                        <rect key="frame" x="8" y="31" width="260" height="68"/>
+                        <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="down4-50" translatesAutoresizingMaskIntoConstraints="NO" id="5cB-Ag-bYp">
+                        <rect key="frame" x="290" y="54" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="22" id="Fv5-Rg-t7g"/>
+                            <constraint firstAttribute="height" constant="22" id="Hc2-h5-LWd"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="5cB-Ag-bYp" firstAttribute="leading" secondItem="Ya3-FK-CFQ" secondAttribute="trailing" constant="8" id="ViA-s5-bPw"/>
+                    <constraint firstItem="5cB-Ag-bYp" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-8" id="Xvv-cC-WwP"/>
+                    <constraint firstItem="RtU-Iv-JAv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="Y08-Ac-eOM"/>
+                    <constraint firstItem="Ya3-FK-CFQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="aBH-8D-HvM"/>
+                    <constraint firstItem="RtU-Iv-JAv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="c2D-lC-okO"/>
+                    <constraint firstItem="RtU-Iv-JAv" firstAttribute="trailing" secondItem="Ya3-FK-CFQ" secondAttribute="trailing" id="dUu-za-m8r"/>
+                    <constraint firstItem="5cB-Ag-bYp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="46" id="ezp-TZ-zJF"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="RtU-Iv-JAv" secondAttribute="bottom" constant="63" id="nKc-XL-Y16"/>
+                    <constraint firstItem="5cB-Ag-bYp" firstAttribute="centerY" secondItem="Ya3-FK-CFQ" secondAttribute="centerY" id="saN-xk-gjZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="arrowImageView" destination="5cB-Ag-bYp" id="1qA-1I-dpq"/>
+                <outlet property="askerLabel" destination="RtU-Iv-JAv" id="LBL-29-yha"/>
+                <outlet property="sectionLabel" destination="Ya3-FK-CFQ" id="hki-Uy-TKj"/>
+            </connections>
+            <point key="canvasLocation" x="140" y="122.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="down4-50" width="50" height="50"/>
+    </resources>
+</document>

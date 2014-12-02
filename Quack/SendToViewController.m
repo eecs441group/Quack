@@ -14,7 +14,6 @@
 #import "Question.h"
 #import "QuackColors.h"
 #import "ClickableHeader.h"
-
 static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
 
 
@@ -22,9 +21,11 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
 
 // Setter for QuestionViewController to pass in the question and answers
 - (void)setQuestion:(NSString *)question
-            answers:(NSArray *)answers {
+            answers:(NSArray *)answers
+             parent:(QuestionViewController *)parent{
     self.question = question;
     self.answers = answers;
+    self.qvc = parent;
 }
 
 - (void)viewDidLoad {
@@ -115,8 +116,10 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
 
 - (IBAction)sendPressed {
     [self saveQuestion];
-    
     [self.navigationController popViewControllerAnimated:NO];
+    
+    [self.qvc clearFields];
+
 }
 
 // Save question to parse

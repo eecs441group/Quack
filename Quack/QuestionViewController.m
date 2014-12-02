@@ -24,8 +24,18 @@
     NSArray *_textFields;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.scrollView.contentOffset = CGPointMake(0, 0);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self registerForKeyboardNotifications];
+    self.scrollView.scrollEnabled = YES;
+    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 155.0);
+
     _textFields = @[self.answer1, self.answer2, self.answer3, self.answer4];
     for(UITextField *tf in _textFields) {
         tf.delegate = self;
@@ -63,8 +73,6 @@
 
     
     _sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    NSLog(@"%f", self.view.frame.size.width);
-    
     [_sendButton setFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, 40.0f)];
     [_sendButton setTitle:@"Send" forState:UIControlStateNormal];
     [_sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -84,6 +92,8 @@
     } else {
         [textField setInputAccessoryView:nil];
     }
+    self.curActiveField = textField;
+    [self scrollToActiveTextField];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -92,7 +102,7 @@
     if ([text isEqualToString:@"\n"]) {
         [[_textFields objectAtIndex:0] becomeFirstResponder];
         shouldChangeText = NO;  
-    }  
+    }
     
     return shouldChangeText;
 }
@@ -106,7 +116,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)quackPressed:(id)sender {
@@ -141,15 +150,16 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     SendToViewController *viewController = (SendToViewController *)[storyboard instantiateViewControllerWithIdentifier:@"sendToView"];
     [viewController setQuestion:question
-                        answers:answers];
+                        answers:answers
+                         parent:self];
     [self.navigationController pushViewController:viewController animated:YES];
     
     // Reload fields
-    [self clearFields];
+    [self dismissKeyboard];
 }
 
 - (void) clearFields {
-    for (UIView *view in self.view.subviews) {
+    for (UIView *view in self.scrollView.subviews) {
         if ([view isKindOfClass:[UITextField class]] || [view isKindOfClass:[UITextView class]]) {
             UITextField *textField = (UITextField *)view;
             textField.text = _emptyString;
@@ -159,13 +169,53 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    //[self quackPressed:self.sendButton];
     NSInteger index = [_textFields indexOfObject:textField];
     if(index < _textFields.count - 1) {
         UITextField *next = [_textFields objectAtIndex:index + 1];
         [next becomeFirstResponder];
+        self.curActiveField = next;
     }
     return YES;
+}
+
+# pragma mark - scroll view
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    kbSize.height += self.inputAccView.frame.size.height;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 400.0);
+}
+
+- (void)scrollToActiveTextField {
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= 293;
+    if (!CGRectContainsPoint(aRect, self.curActiveField.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, self.curActiveField.frame.origin.y - 84.0f);
+        [self.scrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
 }
 
 
