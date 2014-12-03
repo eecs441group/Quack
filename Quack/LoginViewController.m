@@ -109,7 +109,11 @@
                         //automatically get friends and add to friendlist for new users
                         FacebookInfo *fbInfo = [[FacebookInfo alloc] initWithAccountID:user.objectID];
                         [fbInfo getFriends:^(NSArray *friends){
-                            newUser[@"friends"] = friends;
+                            NSMutableArray *friendlist = [[NSMutableArray alloc] init];
+                            for (NSDictionary *friend in friends) {
+                                [friendlist addObject:friend[@"id"]];
+                            }
+                            newUser[@"friends"] = friendlist;
                             [newUser saveInBackground];
                         }];
                     } else {

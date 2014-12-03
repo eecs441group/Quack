@@ -187,7 +187,20 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Results" image="bar_chart" id="acW-dT-cKf"/>
-                    <navigationItem key="navigationItem" title="Results" id="MbR-vB-ZtL"/>
+                    <navigationItem key="navigationItem" title="Results" id="MbR-vB-ZtL">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="BOB-26-dgJ">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HM6-ff-QSG">
+                                <rect key="frame" x="548" y="7" width="37" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Clear">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteQuestions:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Fa8-yL-Ncw"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="0Lg-6p-aYb" id="AQk-tQ-Onh"/>
                     </connections>

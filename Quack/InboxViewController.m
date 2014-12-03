@@ -48,7 +48,7 @@ static NSString *kDownArrowImage = @"down4-50.png";
     [self.tableView addSubview:self.refreshControl];
     
     
-    _noQuestionssLabel = [self getLabelWithText:@"You have no questions in your feed :-("];
+    _noQuestionssLabel = [self getLabelWithText:@"No questions in your feed :-("];
     [self.view addSubview:_noQuestionssLabel];
     
     //style navigation bar
@@ -81,14 +81,15 @@ static NSString *kDownArrowImage = @"down4-50.png";
                  [questionQuery orderByDescending:@"createdAt"];
                  questionQuery.limit = 100;
                  
+                 NSMutableArray *curQuestions = [[NSMutableArray alloc] init];
                  [questionQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                      if (error) {
-                         // There was an error
                          NSLog(@"error");
                      } else {
                          for (PFObject *question in objects) {
                              if(question && ![question isKindOfClass:[NSNull class]] && [friendSet containsObject:question[@"authorId"]]) {
                                  Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)question];
+                                 [curQuestions addObject:q];
                                  Title *t = [[Title alloc] initWithTitle:q.question];
                                  BOOL found = NO;
                                  for(Question *existing in self.questions) {
@@ -104,6 +105,27 @@ static NSString *kDownArrowImage = @"down4-50.png";
                              
                              
                          }
+                         
+                         NSMutableArray *removed = [[NSMutableArray alloc] initWithArray:self.questions];
+                         NSMutableArray *removedTitles = [[NSMutableArray alloc] initWithArray:self.titles];
+                         for(Question *old in self.questions) {
+                             for(Question *cur in curQuestions) {
+                                 if([old.questionId isEqualToString:cur.questionId]) {
+                                     Title *t = [self.titles objectAtIndex:[self.questions indexOfObject:old]];
+                                     [removed removeObject:old];
+                                     [removedTitles removeObject:t];
+                                 }
+                             }
+                         }
+                         
+                         for(Question *removedQ in removed) {
+                             [self.questions removeObject:removedQ];
+                         }
+                         
+                         for(Title *removedT in removedTitles) {
+                             [self.titles removeObject:removedT];
+                         }
+                         
                          if([self.questions count]) {
                              _noQuestionssLabel.hidden = YES;
                          } else {
@@ -133,7 +155,7 @@ static NSString *kDownArrowImage = @"down4-50.png";
         q.answerSet = true;
         q.curSelected = indexPath.row + 1;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Submit?"
-                                                       message:@"Click yes to confirm your answer!"
+                                                       message:@"Click OK to confirm your answer!"
                                                       delegate:nil
                                              cancelButtonTitle:@"Cancel"
                                              otherButtonTitles:@"OK", nil];

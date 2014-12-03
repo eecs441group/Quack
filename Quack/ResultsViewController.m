@@ -35,7 +35,7 @@
                   forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:self.refreshControl];
     
-    _noQuestionssLabel = [self getLabelWithText:@"You haven't Quack'd any questions :-("];
+    _noQuestionssLabel = [self getLabelWithText:@"No Quacked questions :-("];
     [self.view addSubview:_noQuestionssLabel];
     
     //style navigation bar
@@ -104,7 +104,6 @@
 }
 
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
@@ -144,6 +143,21 @@
         
     }
 }
+
+- (IBAction)deleteQuestions:(id)sender {
+    NSLog(@"%@", self.questions);
+    for (Question *question in self.questions) {
+        PFObject *object = [PFObject objectWithoutDataWithClassName:@"Question"
+                                                           objectId:question.questionId];
+        [object deleteEventually];
+    }
+    self.questions = [[NSMutableArray alloc] init];
+    self.titles = [[NSMutableArray alloc] init];
+    [self.tableView reloadData];
+    _noQuestionssLabel = [self getLabelWithText:@"No Quacked questions :-("];
+    [self.view addSubview:_noQuestionssLabel];
+}
+
 
 - (void) gestureHandler:(UIGestureRecognizer *)gestureRecognizer {
     NSInteger section = gestureRecognizer.view.tag;

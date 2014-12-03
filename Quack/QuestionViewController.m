@@ -150,7 +150,8 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     SendToViewController *viewController = (SendToViewController *)[storyboard instantiateViewControllerWithIdentifier:@"sendToView"];
     [viewController setQuestion:question
-                        answers:answers];
+                        answers:answers
+                         parent:self];
     [self.navigationController pushViewController:viewController animated:YES];
     
     // Reload fields
