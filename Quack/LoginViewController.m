@@ -16,10 +16,11 @@
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *profilePicView;
 @property (strong, nonatomic) IBOutlet FBLoginView *loginView;
-- (IBAction)inviteFriends:(id)sender;
-- (IBAction)twitterSignIn:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *twitterButton;
 @property (strong, nonatomic) IBOutlet UIButton *inviteFriendsButton;
+@property (nonatomic, assign) BOOL isWelcome;
+- (IBAction)inviteFriends:(id)sender;
+- (IBAction)twitterSignIn:(id)sender;
 
 @end
 
@@ -46,6 +47,10 @@
     UITabBarItem *tabBarItem = [self.tabBarController.tabBar.items objectAtIndex:3];
     UIImage* selectedImage = [UIImage imageNamed:@"user_male_active"];
     tabBarItem.selectedImage = selectedImage;
+    
+    if (self.isWelcome) {
+        self.view.backgroundColor = [UIColor quackSeaColor];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,6 +71,7 @@
 // This method will be called when the user information has been fetched
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
                             user:(id<FBGraphUser>)user {
+    NSLog(@"fetched user info");
     self.nameLabel.text = user.name;
     
     //set profile picture
@@ -134,7 +140,8 @@
     
     // Dismiss this view if login was successful. On app launch,
     // this redirects to the first tab in the root tab bar controller.
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
+
 }
 
 // Implement the loginViewShowingLoggedInUser: delegate method to modify your app's UI for a logged-in user experience
@@ -148,7 +155,20 @@
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
     [self.inviteFriendsButton setHidden:YES];
     [self.twitterButton setHidden:YES];
-    self.nameLabel.text = @"";
+    
+    if (self.isWelcome) {
+        self.view.backgroundColor = [UIColor quackSeaColor];
+        self.nameLabel.textColor = [UIColor whiteColor];
+    }
+    
+    self.nameLabel.text = @"Welcome to Quack! Please log in.";
+    UIImage *image = [UIImage imageNamed:@"quack_white"];
+    
+    //Resize the image to be for retina
+    image = [UIImage imageWithCGImage:[image CGImage]
+                                scale:image.size.height/50
+                          orientation:UIImageOrientationUp];
+    self.profilePicView.image = image;
 }
 
 // You need to override loginView:handleError in order to handle possible errors that can occur during login
@@ -225,4 +245,9 @@
                                           otherButtonTitles:nil];
     [alert show];
 }
+
+- (void)setWelcome:(BOOL)is_welcome {
+    self.isWelcome = is_welcome;
+}
+
 @end

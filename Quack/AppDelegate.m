@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
+#import "LoginViewController.h"
 #import "Secrets.h"
 #import "QuackColors.h"
 
@@ -112,7 +113,9 @@
     // Get login screen from storyboard and present it
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     // "loginView" is the Storyboard Id for the Login ViewController
-    UIViewController *viewController = (UIViewController *)[storyboard instantiateViewControllerWithIdentifier:@"loginView"];
+    LoginViewController *viewController = (LoginViewController *)[storyboard instantiateViewControllerWithIdentifier:@"loginView"];
+    
+    [viewController setWelcome:YES];
     [self.window makeKeyAndVisible];
     [self.window.rootViewController presentViewController:viewController
                                                  animated:animated

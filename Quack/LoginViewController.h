@@ -12,4 +12,6 @@
 
 @interface LoginViewController : UIViewController <FBLoginViewDelegate>
 
+- (void)setWelcome:(BOOL)is_welcome;
+
 @end
