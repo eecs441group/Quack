@@ -155,7 +155,7 @@ static NSString *kDownArrowImage = @"down4-50.png";
         q.answerSet = true;
         q.curSelected = indexPath.row + 1;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Submit?"
-                                                       message:@"Click yes to confirm your answer!"
+                                                       message:@"Click OK to confirm your answer!"
                                                       delegate:nil
                                              cancelButtonTitle:@"Cancel"
                                              otherButtonTitles:@"OK", nil];
