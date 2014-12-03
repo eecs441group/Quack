@@ -37,6 +37,7 @@
     
     _noQuestionssLabel = [self getLabelWithText:@"No Quacked questions :-("];
     [self.view addSubview:_noQuestionssLabel];
+    [self.view addSubview:self.refreshLabel];
     
     //style navigation bar
     self.navigationController.navigationBar.barTintColor = [UIColor quackSeaColor];
@@ -82,8 +83,10 @@
                          }
                          if([self.questions count]) {
                              _noQuestionssLabel.hidden = YES;
+                             self.refreshLabel.hidden = YES;
                          } else {
                              _noQuestionssLabel.hidden = NO;
+                             self.refreshLabel.hidden = NO;
                          }
                          
                          [self.tableView reloadData];
@@ -154,7 +157,8 @@
     self.questions = [[NSMutableArray alloc] init];
     self.titles = [[NSMutableArray alloc] init];
     [self.tableView reloadData];
-    _noQuestionssLabel = [self getLabelWithText:@"No Quacked questions :-("];
+    _noQuestionssLabel.hidden = NO;
+    self.refreshLabel.hidden = NO;
     [self.view addSubview:_noQuestionssLabel];
 }
 

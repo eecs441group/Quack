@@ -26,6 +26,9 @@ static NSString *kCellIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.refreshLabel = [self getRefreshLabel];
+    
     self.questions = [NSMutableArray new];
     self.titles = [NSMutableArray new];
     
@@ -45,17 +48,20 @@ static NSString *kCellIdentifier = @"Cell";
 
 - (UILabel *)getLabelWithText:(NSString *)text {
     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height)];
-    UILabel *lbl0 = [[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y + 45, self.view.frame.size.width, self.view.frame.size.height)];
     lbl.text = text;
-    lbl0.text = @"Pull down to refresh!";
     lbl.font = [UIFont fontWithName:@"Thonburi" size:17.0f];
-    lbl0.font = [UIFont fontWithName:@"Thonburi" size:17.0f];
     lbl.textColor = [UIColor quackCharcoalColor];
-    lbl0.textColor = [UIColor quackCharcoalColor];
-    lbl0.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:lbl0];
     lbl.textAlignment = NSTextAlignmentCenter;
     return lbl;
+}
+
+- (UILabel *)getRefreshLabel {
+    UILabel *lbl0 = [[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y + 45, self.view.frame.size.width, self.view.frame.size.height)];
+    lbl0.text = @"Pull down to refresh!";
+    lbl0.font = [UIFont fontWithName:@"Thonburi" size:17.0f];
+    lbl0.textColor = [UIColor quackCharcoalColor];
+    lbl0.textAlignment = NSTextAlignmentCenter;
+    return lbl0;
 }
 
 - (void)didReceiveMemoryWarning {

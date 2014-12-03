@@ -49,6 +49,7 @@ static NSString *kDownArrowImage = @"down4-50.png";
     
     
     _noQuestionssLabel = [self getLabelWithText:@"No questions in your feed :-("];
+    [self.view addSubview:self.refreshLabel];
     [self.view addSubview:_noQuestionssLabel];
     
     //style navigation bar
@@ -128,8 +129,10 @@ static NSString *kDownArrowImage = @"down4-50.png";
                          
                          if([self.questions count]) {
                              _noQuestionssLabel.hidden = YES;
+                             self.refreshLabel.hidden = YES;
                          } else {
                              _noQuestionssLabel.hidden = NO;
+                             self.refreshLabel.hidden = NO;
                          }
                          
                          [self.tableView reloadData];
@@ -192,8 +195,10 @@ static NSString *kDownArrowImage = @"down4-50.png";
     
     if([self.questions count]) {
         _noQuestionssLabel.hidden = YES;
+        self.refreshLabel.hidden = YES;
     } else {
         _noQuestionssLabel.hidden = NO;
+        self.refreshLabel.hidden = NO;
     }
     
     // get question from Parse
