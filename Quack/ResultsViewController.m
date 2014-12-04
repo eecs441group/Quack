@@ -57,29 +57,25 @@
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
              if (!error) {
-                 PFUser *user = [PFUser currentUser];
                  
+                 PFUser *user = [PFUser currentUser];
                  PFQuery *query = [PFQuery queryWithClassName:@"Question"];
                  [query whereKey:@"authorId" equalTo:user[@"FBUserID"]];
                  [query orderByAscending:@"createdAt"];
                  
+                 //clear questions and titles array
+                 [self.questions removeAllObjects];
+                 [self.titles removeAllObjects];
+                 
                  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                      if (!error) {
                          for (PFObject *object in objects) {
+                             
                              Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)object];
                              Title *t = [[Title alloc] initWithTitle:q.question];
+                             [self.questions insertObject:q atIndex:0];
+                             [self.titles insertObject:t atIndex:0];
 
-                        
-                             BOOL found = NO;
-                             for(Question *existing in self.questions) {
-                                 if([existing.questionId isEqualToString:q.questionId]) {
-                                     found = YES;
-                                 }
-                             }
-                             if(!found) {
-                                 [self.questions insertObject:q atIndex:0];
-                                 [self.titles insertObject:t atIndex:0];
-                             }
                          }
                          if([self.questions count]) {
                              _noQuestionssLabel.hidden = YES;

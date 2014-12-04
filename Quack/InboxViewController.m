@@ -79,54 +79,26 @@ static NSString *kDownArrowImage = @"down4-50.png";
                  PFRelation *relation = [user relationForKey:@"inbox"];
                  // Find user's inbox questions, add them to the _userInbox array and reload the tableView
                  PFQuery *questionQuery = [relation query];
-                 [questionQuery orderByDescending:@"createdAt"];
+                 [questionQuery orderByAscending:@"createdAt"];
                  questionQuery.limit = 100;
                  
-                 NSMutableArray *curQuestions = [[NSMutableArray alloc] init];
+                 //clear out self.questions and self.titles
+                 [self.questions removeAllObjects];
+                 [self.titles removeAllObjects];
+                 
                  [questionQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                      if (error) {
                          NSLog(@"error");
                      } else {
                          for (PFObject *question in objects) {
                              if(question && ![question isKindOfClass:[NSNull class]] && [friendSet containsObject:question[@"authorId"]]) {
+
                                  Question *q = [[Question alloc] initWithDictionary:(NSDictionary *)question];
-                                 [curQuestions addObject:q];
                                  Title *t = [[Title alloc] initWithTitle:q.question];
-                                 BOOL found = NO;
-                                 for(Question *existing in self.questions) {
-                                     if([existing.questionId isEqualToString:q.questionId]) {
-                                         found = YES;
-                                     }
-                                 }
-                                 if(!found) {
-                                     [self.questions insertObject:q atIndex:0];
-                                     [self.titles insertObject:t atIndex:0];
-                                 }
+                                 [self.questions insertObject:q atIndex:0];
+                                 [self.titles insertObject:t atIndex:0];
                              }
-                             
-                             
-                         }
-                         
-                         NSMutableArray *removed = [[NSMutableArray alloc] initWithArray:self.questions];
-                         NSMutableArray *removedTitles = [[NSMutableArray alloc] initWithArray:self.titles];
-                         for(Question *old in self.questions) {
-                             for(Question *cur in curQuestions) {
-                                 if([old.questionId isEqualToString:cur.questionId]) {
-                                     Title *t = [self.titles objectAtIndex:[self.questions indexOfObject:old]];
-                                     [removed removeObject:old];
-                                     [removedTitles removeObject:t];
-                                 }
-                             }
-                         }
-                         
-                         for(Question *removedQ in removed) {
-                             [self.questions removeObject:removedQ];
-                         }
-                         
-                         for(Title *removedT in removedTitles) {
-                             [self.titles removeObject:removedT];
-                         }
-                         
+                  
                          if([self.questions count]) {
                              _noQuestionssLabel.hidden = YES;
                              self.refreshLabel.hidden = YES;
@@ -140,8 +112,8 @@ static NSString *kDownArrowImage = @"down4-50.png";
                          
                          if (self.refreshControl) {
                              [self.refreshControl endRefreshing];
+                            }
                          }
-                         
                      }
                  }];
              }

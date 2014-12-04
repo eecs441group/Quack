@@ -104,7 +104,6 @@ static NSString *kClickableHeaderIdentifier = @"ClickableHeader";
 
 - (IBAction)saveFriends:(id)sender {
     PFUser *currentUser = [PFUser currentUser];
-    //sort array alphabetically.
     currentUser[@"friends"] = [self.friendSet allObjects];
     NSLog(@"saving friends: %@",currentUser[@"friends"]);
     [currentUser saveInBackground];
